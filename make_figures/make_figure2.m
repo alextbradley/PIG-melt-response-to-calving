@@ -97,10 +97,17 @@ linestyles = ["-", "--", "--"];
 for i = 1:3
 [t_prof, s_prof] = TS_profile(depth,-1100,P(i) - 600, P(i)-600); %send and third arguments are offset from 600
 
-plot(p1, t_prof,-depth(1:end-1), 'r', 'linestyle', linestyles(i), 'linewidth', 1.5);
-plot(p2,s_prof, -depth(1:end-1), 'b', 'linestyle', linestyles(i), 'linewidth', 1.5);
 
+plot(p1, t_prof,-depth(1:end-1), 'r', 'linestyle', linestyles(i), 'linewidth', 1.5);
+
+axes(p1); txt =  text(0, -P(i) + 190, strcat("P = " ,num2str(P(i))), 'Color', 'r', 'Rotation', -45);
+
+plot(p2,s_prof, -depth(1:end-1), 'b', 'linestyle', linestyles(i), 'linewidth', 1.5);
+axes(p2); txt =  text(34.3, -P(i) + 200, strcat("P = " ,num2str(P(i))), 'Color', 'b', 'Rotation', -45);
 end
+
+
+
 
 %tidy up
 p1.XLim = [-1.2, 1.4]; 

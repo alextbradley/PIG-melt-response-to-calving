@@ -181,7 +181,7 @@
 %  TEXT
 %
 %% ------------------------------------------------------------------------ %%
-
+\graphicspath{{../make_figures/plots}}
 \section{Introduction}
 %we have seen big changes, and they're mostly driven by increased basal melting
 \red{BELOW FOR THE REALISTIC PIG SNAPPING, BUT LEAVING FOR NOW AS PROBABLY ADAPTABLE}
@@ -205,6 +205,13 @@ In this paper, we aim to
 We perform a total of nine experiments, each corresponding to a unique pair of ridge-shelf distance, and hydrographic forcing. Each experiment involves resolving the ocean circulation explicitly using the MIT general circulation model (MITgcm) for ten different ice front locations, thus simulating the effect of calving. Other than removing sections within each experiment, the ice shelf geometry does not change; ice shelves enter passively, via the exchange of heat and salt at the ice-ocean interface alone. This passive description (i.e. not including any ice sheet or ice shelf dynamics) is sufficient for this study since we are primarily interested in response of melt rates to ice shelf calving, which occur on timescales much shorter than on which the ice responds dynamically to perturbations in melting.
 
 In the following sections we provide further details of the ocean model and experimental setup, including the motivation for various parameter choices.
+
+\begin{figure}
+    \centering
+    \includegraphics[width = \textwidth]{make_figures/plots/figure2.eps}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
 
 \subsection{Details of Ocean Model}
 The MITgcm is a z-level general circulation model that includes a partial-cell treatment of topography, allowing an accurate description of both the seabed and ice draft. Our model grid consists of 110 layers with a vertical spacing of 10m, and a horizontal resolution of 400m. We use the MITgcm in hydrostatic model with a implicit nonlinear free surface scheme, a third-order direct space-time flux limited advection scheme, a non-linear equation of state~\citeA{Mcdougall2003JAtmosOceanTech}, and the Pacanowski-Philander~\cite{Pacanowski1981JPhysOcean} scheme parametrizes vertical mixing. The equations are solved on an $f$-plane with $f = -1.4\times10^{-4}~\text{s}^{-1}$. \red{maybe say something about viscosity?}

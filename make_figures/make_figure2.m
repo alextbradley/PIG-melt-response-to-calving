@@ -6,8 +6,6 @@
 % 
 save_flag = 1; 
 
-
-
 %
 % Preliminaries
 %
@@ -94,12 +92,20 @@ depth = 0:10:1110;
 
 P = [600, 700. 800];
 linestyles = ["-", "--", "--"];
+
+%2009 and 2012 profiles in background
+load('./data/TS_2009.mat', "Z", "T2009","S2009");
+plot(p1, T2009, Z, 'color', ones(3,1)*0.7)
+plot(p2, S2009, Z, 'color', ones(3,1)*0.7)
+
+load('./data/TS_2012.mat', "Z", "T2012","S2012");
+plot(p1, T2012, Z, 'color', ones(3,1)*0.5)
+plot(p2, S2012, Z, 'color', ones(3,1)*0.5)
+
 for i = 1:3
 [t_prof, s_prof] = TS_profile(depth,-1100,P(i) - 600, P(i)-600); %send and third arguments are offset from 600
 
-
 plot(p1, t_prof,-depth(1:end-1), 'r', 'linestyle', linestyles(i), 'linewidth', 1.5);
-
 axes(p1); txt =  text(0, -P(i) + 190, strcat("P = " ,num2str(P(i))), 'Color', 'r', 'Rotation', -45);
 
 plot(p2,s_prof, -depth(1:end-1), 'b', 'linestyle', linestyles(i), 'linewidth', 1.5);

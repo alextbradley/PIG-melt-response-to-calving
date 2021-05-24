@@ -125,7 +125,5 @@ p2.FontSize = ax_fontsize;
 % save
 %
 if save_flag 
-
-
-
+saveas(gcf, "plots/figure2", 'epsc')
 end

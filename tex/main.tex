@@ -201,15 +201,18 @@ In this paper, we aim to
 
 \section{Experiment Details}
 %broad overview of the experiemnts
-We perform a total of nine experiments, each corresponding to a unique pair of ridge-shelf distance, and hydrographic forcing. Each experiment involves resolving the ocean circulation explicitly using the MIT general circulation model (MITgcm) for ten different ice front locations, thus simulating the effect of calving. Other than removing sections within each experiment, the ice shelf geometry does not change; ice shelves enter passively, via the exchange of heat and salt at the ice-ocean interface alone. This passive description (i.e. not including any ice sheet or ice shelf dynamics) is sufficient for this study since we are primarily interested in response of melt rates to ice shelf calving, which occur on timescales much shorter than on which the ice responds dynamically to perturbations in melting.
+We perform a total of nine experiments, each corresponding to a unique pair of ridge-shelf distance, and hydrographic forcing. Each experiment involves resolving the ocean circulation explicitly using the MIT general circulation model (MITgcm) for ten different ice front locations, thus simulating the effect of calving. Other than removing sections within each experiment, the ice shelf geometry does not change; ice shelves enter passively, via the exchange of heat and salt at the ice-ocean interface alone. This passive description (i.e. not including any ice sheet or ice shelf dynamics) is sufficient for this study since we are primarily interested in response of melt rates to ice shelf calving, which occur on timescales much shorter than on which the ice responds dynamically to perturbations in melting. \red{within each we have an `uncalved run and nine further runs in which the ice front position is systematically adjusted by removing sections of ice, thus simulating calving.}
+
+\red{Note that throughout we use the term `calving' as a proxy for the effect of removing sections of ice.}
+
 
 In the following sections we provide further details of the ocean model and experimental setup, including the motivation for various parameter choices.
 
 \begin{figure}
     \centering
     \includegraphics[width = \textwidth]{../make_figures/plots/figure2.eps}
-    \caption{Caption}
-    \label{fig:my_label}
+    \caption{(a) Schematic diagram of the experimental setup. The ocean domain consists of the gridded area, which is bordered by a passive ice shelf (shaded blue) and seabed ridge a (shaded brown). Solid and dashed black lines indicate the ice shelf geometry in un-calved case for the three values of the ridge gap parameter $H$ used in the experiments ($H = $100, 200, and 300). Solid blue lines indicate the ice front in the calving experiments, which are located 80, 75, 70, 65, 60, 55, 50, 45, and 40~km north of the southern end of the domain. The red box indicates locations in the ocean domain which are within 30~km of the southern end of the domain, defining the `inner cavity' region, (b) Salinity and temperature profiles used in the experiments (red and blue curves), with $P = 600$ (solid), $P = 700$ (dashed), $P = 800$ (dot-dashed) as indicated by the label. Grey lines correspond to temperature and salinity profiles taken from CTD measurements in Pine Island Bay during the austral summers of 2009 (light grey) and 2012 (dark grey).  \red{Need (a), (b) labels and shade the inner cavity region, change the P800 to dot dashed.} }
+    \label{fig:Schematic}
 \end{figure}
 
 \subsection{Details of Ocean Model}
@@ -245,7 +248,7 @@ where $y_c$ is the location of the ice front (see below). We stress that these i
 
 We use three different values of $H$ in different experiment sets. The smallest value we use is $H = 100$m, corresponding to the minimum gap between the ice shelf and ridge that is observed in practice. The largest value of $H$ is  $200$m; as we shall see, the melt response to calving is very small when the cavity gap $H$ is above $200$m, and thus the $H = 200$m case can be thought of an end member for which the cavity does not care about the gap width. The third value of $H$ we use is 150m, which acts as an intermediate value between these two end members.
 
-To simulate calving, we vary the calving front position $y_f$ in each set of experiments; for each set we use ten values in the range $40~\text{km} \leq y_f \leq 84~\text{km}$. The largest value in this range corresponds to the distance of the ice front in PIG in 2012, before significant calving took place in the late 2010s, while the lowest value is determined by a compromise between calving a significant way beyond the ridge, while retaining a significant area that is shared by each experiment, over which the melt rate may be averaged (as we discuss further in \S\ref{S:Baseline}, the area over which melt rates are averaged must be invariant to calving).
+To simulate calving, we vary the calving front position $y_f$ in each set of experiments; for each set we use ten values in the range $40~\text{km} \leq y_f \leq 84~\text{km}$. The largest value in this range corresponds to the distance of the ice front in PIG in 2012, before significant calving took place in the late 2010s, while the lowest value is determined by a compromise between calving a significant way beyond the ridge, while retaining a significant area that is shared by each experiment, over which the melt rate may be averaged (as we discuss further in \S\ref{S:Baseline}, the area over which melt rates are averaged must be invariant to calving). \red{You might want to but these changes in ice front into the context of PIG, as for hydrography.}
 
 
 \subsection{Hydrographic Forcing}\label{S:Experiment:Hydrography}
@@ -261,9 +264,16 @@ These piecewise linear hydrographic forcings used in this study correspond to (s
 %wrap up the experiments:\ 
 Within each experiment set, the "uncalved" geometry, with ice front located 84~km from the southern end of the domain is considered the default. In addition, the experiment set that includes the narrowest gap ($H = 100$) and the highest pycnocline ($P = 600$) is considered the baseline set; in the following section we describe the conditions in the baseline set. \red{maybe better to say (at the start of this section) we have nine experiments, each of which involves resolving the circulation for different calving front positions}
 
-\section{Result for the Baseline Set}\label{S:Baseline}
-\subsection{Un-calved results}
+\section{Result for the Baseline Experiments}\label{S:Baseline}
+In this section, we describe the results for the baseline experiment with $H = 100$ (the narrowest ridge gap width) and $P = 600$ (the highest pycnocline), corresponding to the solid lines in figure~\ref{fig:Schematic}. We begin by describing the steady state configuration for the uncalved run, and then describe how and why calving changes the inner cavity melt rate.
+
+\subsection{Default Run}
+
+%figure 4: plots of (a) melt rate and velocity vectors, (b) geostrophic contours and BSF overlain and (c) bottom current and temperature (i.e. a la Jan 2014 paper)
 \subsection{Calving effect}
+%figure 5: (a) plot of mean melt rate as a function of extent and (b) millgate decomposition 
+
+%figure 6: calving with snapping why: (a) row of melt rate (colours) and BSF contours, (b) zonal sections, (c) meridional sections
 
 \section{Effect of Cavity Geometry on Melt Response to Calving}
 

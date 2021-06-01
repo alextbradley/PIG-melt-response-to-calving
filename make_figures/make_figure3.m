@@ -158,7 +158,7 @@ end %end gendata loop
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plots %%%%%%%%%%%%%%%%%%%%%%%
 width = 0.22;
-gap = 0.02;
+gap = 0.04;
 startx = (1 - 3*width + 2*gap)/2 - 0.05;
 starty = 0.1;
 height = 0.8;

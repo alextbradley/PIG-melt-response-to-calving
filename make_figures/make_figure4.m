@@ -225,7 +225,7 @@ ylim([0.4, 1.8])
 xlabel('Calved length (km)');
 ylabel('Mean melt relative to default')
 xlim([0, 84 - 40]);
-legend({"Modelled results", "Constant (T - T_f)", "Constant U^*"}, 'location', 'southwest')
+legend({"Modelled results", "Constant $(T - T_f)$", "Constant $U^*$"}, 'location', 'southwest','interpreter', 'latex')
 
 %
 % Save figure

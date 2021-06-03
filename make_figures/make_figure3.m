@@ -21,7 +21,9 @@ plot_defaults
 label_size = 11;
 ax_fontsize = 10;
 figure(1); clf;
-fig = gcf; fig.Position(3:4) = [900, 500];
+fig = gcf; fig.Position(3:4) = [1085, 540];
+merid_idx = floor(nx/2);
+zonal_idx = 50;
 
 %
 % Data locations
@@ -157,19 +159,24 @@ stream = stream/1e6; %convert to sv
 end %end gendata loop
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plots %%%%%%%%%%%%%%%%%%%%%%%
-width = 0.22;
-gap = 0.04;
-startx = (1 - 3*width + 2*gap)/2 - 0.05;
-starty = 0.1;
+width = 0.16;
+widthsect = 0.28;
+gap = 0.03;
+startx = (1 - 4*width - 3*gap)/2 - 0.05;
+starty = 0.085;
 height = 0.8;
+heightsmall = 0.35; 
 positions = [startx, starty, width, height;
 	     startx + gap + width, starty, width, height;
-	     startx + 2*gap + 2*width, starty, width, height];
+	     startx + 2*gap + 2*width, starty, width, height;
+	     startx + 3*gap + 3*width + 0.05, starty, widthsect, heightsmall;
+	     startx + 3*gap + 3*width + 0.05, starty + height/2+0.045, widthsect, heightsmall];
 	    
 %
 % Plot 1: Melt rate and BL velocities
 %
 ax(1) = subplot('Position', positions(1,:)); hold on; box on
+ax(1).FontSize = 10;
 contourf(X/1e3,Y/1e3,melt', 50, 'linestyle', 'none');
 cmap = lighter_blue_parula(100,0.2); 
 colormap(ax(1), cmap);
@@ -181,17 +188,19 @@ idxY = 1:8:320;
 XX = XX/1e3; YY = YY/1e3;
 velscale =15;
 plot(X/1e3, 50*ones(length(X), 1), 'w--', 'linewidth', 1.5)
+plot(X/1e3, Y(zonal_idx)*ones(length(X))/1e3, 'm--', 'linewidth', 1.5)
+plot(24*ones(1,230), Y(1:230)/1e3, 'm--', 'linewidth', 1.5);
 quiver(XX(idxY, idxX),YY(idxY, idxX),velscale *Ubl(idxX, idxY)', velscale*Vbl(idxX, idxY)', 'autoscale', 'off', 'color', 'k')
 
 %colorbar and arrow
-c = colorbar;
-c.Location = 'north';
-c.Label.String = 'melt rate (m/yr)';
-c.Position(end) = c.Position(end) - 0.02;
-c.Position(2) = c.Position(2) + 0.03;
-c.FontSize = 10;
-plot([20, 30], [100,100], 'k', 'linewidth', 1);
-text(31, 100, '0.6 m/s')
+A = colorbar;
+A.Location = 'northoutside';
+A.Label.String = 'melt rate (m/yr)';
+A.Position(end) = 0.02;%A.Position(end) - 0.02;
+A.Position(2) = 0.89;
+A.FontSize = 10;
+plot([20, 30], [120,120], 'k', 'linewidth', 1);
+text(31, 120, '0.6 m/s')
 xlabel('x (km)');
 ylabel('y (km)')
 
@@ -200,22 +209,22 @@ ylabel('y (km)')
 % Plot 2: 1/h and BSF contours
 %
 ax(2) = subplot('Position', positions(2,:)); hold on; box on;
+ax(2).FontSize = 10;
 column_thickness = topo - bathy;
-contourf(X/1e3,Y/1e3,1e3* (1./column_thickness)', 20, 'linestyle', 'none');
 plot(X/1e3, 50*ones(length(X), 1), 'w--', 'linewidth', 1.5)
+contourf(X/1e3,Y/1e3,1e3* (1./column_thickness)', 20, 'linestyle', 'none');
 colormap(ax(2), cmap);
-c = colorbar;
-c.Location = 'north';
-c.Position(end) = c.Position(end) - 0.02;
-c.Position(2) = c.Position(2) + 0.03;
-c.Label.String = '1/h (10^{-3} m^{-1})';
-c.FontSize = 10;
+a = colorbar;
+a.Location = 'northoutside';
+a.Position(end) = 0.02;%a.Position(end) - 0.02;
+a.Position(2) = 0.89;%a.Position(2) + 0.03;
+a.Label.String = '1/h (10^{-3} m^{-1})';
+a.FontSize = 10;
 yticks([])
 xlabel('x (km)');
 
 %add bsf
 streamsm = smooth2a(stream, 2,2);
-streamsm(:,end-32:end) = nan;
 axnew = axes;
 axnew.Position = ax(2).Position;
 [C,h] =contour(X/1e3,Y/1e3, streamsm', [-0.7, -0.5, -0.3, -0.1], 'k');
@@ -233,22 +242,122 @@ set(axnew, 'color', 'none')
 % Plot 3
 %
 ax(3) = subplot('Position', positions(3,:)); hold on; box on
+ax(3).FontSize = 10;
 Tbotsm = smooth2a(Tbot, 2,2);
 contourf(X/1e3,Y/1e3,Tbotsm', 50, 'linestyle', 'none');
 cmap = lighter_blue_parula(100,0.2); 
 colormap(ax(3), cmap);
 
 plot(X/1e3, 50*ones(length(X), 1), 'w--', 'linewidth', 1.5)
-c = colorbar;
-c.Location = 'north';
-c.Position(end) = c.Position(end) - 0.02;
-c.Position(2) = c.Position(2) + 0.03;
-c.Label.String = 'Bottom temp(\circC)';
-c.FontSize = 10;
+b = colorbar;
+b.Location = 'northoutside';
+b.Position(end) = 0.02; %b.Position(end) - 0.02;
+b.Position(2) = 0.89;%b.Position(2) + 0.03;
+b.Label.String = 'Bottom temp(\circC)';
+b.FontSize = 10;
 yticks([])
-Ubot(:,end-48:end)= nan;
 quiver(XX(idxY, idxX),YY(idxY, idxX),velscale *Ubot(idxX, idxY)', velscale*Vbot(idxX, idxY)', 'autoscale', 'off', 'color', 'k')
 xlabel('x (km)')
+
+%
+% Plot 4: meridional cross section
+%
+ax(4) = subplot('Position', positions(4,:)); hold on; box on;
+ax(4).FontSize = 10;
+SMS = squeeze(Salt(merid_idx, :,:));
+TMS = squeeze(Theta(merid_idx, :, :));
+for p = 1:ny
+for q = 1:nz
+        if bathy(merid_idx,p) > -Z(q)
+        TMS(p,q) = nan;
+        SMS(p,q) = nan;
+        end
+        if topo(merid_idx,p)< -Z(q)
+        TMS(p,q) = nan;
+        SMS(p,q) = nan;
+        UMS(p,q) = nan;
+        VMS(p,q) = nan;
+        end
+end
+end
+contourf(max(Y)/1e3 - Y/1e3,-Z, TMS',30, 'linestyle', 'none');
+colormap(ax(4), cmap);
+hold on
+plot(max(Y)/1e3 - Y/1e3, topo(merid_idx, :), 'k', 'linewidth', 1)
+plot(max(Y)/1e3 - Y/1e3, bathy(merid_idx, :), 'k', 'linewidth', 1)
+xlim([4*1e4, Y(end)]/1e3)
+ylim([-1100,-300])
+ylabel('depth (m)');
+xlabel('Y (km)');
+c = colorbar;
+c.Location = 'north';
+c.Position(1) = positions(4,1) + 0.02;
+c.Position(3) = widthsect - 0.04;
+c.Position(4) = 0.02;
+c.Position(2) = 0.4;
+c.Label.String = '\Theta (\circ C)';
+c.Label.FontSize = 10;
+plot((max(Y)/1e3 - 20)*[1,1], [bathy(3,zonal_idx),topo(3,zonal_idx)], 'm--', 'linewidth', 1.5)
+
+
+axnew = axes;
+axnew.Position = ax(4).Position;
+[C,h] =contour(max(Y)/1e3 - Y/1e3,-Z , SMS', 34.2:0.2:34.6, 'k');
+%clabel(C,h);
+
+xticks([]);
+yticks([]);
+set(axnew, 'color', 'none')
+xlim([4*1e4, Y(end)]/1e3)
+ylim([-1100,-300])
+%shift labels because we plotted in reverse
+ax(4).XTick = max(Y)/1e3 - (80:-20:0);
+ax(4).XTickLabels = {"80", "60","40", "20", "0"};
+
+
+%
+% Plot 5
+% 
+ax(5) = subplot('Position', positions(5,:)); hold on; box on;
+ax(5).FontSize = 10;
+SZS = squeeze(Salt(:, zonal_idx,:));
+TZS = squeeze(Theta(:, zonal_idx, :));
+for p = 1:nx
+for q = 1:nz
+        if bathy(p,zonal_idx) > -Z(q)
+        TZS(p,q) = nan;
+        SZS(p,q) = nan;
+        end
+        if topo(p,zonal_idx)< -Z(q)
+        TZS(p,q) = nan;
+        SZS(p,q) = nan;
+        end
+end
+end
+TZS  = saturate(TZS, max(max(TMS)), min(min(TMS)));
+contourf(X/1e3,-Z, TZS',30, 'linestyle', 'none');
+colormap(ax(5), cmap);
+hold on
+ylabel('depth (m)');
+xlabel('X (km)');
+d = colorbar;
+d.Location = 'northoutside';
+d.Position(1) = positions(4,1) + 0.02;
+d.Position(2) = 0.89;
+d.Label.String = '\Theta (\circ C)';
+d.Label.FontSize = 10;
+d.Position(3) = widthsect - 0.04;
+d.Position(4) = 0.02;
+ylim([bathy(3,zonal_idx),topo(3,zonal_idx)])
+axnew = axes;
+axnew.Position = ax(5).Position;
+[C,h] =contour(X/1e3,-Z , SZS', 34.2:0.2:34.6, 'k');
+clabel(C,h);
+
+xticks([]);
+yticks([]);
+set(axnew, 'color', 'none')
+ylim([bathy(3,zonal_idx),topo(3,zonal_idx)])
 
 %
 % Save
@@ -256,4 +365,5 @@ xlabel('x (km)')
 if save_flag
 saveas(gcf, "plots/figure3", 'epsc')
 end
+
 

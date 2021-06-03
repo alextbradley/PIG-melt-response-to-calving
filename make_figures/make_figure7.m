@@ -1,4 +1,4 @@
-%Make figure 5 in the Idealized PIG calving manuscript: results from the default run.
+%Make figure 7 in the Idealized PIG calving manuscript: results from the W = 200, P600 runs.
 %Column 1: Melt rate and BSF contours 
 %Column 2: Zonal Sections velocity
 %Column 3: Zonal Sections temperature
@@ -65,7 +65,7 @@ merid_idx = floor(nx/2); %index of midpt in x
 %
 % Generate data loop
 %
-run_nos = ["077", "078", "079", "080", "081", "082", "083", "084", "085", "086"];
+run_nos = ["125", "126", "127", "128", "129", "130", "131", "132", "133", "134"];
 sz = length(run_nos);
 extent = [84,80,75,70,65,60,55,50,45,40];
 H = 400; %ridge height (always 400);
@@ -264,7 +264,7 @@ end
 for p = 1:sz
 ax(2,p) = subplot('Position', squeeze(positions(:,2,sz+1-p)));
 TMS = cell2mat(merid_theta_scenarios(p));
-TMS = saturate(TMS, 1.3, -1.2);
+TMS = saturate(TMS, 1.3, -0.5);
 contourf(max(Y) - Y,-Z, TMS',30, 'linestyle', 'none');
 hold on
 topo = cell2mat(topo_scenarios(p));
@@ -306,7 +306,7 @@ end %end loop over runs
 for p = 1:sz
 ax(3,p) = subplot('Position', squeeze(positions(:,3,sz+1-p)));
 TZS = cell2mat(zonal_theta_scenarios(p));
-TZS = saturate(TZS, 1.3, -1.2);
+TZS = saturate(TZS, 1.3, 0.5);
 contourf(X,-Z, TZS',30, 'linestyle', 'none');
 hold on
 topo = cell2mat(topo_scenarios(p));
@@ -345,7 +345,7 @@ end %end loop over runs
 for p = 1:sz
 ax(4,p) = subplot('Position', squeeze(positions(:,4,sz+1-p)));
 VZS = cell2mat(zonal_uvel_scenarios(p));
-VZS = saturate(VZS, 0, -0.3);
+VZS = saturate(VZS, 0, -0.15);
 contourf(X,-Z, VZS',30, 'linestyle', 'none');
 hold on
 topo = cell2mat(topo_scenarios(p));
@@ -360,6 +360,7 @@ if p == 1
 	d.Position(2)=colbar_ypos;
 	d.Label.String = 'zonal velocity (m/s)';
 	d.Label.FontSize = cbar_fontsize;
+	d.Ticks = -0.15:0.05:0;
 end
 end %end loop over runs
 
@@ -367,6 +368,6 @@ end %end loop over runs
 % Save flag
 %
 if save_flag
-saveas(gcf, "plots/figure5", 'epsc')
+saveas(gcf, "plots/figure7", 'epsc')
 end
 

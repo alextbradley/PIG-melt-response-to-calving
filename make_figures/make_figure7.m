@@ -22,7 +22,7 @@ plot_defaults
 label_size = 11;
 ax_fontsize = 10;
 figure(1); clf;
-fig = gcf; fig.Position(3:4) = [1085, 650];
+fig = gcf; fig.Position(3:4) = [1085, 800];
 
 %
 % Data locations

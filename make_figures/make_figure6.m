@@ -19,7 +19,7 @@ plot_defaults
 label_size = 11;
 ax_fontsize = 10;
 figure(1); clf; 
-fig = gcf; fig.Position(3:4) = [1000, 390];
+fig = gcf; fig.Position(3:4) = [1000, 650];
 
 %
 % Data locations
@@ -53,12 +53,12 @@ T0 = 8.32*1e-2;
 
 %time details
 ntout1 = 6; 
-ntout2 = 12; %define time period to average over
+ntout2 = 8; %define time period to average over
 
 % 
 % Generate data loop
 %
-run_nos = ["101", "102", "103", "104", "105", "106", "107", "108", "109", "110";
+run_nos = ["102", "102", "103", "104", "105", "106", "107", "108", "109", "110";
 	"125", "126", "127", "128", "129", "130", "131", "132", "133", "134"];
 sz = size(run_nos);
 extent = [84,80,75,70,65,60,55,50,45,40];
@@ -90,14 +90,14 @@ topo_fname=  ['shelfice_topo_H' num2str(H) '_W' num2str(W(i)) '_extent' num2str(
 topo_fid = fopen(strcat(topodir, '/',topo_fname));
 topo = fread(topo_fid, 'real*8', 'b');
 topo = reshape(topo, [nx, ny]);
-topo_scenarios{i} = topo;
+topo_scenarios{i,j} = topo;
 
 %melt rates
 state2D_fname = strcat(rootdir, run_nos(i,j), '/run/state2D.nc');
 melt = ncread(state2D_fname, 'SHIfwFlx', [1, 1, ntout1], [Inf, Inf, 1+ntout2- ntout1]);
 melt = mean(melt, 3); %average over months ntout1 to ntout2
 melt = -melt * secs_per_year / density_ice;
-melt_scenarios{i} = melt;
+melt_scenarios{i,j} = melt;
 
 %Theta
 Theta_fname = strcat(rootdir, run_nos(i,j), '/run/stateTheta.nc');
@@ -154,7 +154,8 @@ Ubl_scenarios{i,j} = Ubl;
 Vbl_scenarios{i,j} = Vbl;
 
 
-end
+end %end loop over i
+end %end loop over j
 end %end generate data loop
 
 %
@@ -165,42 +166,47 @@ end %end generate data loop
 %
 % Plot 1 + 3: Mean inner cavity melt rate with calving
 %
-subplot(1,2,1); grid on; hold on; ax = gca; box on
+for i = 1:2
+subplot(2,2,2*i-1); grid on; hold on; ax = gca; box on
 ave_melt = zeros(1,sz(2));
 for j = 1:sz(2)
-melt = cell2mat(melt_scenarios(1,j));
-ave_melt(i) = mean(melt(idx));
+melt = cell2mat(melt_scenarios(i,j));
+ave_melt(j) = mean(melt(idx));
 end
-plot([34,34],  [40,80], 'k--', 'linewidth', 1.5); %plot the location of top of ridge
+plot([34,34],  [60,70], 'k--', 'linewidth', 1.5); %plot the location of top of ridge
 plot(84 - extent, ave_melt, 'o-', 'color', plotcolor1, 'markerfacecolor', plotcolor1);
 xlabel('Calved length (km)');
 ylabel('Mean inner cavity melt rate (m/yr)');
 xlim([0, 84 - 40]);
+end %end loop over i
+
+
 
 %
 % Plot 2: Decomposition
 %
-subplot(1,2,2); grid on; hold on; ax = gca; box on
+for i = 1:2
+subplot(2,2,2*i); grid on; hold on; ax = gca; box on
 
 %set up storage
-relmelt        = zeros(1,sz);
-relmelt_noTemp = zeros(1,sz);
-relmelt_noVel  = zeros(1,sz);
+relmelt        = zeros(1,sz(2));
+relmelt_noTemp = zeros(1,sz(2));
+relmelt_noVel  = zeros(1,sz(2));
 
 %get the baseline velocity, theta, salt
-Ubl_baseline = cell2mat(Ubl_scenarios(1));
-Vbl_baseline = cell2mat(Vbl_scenarios(1));
-Tbl_baseline = cell2mat(Tbl_scenarios(1));
-Sbl_baseline = cell2mat(Sbl_scenarios(1));
+Ubl_baseline = cell2mat(Ubl_scenarios(i,1));
+Vbl_baseline = cell2mat(Vbl_scenarios(i,1));
+Tbl_baseline = cell2mat(Tbl_scenarios(i,1));
+Sbl_baseline = cell2mat(Sbl_scenarios(i,1));
 Tl_baseline  = T0 + lambda*topo - gamma*Sbl_baseline;
 UdT_baseline = sqrt(Ubl_baseline.^2 + Vbl_baseline.^2) .* (Tbl_baseline - Tl_baseline);
-for i = 1:sz
+for j = 1:sz(2)
 
 %get the current velocity, theta, salt
-Ubl = cell2mat(Ubl_scenarios(i));
-Vbl = cell2mat(Vbl_scenarios(i));
-Tbl = cell2mat(Tbl_scenarios(i));
-Sbl = cell2mat(Sbl_scenarios(i));
+Ubl = cell2mat(Ubl_scenarios(i,j));
+Vbl = cell2mat(Vbl_scenarios(i,i));
+Tbl = cell2mat(Tbl_scenarios(i,j));
+Sbl = cell2mat(Sbl_scenarios(i,j));
 Tl  = T0 + lambda*topo - gamma*Sbl; %liquidus temperature in BL
 
 %compute relative melt contributions
@@ -208,27 +214,30 @@ UdT = sqrt(Ubl.^2 + Vbl.^2) .* (Tbl - Tl);
 UdT_noVel =  sqrt(Ubl_baseline.^2 + Vbl_baseline.^2) .* (Tbl - Tl);
 UdT_noTemp = sqrt(Ubl.^2 + Vbl.^2) .* (Tbl_baseline - Tl_baseline);
 
-relmelt(i) = nanmean(UdT(idx)) / nanmean(UdT_baseline(idx)); 
-relmelt_noTemp(i) = nanmean(UdT_noTemp(idx)) / nanmean(UdT_baseline(idx));
-relmelt_noVel(i) = nanmean(UdT_noVel(idx)) / nanmean(UdT_baseline(idx));
+relmelt(j) = nanmean(UdT(idx)) / nanmean(UdT_baseline(idx)); 
+relmelt_noTemp(j) = nanmean(UdT_noTemp(idx)) / nanmean(UdT_baseline(idx));
+relmelt_noVel(j) = nanmean(UdT_noVel(idx)) / nanmean(UdT_baseline(idx));
 
 end %end loop over runs
-plot([34,34],  [0.4, 1.8], 'k--', 'linewidth', 1.5, 'handlevisibility', 'off'); %plot the location of top of ridge
+plot([34,34],  [0.6, 1.4], 'k--', 'linewidth', 1.5, 'handlevisibility', 'off'); %plot the location of top of ridge
 plot(84 - extent, relmelt, 'o-', 'color', plotcolor1, 'markerfacecolor', plotcolor1);
 plot(84 - extent, relmelt_noTemp, 'o-', 'color', plotcolor2, 'markerfacecolor', plotcolor2);
 plot(84 - extent, relmelt_noVel, 'o-', 'color', plotcolor3, 'markerfacecolor', plotcolor3);
 
 %tidy
-ylim([0.4, 1.8])
+ylim([0.6, 1.4])
 xlabel('Calved length (km)');
 ylabel('Mean melt relative to default')
 xlim([0, 84 - 40]);
+if i == 1
 legend({"Modelled results", "Constant $(T - T_f)$", "Constant $U^*$"}, 'location', 'southwest','interpreter', 'latex')
+end
+end %end loop over i = 1,2
 
 %
 % Save figure
 %
 if save_flag
-saveas(gcf, "plots/figure4", 'epsc')
+saveas(gcf, "plots/figure6", 'epsc')
 end
 

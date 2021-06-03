@@ -163,6 +163,7 @@ width = 0.16;
 widthsect = 0.28;
 gap = 0.03;
 startx = (1 - 4*width - 3*gap)/2 - 0.05;
+startx = 0.05;
 starty = 0.085;
 height = 0.8;
 heightsmall = 0.35; 

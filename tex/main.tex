@@ -165,6 +165,8 @@
 % see http://sharingscience.agu.org/creating-plain-language-summary/)
 %
 %% ------------------------------------------------------------------------ %%
+\newcommand{\mpryr}{~m~yr\textsuperscript{-1}}
+
 
 %% \begin{abstract} starts the second page
 
@@ -199,11 +201,7 @@ In addition to the significant recently calving, it is therefore conceivable, th
 %in this paper, we explore the response of melting to calving in an idealized setup. We aim to isolate the physical processes responsible. Idealized modelling also means that 
 In this paper, we aim to 
 
-\section{Experiment Details}
-%broad overview of the experiemnts
-We perform a total of nine experiments, each corresponding to a unique pair of ridge-shelf distance, and hydrographic forcing. Each experiment involves resolving the ocean circulation explicitly using the MIT general circulation model (MITgcm) for ten different ice front locations, thus simulating the effect of calving. Other than removing sections within each experiment, the ice shelf geometry does not change; ice shelves enter passively, via the exchange of heat and salt at the ice-ocean interface alone. This passive description (i.e. not including any ice sheet or ice shelf dynamics) is sufficient for this study since we are primarily interested in response of melt rates to ice shelf calving, which occur on timescales much shorter than on which the ice responds dynamically to perturbations in melting. \red{within each we have an `uncalved run and nine further runs in which the ice front position is systematically adjusted by removing sections of ice, thus simulating calving.}
 
-\red{Note that throughout we use the term `calving' as a proxy for the effect of removing sections of ice.}
 
 \begin{figure}
     \centering
@@ -212,83 +210,135 @@ We perform a total of nine experiments, each corresponding to a unique pair of r
     \label{fig:figure1}
 \end{figure}
 
-In the following sections we provide further details of the ocean model and experimental setup, including the motivation for various parameter choices.
+\section{Experiment Details}
+%broad overview of the experiemnts
+We perform a total of nine experiments, each corresponding to a unique pair of parameters that characterize the hydrographic forcing, the strength of the barrier provided by the shelf, which are known to be variable in practice (section 1). Within each experiment, we perform ten simulations in which the ocean circulation is resolved explicitly using the MIT general circulation model (MITgcm): the first `default' (or `uncalved') simulation  corresponds to a configuration that captures the essential features of the Pine Island Cavity in 2009, while in the nine further `calving' simulations, sections of the ice shelf in the default run are removed subsequently, thus simulating the effect of calving (we use the word calving henceforth as a proxy for this description). Other than removing sections within each experiment, the ice shelf geometry does not change within each experiment (but may change between experiments, see section \ref{S:Experiment:Geometry}). Ice shelves therefore enter passively, via the exchange of heat and salt at the ice-ocean interface alone; a passive description of ice shelves (i.e. not including any ice sheet or ice shelf dynamics) is sufficient for this study since we are primarily interested in response of melt rates to ice shelf calving, which occur on timescales much shorter than on which the ice responds dynamically to perturbations in melting. In the following sections we provide further details of the ocean model and experimental setup, including the motivation for various parameter choices.
 
 \begin{figure}
     \centering
     \includegraphics[width = \textwidth]{../make_figures/plots/figure2.eps}
-    \caption{(a) Schematic diagram of the experimental setup. The ocean domain consists of the gridded area, which is bordered by a passive ice shelf (shaded blue) and seabed ridge a (shaded brown). Solid and dashed black lines indicate the ice shelf geometry in un-calved case for the three values of the ridge gap parameter $H$ used in the experiments ($H = $100, 200, and 300). Solid blue lines indicate the ice front in the calving experiments, which are located 80, 75, 70, 65, 60, 55, 50, 45, and 40~km north of the southern end of the domain. The red box indicates locations in the ocean domain which are within 30~km of the southern end of the domain, defining the `inner cavity' region, (b) Salinity and temperature profiles used in the experiments (red and blue curves), with $P = 600$ (solid), $P = 700$ (dashed), $P = 800$ (dot-dashed) as indicated by the label. Grey lines correspond to temperature and salinity profiles taken from CTD measurements in Pine Island Bay during the austral summers of 2009 (light grey) and 2012 (dark grey).  \red{Need (a), (b) labels and shade the inner cavity region, change the P800 to dot dashed.} }
-    \label{fig:Schematic}
+    \caption{(a) Schematic diagram of the experimental setup. The ocean domain consists of the gridded area, which is bordered by a passive ice shelf (shaded blue) and seabed ridge a (shaded brown). Solid and dashed black lines indicate the ice shelf geometry used in the default simulation for the three values of the ridge-gap parameter $H$=100~m, $H$=150~m, and $H$=200~m, as labelled. Solid blue lines indicate the ice front in the calving experiments, which are located 80, 75, 70, 65, 60, 55, 50, 45, and 40~km north of the southern end of the domain. The shaded grey region indicates the `inner cavity' (see main text), which are areas in the ocean domain that are within 30~km of the southern end of the domain. (b) Salinity and temperature profiles used in the experiments (red and blue curves), with $P = 600$ (solid), $P = 700$ (dashed), $P = 800$ (dot-dashed) as indicated by the label. Grey lines correspond to temperature and salinity profiles taken from CTD measurements in Pine Island Bay during the austral summers of 2009 (light grey) and 2012 (dark grey).  \red{Need (a), (b) labels and shade the inner cavity region, change the P800 to dot dashed. Add shaded restoring region.} }
+    \label{fig:figure2}
 \end{figure}
 
 \subsection{Details of Ocean Model}
-The MITgcm is a z-level general circulation model that includes a partial-cell treatment of topography, allowing an accurate description of both the seabed and ice draft. Our model grid consists of 110 layers with a vertical spacing of 10m, and a horizontal resolution of 400m. We use the MITgcm in hydrostatic model with a implicit nonlinear free surface scheme, a third-order direct space-time flux limited advection scheme, a non-linear equation of state~\citeA{Mcdougall2003JAtmosOceanTech}, and the Pacanowski-Philander~\cite{Pacanowski1981JPhysOcean} scheme parametrizes vertical mixing. The equations are solved on an $f$-plane with $f = -1.4\times10^{-4}~\text{s}^{-1}$. \red{maybe say something about viscosity?}
+The MITgcm is a z-level general circulation model that includes a partial-cell treatment of topography, allowing an accurate description of both the seabed and ice draft. Our model grid consists of 110 layers with a vertical spacing of 10~m, and a horizontal resolution of 400m. We use the MITgcm in hydrostatic mode with a implicit nonlinear free surface scheme, a third-order direct space-time flux limited advection scheme, a non-linear equation of state~\citeA{Mcdougall2003JAtmosOceanTech}, and the Pacanowski-Philander~\cite{Pacanowski1981JPhysOcean} scheme parametrizes vertical mixing. Constant values of 15 and 2.5~m\textsuperscript{2}~s\textsuperscript{-1} are used for the horizontal Laplacian viscosity and horizontal diffusivity. The equations are solved on an $f$-plane with $f = -1.4\times10^{-4}~\text{s}^{-1}$.
 
-Each simulation is ran for a total of 12 months, using a timestep of 30~\si{seconds}, after which time the configuration reaches a steady state. The melt rates reach approximately 95 percent of their final values with three months (see Appendix). All results presented here are averaged over months nine to twelve in the simulation. 
+Each simulation is ran for a total of 12 months, using a timestep of 30~\si{seconds}, after which time the configuration reaches a steady state. The melt rates reach approximately 95\% of their final values with three months \red{(see Appendix?)}. All results presented here are averaged over months nine to twelve in the simulation. 
 
-The MITgcm includes a static representation of ice shelves~\cite{Losch2008JGeophysResOceans}. Ice shelf melting is implemented using the so-called "three-equation formulation"~\cite{Holland1999JPhysOcean} that describes the exchange of heat and salt across the ice-ocean boundary. The implementation of this scheme in MITgcm has been described in detail elsewhere~\cite[for example]{DeRydt2014JGeophysResOceans,Dansereau2014JGROceans} but we note that because the temperatures difference between ice shelves and the adjacent boundary layer is on the order of several degrees Kelvin, thermal exchange across the ice-ocean interface is dominated by latent heat; under this assumption, the three equation formulation gives the melt rate $\dot{m}$ as
-\begin{equation}
+The MITgcm includes a static representation of ice shelves~\cite{Losch2008JGeophysResOceans}. Ice shelf melting is implemented using the so-called "three-equation formulation"~\cite{Holland1999JPhysOcean} that describes the exchange of heat and salt across the ice-ocean boundary. The implementation of this scheme in MITgcm has been described in detail elsewhere~\cite[for example]{DeRydt2014JGeophysResOceans,Dansereau2014JGROceans} but we note that thermal exchange across the ice-ocean interface is typically dominated by latent heat (a consequence of the fact that temperatures difference between ice shelves and the adjacent boundary layer is on the order of several degrees Celsius, while the characteristic temperature associated with latent heat removal is -84 degrees Celsius). With latent heat dominate thermal exchange, the three equation formulation gives the melt rate $\dot{m}$ as
+\begin{equation}\label{E:MeltRate}
     \dot{m} = \frac{c_p \gamma_T (T - T_b)}{L}.
 \end{equation}
-Here $c_p = 3947~\si{\joule \kilogram}^{-1}$, $T$ is the temperature of the ambient ocean, $T_b$ is the temperature, and $\gamma_T$ is a heat exchange co-efficient, which is has an approximately linear relationship on the ocean velocity next to the ice shelf base~\cite{Holland1999JPhysOcean}.
+Here $c_p = 3947~\si{\joule \kilogram}^{-1}$ is the specific heat capacity of water, $T$ is the temperature of the ambient ocean, $T_b$ is the temperature at the ice shelf base, which must be at the local freezing point, and $\gamma_T$ is a heat exchange co-efficient. The heat exchange coefficient has an approximately linear relationship on $u^*$, the ocean speed adjacent to the ice shelf base~\cite{Holland1999JPhysOcean}; assuming a perfectly linear relationship, equation~\eqref{E:MeltRateUdT} yields
+\begin{equation}\label{E:MeltRateUdT}
+    \dot{m} \propto u^* (T - T_b).
+\end{equation}
+We shall return to~\eqref{E:MeltRateUdT} when diagnosing the reasons for changes in the melt rate as the ice shelf calves.
 
-All parameter values used in the three equation formulation here are as in~\citeA{DeRydt2014JGeophysResOceans}, with the exception of the drag co-efficient, which is set to $4.5\times10^{-3}$, a value is more appropriate for Pine Island Glacier~\cite{Dutrieux2014Science} (note, however, that the drag coefficient that enters in the momentum balance, which can be set independently, remains at the default value of $2.5\times 10^{-3}$).
+All parameter values used in the three equation formulation here are as in~\citeA{Holland1999JPhysOcean}, with the exception of the drag co-efficient, which is set to $4.5\times10^{-3}$, a value is more appropriate for Pine Island Glacier~\cite{Dutrieux2014Science} (the drag coefficient that enters in the momentum balance, which can be set independently, remains at the default value of $2.5\times 10^{-3}$).
 
 \subsection{Ice Shelf Geometry and Seabed Bathymetry}\label{S:Experiment:Geometry}
-Idealized setup is uniform in the zonal direction, with the $x$-axis aligned along the meridional direction and $y$-axis aligned along the zonal direction (we assume that PIG is oriented north-south as is standard, although it's closer to east-west in practice but the beta-effect doesn't make a difference of these scales). Setup shown schematically in figure x. We are primarily interested in understanding how calving changes melt rates in cavities with a topographic barrier to the flow, and our setup includes these features via a seabed ridge and a variable ice shelf front position. 
+Our idealized setup is shown schematically in figure~\ref{fig:figure2}a: it is uniform in the zonal direction, along which the $x$-axis is aligned, and the $y$-axis is aligned along the meridional direction (although PIG is aligned approximately East-West, we assume here that it is aligned East-West, as is standard~\cite{Grosfeld1997JGROceans, DeRydt2014JGeophysResOceans}).
 
 The sea bed has a Gaussian profile,
 \begin{equation}\label{E:Experiment:Bed}
-    b(x,y) = 100 \exp\left[-\frac{\left(y - 50\times 10^3\right)^2}{2\sigma^2}\right],
+    b(x,y) = -1100 + 400 \exp\left[-\frac{\left(y - 50\times 10^3\right)^2}{2\sigma^2}\right],
 \end{equation}
-where $\sigma = 12$~km is the lengthscale over which this profile decays to zero. The profile~\ref{E:Experiment:Bed} corresponds to a ridge of height 400m, which reaches a peak 50km from the southern end of the domain that roughly corresponds to the grounding line (see below). A ridge to grounding line distance of 50km is similar to Pine Island Glacier \red{figure showing PIG bathymetry, slide through ridge and cross section of gaps along ridge}.
+where $\sigma = 12$~km is the length scale over which this profile decays towards zero. The profile~\eqref{E:Experiment:Bed} corresponds to a ridge that peaks 50km from the southern end of the domain, which can be considered as the grounding line, at a height of 400m (note that the cavity thickness is prevented from reaching zero at the grounding line as the MITgcm requires at least two grid cells in the vertical to permit horizontal transfer). \blue{Would be nice to add a cross section to figure 2a, of the ice and sea bed along a profile.}
 
-In Pine Island, the gap between the ridge and the ice is not constant but varies between ~100m at its narrowest up to greater than 300m at it's widest. This is the result of variability in both the ice shelf draft and the height of the ridge along its length; since we assumed a constant sea bed geometry for simplicity, we aim to capture the effect of this variability by considering values of the gap $H$ between the crest of the seabed ridge and the ice shelf base (see figure). Following~\citeA{DeRydt2014JGeophysResOceans}, we use ice profiles of the form
+The variability in both Pine Island Ice Shelf draft and the height of the seabed ridge result in a ridge-draft gap that varies between approximately 100m at its narrowest to greater than 300m at it's widest (figure~\ref{fig:figure1}). Since we assumed a constant sea bed geometry, we aim to capture the effect of variability in the ridge-draft gap by considering different values of $H$, the vertical distance between the crest of the seabed ridge and the ice shelf base; $H$ enters only the model only via the ice profile, which, following~\citeA{DeRydt2014JGeophysResOceans}, takes the form
 \begin{equation}
     h(y) = \begin{cases}
     \left(\frac{310 + H}{2.64}\right)\tan^{-1}\left(\frac{y}{5882} -3\right) & \text{for}~y < y_f,\\
-    0  & \text{for}~y \geq y_f
+    0  & \text{for}~y \geq y_f.
     \end{cases}
 \end{equation}
-where $y_c$ is the location of the ice front (see below). We stress that these ice profiles are not obtained from ice dynamics considerations but feature a flatter section beyond the ridge and a steeper section inside the ridge that is observed in practice \red{figure} (we do not allow the ice profile to reach zero at the southern end of the domain because the MITgcm requires at least two grid cells to permit horizontal exchange of heat and salt) \red{ref?}.
+Here $y_c$ is the location of the ice front, which is varied in order to simulate calving (see below). We stress that these ice profiles are not obtained from ice dynamics considerations, but do feature a flatter section beyond the ridge and a steeper section inside the ridge that is observed in practice (figure~\ref{fig:figure2}a).
 
-We use three different values of $H$ in different experiment sets. The smallest value we use is $H = 100$m, corresponding to the minimum gap between the ice shelf and ridge that is observed in practice. The largest value of $H$ is  $200$m; as we shall see, the melt response to calving is very small when the cavity gap $H$ is above $200$m, and thus the $H = 200$m case can be thought of an end member for which the cavity does not care about the gap width. The third value of $H$ we use is 150m, which acts as an intermediate value between these two end members.
+We use three different values of $H$: $H$=100~m, $H$=150~m, and $H$=200m. The smallest value, $H = 100$m, corresponds to the minimum gap between the ice shelf and ridge that is observed in Pine Island (figure~\ref{fig:figure1}), while the largest value, $H$=200m, corresponds to an upper bound, beyond which the melt response to calving is negligible, as we shall see. The third value, $H$=150~m is an intermediate value between $H$ at which the melt rate is highly sensitive and weakly sensitive to calving.
 
-To simulate calving, we vary the calving front position $y_f$ in each set of experiments; for each set we use ten values in the range $40~\text{km} \leq y_f \leq 84~\text{km}$. The largest value in this range corresponds to the distance of the ice front in PIG in 2012, before significant calving took place in the late 2010s, while the lowest value is determined by a compromise between calving a significant way beyond the ridge, while retaining a significant area that is shared by each experiment, over which the melt rate may be averaged (as we discuss further in \S\ref{S:Baseline}, the area over which melt rates are averaged must be invariant to calving). \red{You might want to but these changes in ice front into the context of PIG, as for hydrography.}
-
+Within each experiment, the vary the front position $y_f$ is systematically reduced by removing sections of ice, to simulate calving. The ten simulations within each experiment use values $y_f$ = 84 (default), 80, 75, 70, 65, 60, 55, 50, 45, and 40~km, which correspond to calved lengths of 0, 4, 9, 14, 19, 24, 29, 34, 39, and 44~km, respectively. There are both pragmatic and physical reasons for this choosing this particular range: the default experiment with $y_f$= 84~km corresponds to the distance of the ice front in PIG in 2009, before significant calving took place in the late 2010s (the calving experiment with $y_f$=xx~km approximately corresponds to the present day ice front position); the lowest value, $y_f$=40~km, is chosen as a compromise between a configuration in which the ice front has calved a significant distance beyond the ridge, which retains a significant area that is shared by each experiment: as we discuss further in \S\ref{S:Baseline}, the area over which melt rates are averaged should be invariant to calving for a rigorous assessment of changes with calving. The computational expense of ocean simulations together with a large number of experiments means that the number of simulations within the range is restricted to ten.
 
 \subsection{Hydrographic Forcing}\label{S:Experiment:Hydrography}
 
-As discussed in \S\ref{S:Introduction}, the presence of a seabed ridge in Pine Island Glacier means that melt rates are particularly sensitive to the hydrographic forcing. It is natural to expect, therefore, that the melting response to calving will also have a sensitive dependence on the hydrographic forcing; to assess the effect of hydrographic forcing on melt response to calving, we repeat each of the sets of `geometric' experiments for three different hydrographic forcings. The hydrographic forcings are imposed on the model by means of a restoring boundary condition at the northern end of the domain: at this restoring boundary, the temperature and salinity are restored to the hydrographic forcings over five grid cells (total length 2km) with a restoring timescale varying from 12~h at the boundary to 60~h at the interior of this restoring regions. (The model includes solid walls with a free slip condition at the southern, western, and eastern sides of the domain.)
+As discussed in \S\ref{S:Introduction}, the presence of a seabed ridge in Pine Island Glacier means that melt rates are particularly sensitive to the ocean state in the far away from the cavity (the hydrographic forcing); we therefore expect that the melting response to calving will also have a sensitive dependence on hydrographic forcing. To assess this sensitivity, we repeat each of the experiments with different values of the ridge-gap parameter $H$ described in the previous section with three different hydrographic forcings, which are imposed on the model by means of a restoring boundary condition at the northern end of the domain (figure~\ref{fig:figure2}): at this boundary, the temperature and salinity are restored to specified vertical profiles over a distance of five horizontal grid cells (total length 2km) with a restoring timescale that varies from 12~h at the boundary to 60~h at the interior of this restoring regions. (The model includes solid walls with a free slip condition at the southern, western, and eastern sides of the domain.)
 
 %what do our profiles look like
-The three hydrographic profiles are shown schematically in figure \red{fig}: both the temperature and salinity vary linearly between constant values in a lower layer (temperature $1.2~\si{\celcius}$, salinity $34.7$~psu) to constant values in an upper layer (temperature $-1~\si{\celcius}$, salinity $34$~psu) across a pyncocline of thickness 400m, which begins at a depth denoted by $P$. The depth $P$ parametrizes the whole profile, with higher $P$ corresponding to a deeper pycnocline; our three hydrographic forcing conditions take $P = 600$, $700$, and $800$. 
+The three temperature and salinity profiles to which the ocean is restored are shown schematically in figure~\ref{fig:figure2}b,c. Both the temperature and salinity profiles are piecewise linear, with constant conditions in both a lower layer (temperature $1.2~\si{\celcius}$, salinity $34.7$~psu) and upper layer (temperature $-1~\si{\celcius}$, salinity $34$~psu) separated by a pycnocline of thickness 400~m. The pycnocline begins at a variable depth $P$ (a higher $P$ corresponds to a deeper pycnocline), which parametrizes the whole profile; our three hydrographic forcings use $P = 600$, $700$, and $800$. 
 
 %why do we choose these conditions
-These piecewise linear hydrographic forcings used in this study correspond to (simplified versions of) typical hydrographic conditions for the Pine Island Bay~\cite{Jacobs1996GRL, Dutrieux2014Science, Jenkins2018NatureGeo} (see figure \red{figure}). The upper and lower layers are dominated by Winter Water and Modified Circumpolar Deep Water, respectively. A record of hydrographic conditions in the Amundsen Sea indicates significant variability in the depth of the pycnocline varies considerably on interannual timescales~\cite{Dutrieux2014Science}; the profiles with $P = 600$ and $P = 800$ correspond to the years 2009 and 2012, respectively, which span the range of observed conditions: in 2012, the average depth of the pycnocline was at the shallowest on record, while in 2009, the average depth of the pycnocline was at the highest on record. As discussed, this resulted in a total yearly freshwater flux that was approximately twice as large in 2009, compared to 2012.
+These piecewise linear profiles correspond to (simplified versions of) typical conditions for the Pine Island Bay~\cite{Jacobs1996GRL, Dutrieux2014Science, Jenkins2018NatureGeo} (see figure~\ref{fig:figure2}a,b). The upper and lower layers are dominated by Winter Water and Modified Circumpolar Deep Water, respectively. A record of hydrographic conditions in the Amundsen Sea indicates significant variability in the depth of the pycnocline varies considerably on interannual timescales~\cite{Dutrieux2014Science}; the profiles with $P = 600$ and $P = 800$ correspond to the years 2009 and 2012, respectively, which span the range of observed conditions: in 2012, the average depth of the pycnocline was at the lowest on record, while in 2009, the average depth of the pycnocline was at the highest on record. 
 
 %wrap up the experiments:\ 
-Within each experiment set, the "uncalved" geometry, with ice front located 84~km from the southern end of the domain is considered the default. In addition, the experiment set that includes the narrowest gap ($H = 100$) and the highest pycnocline ($P = 600$) is considered the baseline set; in the following section we describe the conditions in the baseline set. \red{maybe better to say (at the start of this section) we have nine experiments, each of which involves resolving the circulation for different calving front positions}
+The nine experiments can be uniquely identified by a $(H,P)$ pair, where $H$ $\in \{100, 150, 200\}$ and $P$ $\in \{600, 700, 800\}$. We consider the extreme scenario with the strongest topographic barrier and warmest hydrographic forcing, $(H,P) = (100,600)$ to be the baseline; in the following section, we describe the results of this baseline experiment, before describing in sections~\ref{S:Results:H} and~\ref{S:Results:P} how this picture changes for different values of $H$ and $P$, respectively.
 
+\red{AB first readable to here}
 \section{Result for the Baseline Experiments}\label{S:Baseline}
 In this section, we describe the results for the baseline experiment with $H = 100$ (the narrowest ridge gap width) and $P = 600$ (the highest pycnocline), corresponding to the solid lines in figure~\ref{fig:Schematic}. We begin by describing the steady state configuration for the uncalved run, and then describe how and why calving changes the inner cavity melt rate.
 
 \subsection{Default Run}
+%describe each of what we see: melt rate, general observations
+Ice-ocean properties that characterise the default case with $H = 100$ and $P =600$ are shown in figure~\ref{fig:figure3}. Melt rates (figure~\ref{fig:figure3} are mostly below  20~m~yr\textsuperscript{-1} everywhere, except for a region located within 20~km of the grounding line, where maximum melt rates of approximately 120~m~yr\textsuperscript{-1} are seen. The average melt rate over the whole shelf is approximately 20\mpryr, which is lower than we see in practice (approximately 33$\pm$2\mpryr for 2009, to which the $P=600$ case corresponds), but this is in the direction we expect, given that the $H = 100$ cavity corresponds to the tightest topographic control we see anyway applied to the whole cavity.
+\red{introduce here the definition of the inner cavity, say why we need an area invariance (with respect to the spatially variable melt rate map we've seen for the default run), and quote the value of mean inner cavity melt rate here.}
+
+
+
+%why does the melt rate look like it does
+Melt rates depend on both cavity circulation and thermal driving. Circulation is controlled by coriolis, spin up a coriolis driven cyclonic circulation within the inner cavity, directed southward at the eastern boundary (large x) and predominantly westward south of $y =$ 30km. There circulation is strong south of $y = 30$~km, but high melt rates are confined to within $y = 20$~km: this is because the thermal driving is weak upstream of the $y = 20$km because of the rising buoyant melt water plume from this region presents colder ocean conditions to the ice shelf thus reducing $\Delta T$ and thus melting (figure 3e). 
+
+%we can use the bsf 
+We can gain further understanding into the behaviour in this default case by considering the bsf (figure 3c). If the flow is geostrophic, then the flow will align with contours of constant $f/h$, which are aligned with lines of constant $y$ (i.e. east west). The ice front provides a pv barrier, restricting flow from the open ocean into the cavity. We see melt rates of up to 50\mpryr at the ice front where we get some hot water access and high velocities as the flow downwells forced by this barrier. Under the ice shelf, the flow is primarily constrained by geometry: the ridge acts as a potential voriticity barrier causing the flow to be deflected to the left as it goes up the ridge. This PV barrier is sufficiently strong that there is little flow able to penetrate across the ridge, with the exception of a strong boundary current at the eastern end of the domain, where flow divergence and relative vorticity permit flow perpendicular to contours of constant column this thickness which is southward (northward) in the east (west). By the same token, the cyclonic circulation that spins up in the inner cavity is strongly constrained. 
+
+Although the inner and outer cavity are almost disconnected in a barotropic sense (as we shall see, this is not the case for larger $H$, when the PV barrier is not as strong), they are still connected via flow of warm water over the ridge. In this high pycnocline case, the melt water plume blocks most of the hot water from the outside but some is able to spill over and into the inner cavity, predominantly via the eastern boundary as discussed above (figure 3c shows that plume extends to top of ridge everywhere except boundary) (we verified that the heat content in the inner cavity is in steady state and it's presence is not the result of the initial conditions). This water is cooled by mixing with the meltwater plume (inner cavity temperatures maximum of approx 0.8C, compared to 1.3C outside the cavity), but still provides significant heat for melting. This hot water access leads to a strong stratification in the inner cavity, which results in a fast circulation there because flow is approximately geostrophic within the cavity. 
+
+The key points are that: (1) we spin up a cyclonic circulation in the inner cavity that strongly constrained by the strong pv barrier that the ridge-shelf provides, (2) melt water plume blocks most access of hot water, but still have some hot water access that permits strong melting close to the grounding line (3) presence of hot water and melt water results in high stratification and thus enhanced melting. Despite this being the end member with a barrier that's expected to be stronger than reality, we still get hot water access, plume coldest inshore of the ridge, and weak hydrographic front forms on the northern slope of the ridge. 
+
 \begin{figure}
     \centering
     \includegraphics[width = \textwidth]{../make_figures/plots/figure3.eps}
-    \caption{(a) Melt rate and BL velocity, (b) BSF and water column thickness, (c) bottom temp and velocity. \red{add a,b,c labels}}
+    \caption{Ice-ocean properties that characterize the default (uncalved) run in the baseline experiment ($P = 600$, $H = 100$). (a) Melt rate (colours) and boundary layer velocities (arrows), averaged over the three grid cells adjacent to the ice-ocean interface. White areas correspond to open ocean. Every fifth boundary layer velocity is plotted; the black line indicates an arrow length that would correspond to 0.6~m~s\textsuperscript{-1}. The white dashed line indicates the location of the top of the ridge, while the E-W and N-S aligned dashed magenta lines indicate the location at which the cross sections in (d) and (e) are taken, respectively. (b) Inverse water column thickness (colours) and barotropic stream function (black contours, in units of Sv). (c) Bottom temperature (colours) and bottom current (arrows) averaged over the three grid cells closest to the ocean floor. The scale bar in (a) is also appropriate for (c) \red{check this!}. (d) Zonal cross-section taken along the E-W aligned magenta line in (a), showing potential temperature (colours) and salinity contours at the 34.2, 34.4, and 34.6~psu levels. (e) Meridional cross-section, taken along the N-S aligned magnenta line in (a), with colours and contours as in (d). The magneta dashed line indicates the location of the section correspnding to (d). \red{add a, b, c, d, e labels}}
     \label{fig:figure3}
 \end{figure}
 
 %figure 4: plots of (a) melt rate and velocity vectors, (b) geostrophic contours and BSF overlain and (c) bottom current and temperature (i.e. a la Jan 2014 paper)
-\subsection{Calving effect}
+\subsection{Calving Effect}
+As sections of ice are removed from the shelf, the steady state mean melt rate in the inner cavity (henceforth `inner cavity melt rate') changes significantly (figure~\ref{fig:figure4}: it increases rapidly with calving when the ice shelf front is still located beyond the ridge, before suddenly dropping off when the calving event taken the ice front beyond the ridge, reaching an inner cavity melt rate that is approximately independent to further calving. 
+
+In more detail, the mean inner cavity melt rate increases only slightly with calving while the ice shelf front is located a beyond 70~km from the southern end of the domain (calved length less than 14km), but increases significantly at the front retreats further towards the top of the ridge, reaching a maximum of 73\mpryr (70\% larger than the default run) when the ice shelf front is located approximately 5~km north of the ridge crest. As mentioned, a subsequent calving event taking the ice shelf front to directly above the ridge crest (calved length 34km) results in a significant \textit{decrease} of approximately 15$\%$ (from 73\mpryr to 64\mpryr) in the mean inner cavity melt rate. Further calving does not beyond the ridge does not appear to change the mean inner cavity melt rate significantly.
+
+%explain what the Millgate decomposition.
+ The melt rate is approximately proportional to the product of the boundary layer velocity and thermal driving (equation~\eqref{E:MeltRateUdT}). We investigate the relative roles of changes in these two quantities in changing the mean inner cavity melt rate by calculating replacing the velocity and thermal driving fields in the calving experiments with the corresponding baseline values, and calculating the resulting mean inner cavity melt rate, relative to the actual melt rate from the simulation. In other words, the effect of changes in boundary layer velocity and thermal driving are assessed by computing
+ \begin{equation}\label{E:MillgateDecomp}
+U_{\text{effect}} =  \int_{\text{inner cavity}}\frac{u^*(x,y)}{u^*(x,y)_d}, \quad \text{and} \quad \Delta T_{\text{effect}} = \int_{\text{inner cavity}}\frac{T(x,y) - T_f(x,y)}{T_d(x,y) - T_{f,d}(x,y)},
+ \end{equation}
+  respectively, where subscript d indicates result for the default (uncalved) simulation. The quantities in~\eqref{E:MillgateDecomp} are compared, for a given calving front position, to
+ \begin{equation}\label{E:MillgateDecompMelt}
+   \mathcal{M} =  \int_{\text{inner cavity}}\frac{u^*(x,y)}{u^*(x,y)_d}.
+ \end{equation}
+These quantities~\eqref{E:MillgateDecomp} and~\eqref{E:MillgateDecompMelt} are plotted in figure~\ref{fig:figure4}b, where changes in inner cavity melt rate that are driven exclusively by changes in circulation would be indicated by indistinguishable blue and red curves, while changes in the inner cavity melt rate that are driven exclusively by changes in thermal driving at the ice ocean interface would be indicated by indistinguishable blue and green curves. We refer to this comparison as a `velocity-thermal driving decomposition' henceforth.
+
+%what do these plots tell us about what is responsible for the changes?
+The velocity-thermal driving composition for the baseline experiments indicates that changes in melting with calving are the result of changes in relative changes in thermal driving and velocity that are of similar magnitude. As the ice front is retreated whilst located outside north of the ridge, both increases in the boundary layer velocity and thermal driving contribute to the increase in melting. When calving beyond the ridge, the thermal driving effect increases, while the velocity effect decreases sharply, indicating a large drop in circulation in the inner cavity. This large drop outweighs the further modest increase in thermal driving effect, leading to an overall reduction in the melt rate when calving beyond the ridge.
+
+%how can we understand what happens.
+We gain insight into why the velocity and thermal driving effects behave as described by considering the barotropic stream function and cross sections shown in figure~\ref{fig:figure5}. 
+\begin{itemize}
+    \item When the front is located beyond the ridge, further calving events do not change the topographic barrier provided by the ridge and so the inner cavity circulation still dominated by a strongly confined cyclonic circulation (first column)
+    \item However, snapping in this case reduces the area of the plume (second column), as it is constrained to satisfy the geometry. 
+    \item This means that mixing along the boundary wall where warm water enters is reduced, meaning less modified (i.e. warmer) water entering cavity (third column). NB. still little flow over the ridge proper. 
+    \item This means that (a) water is warmer in the inner cavity (i.e. more thermal driving) and (b) stronger stratification (third column) which enhances vigour of circulation (i.e. more velocity effect).
+    \item When we snap to the ridge crest, two things happen  (1) The pv barrier provided by the ridge crest/ice shelf is relaxed and the circulation connect with one another. The circulation is no longer so strongly confined and thus reduces speed (see column 4, reduce velocity effect). (2): In addition to connected domains meaning more heat access, plume no longer blocks ridge crest (it no longer extends that far!); both of these mean that inner cavity flooded with essentially unmodified cdw. This means that there is more heat available for melting (thermal driving effect increases), but also reduced stratification (reduce velocity effect).
+\end{itemize}
+
+
+
 %figure 5: (a) plot of mean melt rate as a function of extent and (b) millgate decomposition 
 \begin{figure}
     \centering
     \includegraphics[width = 0.9\textwidth]{../make_figures/plots/figure4.eps}
-    \caption{Mean melt rate and velocity/thermal driving decomposition}
-    \label{fig:fig4}
+    \caption{(a) Mean inner cavity melt rate as a function of the calved length of ice. The black dashed line indicates the position of the ice front when it is located directly above the seabed ridge. (b) Velocity-thermal driving decomposition: plot of the decomposition of changes in meean inner cavity melt rate relative to the default (uncalved) experiment (equation~\eqref{E:MillgateDecompMelt}) into changes in boundary layer speed $U_\text{effect}$ (green curve) and thermal driving $\Delta T_{\text{effect}}$ (red curve, see equation~\eqref{E:MillgateDecomp} and main text surrounding).}
+    \label{fig:figure4}
 \end{figure}
 
 %figure 6: calving with snapping why: (a) row of melt rate (colours) and BSF contours, (b) zonal sections, (c) meridional sections
@@ -296,15 +346,10 @@ In this section, we describe the results for the baseline experiment with $H = 1
     \centering
     \includegraphics[width = 0.99\textwidth]{../make_figures/plots/figure5.eps}
     \caption{columns showing (a) change of melt rate with snap, (b) meridional cross sectio T and S, (c) zonal cross section T and S, (d) zonal velocity zonal cross section. \red{add a,b,c,d labels for columns and arrow along left with `calving'}}
-    \label{fig:fig5}
+    \label{fig:figure5}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[width = \textwidth]{../make_figures/plots/figure6.eps}
-    \caption{Mean melt rate and millgate decomposition for W = 150 and W = 200 \red{NB: two runs missing for W = 150 -- this figure needs updating when we have these done! As do the time limits in the script (change ntout2 from 8 to 12)}}
-    \label{fig:figure6}
-\end{figure}
+
 
 \begin{figure}
     \centering
@@ -315,165 +360,34 @@ In this section, we describe the results for the baseline experiment with $H = 1
 
 
 
-\section{Effect of Cavity Geometry on Melt Response to Calving}
+\section{Effect of Cavity Geometry on Melt Response to Calving}\label{S:Results:H}
+Having understood how and why the inner cavity melt rate changes with calving in the narrow gap $H = 100$ case, we now turn our attention to describing how the picture presented in the previous section changes when the width of the gap, and thus the strength of the topographic barrier provided by the ridge and ice shelf, is increased.
 
-\section{Effect of Hydrographic Conditions on Melt Response to Calving}
+\begin{figure}
+    \centering
+    \includegraphics[width = \textwidth]{../make_figures/plots/figure6.eps}
+    \caption{Mean melt rate and millgate decomposition for W = 150 and W = 200 \red{NB: two runs missing for W = 150 -- this figure needs updating when we have these done! As do the time limits in the script (change ntout2 from 8 to 12). Could change this to have both mean inner cavity plots on the same axis -- save space and show that effect larger for $W = 200$ than $W = 150$? (also add $W = 100$ results in grey) }}
+    \label{fig:figure6}
+\end{figure}
+
+%what do we see
+Mean melt rates as a function of calved length for the two larger gaps we consider here ($W = 150$~m and $W = 200$~m) are plotted in figure~\ref{fig:figure6}. As in the $W = 100$ case, we see that the melt rate reaches a peak while the ice front is located north of the ridge crest, and further calving events beyond this point reduce the melt rate. From the decomposition, we see in both cases that a reduction in the cavity circulation that outweighs an increase in thermal driving is responsible (and both relative changes are a similar order of magnitude) for the reduction in mean inner cavity melt rate beyond this point.  However, there are several important differences: firstly, the inner cavity melt rate is far less sensitive to calving in both the $W = 150$ and $W = 200$m cases (the difference between largest and smallest inner cavity melt rates is approximately 20\% and 10\%, respectively), and follows the upper end of the maximum range seen in the $W = 100$m case; secondly, the inner cavity melt rate does not show any sort of threshold behaviour when the calving front reaches the top of the ridge.
+
+%why do we see it
+To understand the reasons it is useful to compare the cross sections in figure~\ref{fig:figure4} for the $W = 100$ case to the corresponding plot in figure~\ref{fig:figure7} for the $W = 200$ case (a comparison between the $W = 100$m and $W = 150$m case is qualitatively similar to that discussed below for $W = 100$, but the differences are clearer for $W = 200$m.)
+\begin{itemize}
+    \item Domains are connected even in the default run, and the inner cavity is entirely flushed with warm water. This is different to the `fully' calved $W = 100$m case because the ridge still provides a strong pv barrier constraining the flow to the inner cavity and strongly bounding it, permitting high velocities necessary to allow high mean melt rates.
+    \item As we calve, 
+\end{itemize}
+
+
+\section{Effect of Hydrographic Conditions on Melt Response to Calving}\label{S:Results:P}
 
 \section{Discussion}
 
 \section{Summary and Conclusions}
 
 
-
-
-\section{Methods}
-To assess the effect of calving events on the sub-shelf melting in Pine Island Glacier, we resolve the cavity circulation an ocean model with a series of sections of the ice shelf removed from a baseline geometry representing the shelf configuration in 2012. We consider a total of 6 different ice shelf geometries (the remaining shelf areas are shown in figure \red{x}): the first two represent realistic situations with ice shelf topography corresponding to 2009 and 2020 and four further simulations in which sections of fast flowing ice are removed. It is important to note that in each simulation, the grounding line position and thickness of the remaining ice shelf are identical to the 2012 conditions; in this way we isolate the effect of a changing shelf front position on melting patterns from other feedback processes [such as?]. \red{define the inner cavity here as the region common to them all, and the reasons why we're interested in this regions: (1) its where the melt is most important and (2) its common to them all, removing the dependence on ice shelf size.}
-
-%ice shelf geometry from Dutrieux 
-The sub shelf cavity is computed from the ice and seabed geometry, which we take from~\citeA{Dutrieux2014Science}. Briefly, the ice shelf geometry is calculated from a 40~m-resolution digital elevation model of the ice freeboard from 2008 \red{cite SPIRIT project}, that adjusted using a constant medium bias from observations obtained from the Autosub underwater autonomous vehicle. Note that DEM assumed freely floating ice throughout the shelf, which may reduce its accuracy close to the grounding line. Over the continental shelf, the seabed geometry is well known from ship echo-sounding \red{cite Dutrieux 2014, this sentence is also very similar to their}, while in the cavity it calculated from an inversion of gravimetry data and corrected point-wise using the median difference between the depth from the gravimetry inversion and from the Autosub observations. 
-
-%ocean model details
-The ocean model is the MITgcm z-level model (checkpoint 67u) in hydrostatic mode with a grid resolution of 400~m in the horizontal and 10~m in the vertical. The model employs an implicit nonlinear free surface scheme, a third-order direct space-time flux limited advection scheme, a non-linear equation of state~\citeA{Mcdougall2003JAtmosOceanTech}, and the Pacanowski-Philander~\cite{Pacanowski1981JPhysOcean} scheme parametrizes vertical mixing. The equations are solved on an $f$-plane with $f = -1.4\times10^{-4}~\text{s}^{-1}$, which are timestepped using a \red{what scheme?} with a timestep of 30~s. We use constant viscosities of $1~\text{m}^2~\text{s}^{-1}$ and $10^{-5}~\text{m}^2~\text{s}^{-1}$ in the horizontal and vertical, respectively; providing a non-trivial viscosity is necessary for the numerical stability of the model, and we verify that the results presented here are insensitive to the choice of viscosity.
-
-%boundary conditions details (including mention of where they are applied)
-As discussed, Pine Island has a strong sensitivity to oceanic conditions and we therefore apply two different sets of forcing conditions corresponding to extrema of observations. At the time, the 2012 conditions were the coldest on record (subsequently overtaken by 2014) and 2009 were the warmest(?) conditions on record [\red{need to mention obs taken at ice shelf front}]. For each of the ice shelf geometries, we perform the simulation with both 2009 and 2012 boundary conditions; that is with ocean temperature and salinity are restored to the corresponding hydrographic observations at the lateral boundaries, giving a total of 12 simulations. In more detail, the model temperature and salinity are relaxed over a weighted mesh of several grid points adjacent to the boundary; we verified that the size this mesh and the timescale over these conditions are applied do not significantly influence the results (\red{Appendix}). Results presented here use a five point mesh whose restoring strength decreases linearly from 100\% at the boundary to 50\% at the fifth grid point away from boundary, and a restoring timescale of one day. \red{Need to mention that ideally we want to model the whole sector but this is impractical so we just use a sector. And we verify that results are insenstiive to the location of the boundary. Probably need to show these profiles in a figure somewhere.}
-
-
-%ocean ice interaction details
-The MITgcm includes a static representation of ice shelves~\cite{Losch2008JGeophysResOceans}, and partial cells with a minimum open-cell fraction of 0.1 are used to better represent the slope ice base. Ice shelf melting is implemented using the so-called "three-equation formulation"~\cite{Holland1999JPhysOcean}, including ice-ocean friction velocity dependent exchange coefficients. We use the standard value of $2.5\times10^{-3}$ for the drag coefficient at the ice-ocean interface that enters into the momentum equations, while the drag coefficient that enters into the three-equation formulation is tuned to $4\times10^{-3}$ to match observations; this choice ensures that the mean of the total meltwater flux for 2009 and 2012 boundary conditions matches the mean of the observed total meltwater flux in 2009 (80 km\textsuperscript{3}/yr) and 2012 (37 km\textsuperscript{3}/yr,~\cite{Dutrieux2014Science}). Note that the model output underestimates the sensitivity to different boundary conditions compared to observations, producing 70 km\textsuperscript{3}/yr and 47 km\textsuperscript{3}/yr for 2009 and 2012 boundary conditions, respectively, but this sensitivity is in line with previous modelling assessments of the sensitivity of Pine Island Glacier to different forcing conditions~\cite{Dutrieux2014Science, DeRydt2014JGeophysResOceans}. \red{Note also that there's a 10\% uncertainty in Dutrieux 2014 observations}
-
-%\begin{itemize}
-%    \item To assess the role calving plays in changing melt pattern, we resolve the cavity circulation underneath Pine Island Glacier for a series of different ice shelf geometries (shown in figure). We perform a total of 6 simulations: the first two represent realistic situations with ice shelf topography corresponding to 2012 and 2020 and four further simulations in which sections of fast flowing ice are removed.
-%    \item Details of ice shelf topography and verification from Dutrieux 2014, uncertainties discussed in detail there, but we note some of the main ones here. We are not aiming to simulate the ice shelf response to changes in melting, merely to diagnose the magnitude of such changes and it is therefore reasonable to use the same ice geometry with pieces removed.
-%    \item As above for bathymetry. Need to plot this, making sure to point out the subglacial ridge.
-%    \item Velocities from "Velocity data generated using auto-RIFT (Gardner et al., 2018) and provided by the NASA MEaSUREs ITS\_LIVE project (Gardner et al., 2019)."  (is this the place to mention velocities?) And do you want to show them in plot?
-
-%    \item The cavity circulation is resolved using the MITgcm z-level ocean model in non-hydrostatic mode. Need to include:
- %   \begin{itemize}
-  %      \item Checkpoint 67u, 400m resolution in the horizontal, 10m resolution in the vertical. Static representation of ice shelves. Partial cells with a  minimum thickness of 1m allow the bathymetry and ice draft  to be resolved at finer vertical scales. Advection modeled by a 3rd order flux-limited advection scheme. Pacanowski-Philander parametrizes vertical mixing. All runs 1 yr, well beyond steady state being reached. 
-   %     \item MITgcm code freely available, driver codes and results processing on github. 
-    %    \item \textbf{Do we want to average to total of $\nabla.(h\mathbf{u})$?} Three equation formulation of melting with constant drag coefficient, which is tuned so that the total average of total meltwater flux from fast flowing southern cavity for 2009 (warm) and 2012 (cold) matches the total of $\nabla . (h\mathbf{u})$ using 2012 velocities (approx 50km\textsuperscript{3}/yr), corresponding to an ice shelf that is approximately in balance over the course of a cycle through periodic forcing conditions. Note that our simulations (approx. 70 km\textsuperscript{3}/yr and 50 km\textsuperscript{3}/yr for 2009 and 2012 conditions respectively) underestimate the sensitivity to forcing conditions seen in observations (approx. 80 km\textsuperscript{3}/yr and 37 km\textsuperscript{3}/yr for 2009 and 2012 conditions respectively, but sensitivity is in line with previous simulations reported results (cite Dutrieux). (Need to mention that computed $\nabla . (h\mathbf{u})$ slightly below average of observed 2009 and observed 2012, which is in accordance with a thinning ice shelf)
-    %    \item \textbf{or to the observed values?} Three equation formulation of melting with constant drag coefficient, which is tuned to 4$\times$10\textsuperscript{-3} so that the average of total meltwater flux from fast flowing southern cavity for 2009 (warm) and 2012 (cold) matches the same quantity from observations (approx. 80 km\textsuperscript{3}/yr and 37 km\textsuperscript{3}/yr for 2009 and 2012 conditions respectively). Our simulated meltwater fluxes (approx. 70 km\textsuperscript{3}/yr and 50 km\textsuperscript{3}/yr for 2009 and 2012 conditions respectively) have somewhat lower sensitivity to boundary conditions than observations, but note that these sensitivities are in line with previous results (cite Dutrieux). Note that this average (approx 60~km\textsuperscript{3}/yr is larger than the value of obtained by integrating $\nabla.(h\mathbf{u})$ over the shelf (approx 51~km\textsuperscript{3}/yr), which is in accordance with a thinning ice shelf. But note that there's an approx 10\% uncertainty in the observed flux (Dutrieux at al 2014).
-      %  \item Note that MITgcm has the option to use different drag coefficient in thermodynamics and momentum equations, and we use the standard value of 2.5$\times$10\textsuperscript{-3} in the momentum equations. Free slip boundary conditions applied on solid boundaries. 
-     %   \item Boundary details: apply restoring boundary conditions with timescale on boundary (these are observation as the ice shelf front -- say `following Dutrieux et al 2014'). Model results sensitive to restoring timescale: we use 0.5 day restoring timescale in results presented here, but verify that results similar for different combinations of restoring timescale and drag coefficient which give same total flux when calibrated. We verify that, provided boundary conditions sufficiently far from the shelf front, results are insensitive to boundary location (maybe make the point from Dutrieux 2014 that you really want whole of Amundsen but this is unreasonable). 
-    %    \item Sea ice: not sure yet what we want to say about this.
-        
-    %\end{itemize}
-
-%\end{itemize}
-
-\section{Results}
-\begin{figure}
-    \centering
-    \includegraphics[width = \textwidth]{figs/melt_anomalies_cumulative_2009.eps}
-    \caption{Contour plots of (a) the baseline simulated freshwater flux and (b--e) the simulated freshwater flux anomaly (the difference between simulated freshwater flux and the baseline freshwater flux) for different ice shelf scenarios as indicated in each subplot. Each of the simulations presented here uses the 2009 (warm) boundary conditions. The melt rate is ignored in those locations in the shelf which are present before a calving event but not afterwards. The (saturated) colorbar in (b) is appropriate for each of (b)--(e). The corresponding plot using a cumulative measure of the anomaly is presented in the supplementary information. \red{add label of where ridge is, via 750m depth contour?} }
-    \label{fig:melt_anomalies_cumulaties_2009}
-\end{figure}
-
-The simulated melt rate for the baseline simulation with the 2009 ice shelf geometry and boundary conditions (figure~\ref{fig:melt_anomalies_cumulaties_2009}a) is consistent with observations (figure S\red{x}), with complex features on small scales, but characterized on larger scales as being concentrated near to the grounding line, with a peak melt rate of 120~m~yr\textsuperscript{-1}. \red{describe the current in this scenario}
-
-
-%going to 2020 gives you a complex change in pattern that is primarily focused at the shelf front
-Changing the ice geometry from the 2009 baseline to scenario one (2009 geometry with 2020 ice front) induces a significant, but complex, change in the melt rate pattern, featuring anomalies of up to 50m~yr\textsuperscript{-1} (figure~\ref{fig:melt_anomalies_cumulaties_2009}b). These anomalies are focused at the ice shelf front and are attributed to high velocities associated with upwelling at the new ice shelf front as well as the formation of a gyre in the embayment in the newly open ocean where ice was present in the baseline geometry, but not in 2020 (figure~\ref{fig:barotropic_streamfunction_regular_domain}): this gyre results in a strong circulation along the ice shelf front (the ice shelf front is a dynamic barrier to flow and provides a freshwater source to enhance the flow).
-(We verified that this gyre was not related to boundary forcing by repeating the simulations in an extended domain, where the boundary is approximately twice as far from the ice shelf front, and observed little change in the barotropic stream function.) 
-
-The change in geometry from the 2009 baseline to scenario induces only a small change in the melt rates in the inner cavity. This anomaly tends to grow with further sections of ice shelf removal (figure~\ref{fig:melt_anomalies_cumulaties_2009}c--f), particularly close to the northern shear margin, but the pattern is again complex and features locations of significant negative anomalies (indicating melt rates below the 2009 baseline) near to the grounding line. These observations are illustrated further by the plots of mean melt rate and distributions of melt rate anomaly for the inner region in figure~\ref{fig:mean_melt_rate_and_anomaly_distribution}: the mean melt rate increases (the anomalies are enhanced, figure~\ref{fig:mean_melt_rate_and_anomaly_distribution}a), but the distribution of the anomalies becomes wider (the spread of anomalies grows, figure~\ref{fig:mean_melt_rate_and_anomaly_distribution}b) with each further change in geometry. The picture is qualitatively similar for 2012 boundary conditions (figure~\ref{fig:melt_anomalies_2012_cumulative}), although the upper tail on the melt rate anomaly is shorter in this case and the inner cavity anomaly doesn't really appear until scenario 3 (versus scenario 2), but we'll discuss this further later. 
-
-\begin{figure}
-    \centering
-    \includegraphics[width= \textwidth]{figs/mean_cavity_melt_and_distributions.pdf}
-    \caption{Mean melt rate and anomaly distribution. }
-    \label{fig:mean_melt_rate_and_anomaly_distribution}
-\end{figure}
-
-%why do we get this positive anomaly on average? it seems to be primarily related to heat content (circulation within the cavity is not altered that significantly, but heat content increases significantly with snapping (plot of heat content versus snap), and can see again here that effect focussed on outer shelf after first snap
-The increasing average anomaly appears to be primarily the result of heat available for melting in the inner cavity. Although the pattern is again complex, the picture is somewhat clearer than the melt rate: the temperature within the upper boundary layer (computed as the average over the five grid cells nearest to the ice shelf base) increases with further ice shelf removal (figure~\ref{fig:top_temp_anomalies_2009_noncumulative} and figure~\ref{fig:mean_temperature_anomaly}), while the inner cavity velocity does not change significantly -- it is dominated by the aforementioned inner cavity gyre for each of the ice shelf geometries, even those for which the ice shelf front is upstream of the seabed ridge. \red{do you want to be more specific than this? And also mention that you can see the dominating anomaly near the ice shelf front in the mean temperature anomaly plot?}
-
-%how do we quantify the size of the effect? Mean melt rate indicates an approx 10% change in mean melt rate from the first to the last snap. But as discussed, that's skewed by significant positive and negative anomalies and doesn't know anything about geometry. So we came up with this other method.
-The average melt rate in the inner cavity can be used as one measure of the importance of the shelf area: for both the 2009 and 2012 boundary conditions, the average melt rate on the inner cavity increases by approximately the same amount after each section of ice shelf is removed ($\approx$ 1m~yr\textsuperscript{-1} and 0.61m~yr\textsuperscript{-1} for 2009 and 2012 boundary condition, respectively), and the mean inner cavity melt rate is approximately 10\% higher in the final scenario than in the baseline. However, this measure is somewhat simplified, and does not capture the broad range of melt rate anomalies (as discussed), as well as not accounting for \emph{where} the melting is applied: \red{sentence explaining why melt anomalies applied in the fast moving regions might be more important? is this even true? Should we sell this metric instead as a measure of the shelf response needed to `fill in' the gap left in shelf stabilization by a change in melt pattern.}. We define a more robust metric that addresses these issues: the `nominal shelf speed-up equivalent', denoted by $\Delta v$, the percentage increase in velocity required to bring the velocity back in line with flux divergence, i.e. $f$ satisfies
-    \begin{linenomath*}
-    \begin{equation}
-    \int_{\text{inner cavity}} \left[\left(1+ \frac{f}{100}\right)\nabla.(h\mathbf{u}) - \dot{m}\right]~\mathbf{d}S = 0.
-    \end{equation}
-    \end{linenomath*}
-    where $h$ and $\mathbf{u}$ are the ice shelf thickness and surface velocity from observations, and $\dot{m}$ is the simulated melt rate.
-\red{explain why this known about where the melt is applied (does it?), and explain that this has the added benefit that it phrases the effect in terms of the ice shelf velocity, which is what we are ultimately interested in. Mention straight away that we're not claiming this is the response in velocity we would get, however! Mention that as you increase the velocity, you increase GL flux, but also flux out of this sector? How does this metric tell us about the importance of melt pattern changes -- would be constant if the melt pattern did not change, increases over the baseline can be interpreted how much ice velocity speed up is needed to provide the extra shelf stabilization that is missing because the melt pattern has changed [useful to think in terms of the stabilization of the shelf with snapping as this is how you pitched it earlier].}
-
-%what happens in the baseline case
-If the inner cavity  ice flux divergence is completely in balance with melting (i.e. $\mathrm{d}h/\mathrm{d}t = 0)$, then $f = 0$ and no speed up is required to bring the velocity back in line with divergence. \blue{However, it's not quite that simple in the baseline case, because we're using extrema of the periodic cycle.} In the baseline case, the average of the values of $f$ for 2009 and 2012 boundary conditions (i.e. for the average of results corresponding to extrema of the periodic cycle in boundary conditions) is $f \approx 10\%$, which is in agreement with a thinning ice shelf over this period [cite]. We are primarily interested in the \emph{change} in $f$ over this baseline, rather than the actual values. 
-
-%what do we see: for 2009 BC, percentage speedup increases in each subsequent scenario
-We see that for the 2009 boundary conditions, the percentage speedup increases with each snap by approximately 3\%. \blue{To put that number in context, the shelf velocity...}. The picture is subtly different for 2012 boundary conditions in two particular ways. Firstly, $f$ does not change when the geometry is changed from the 2009 front to the 2020 front: the change in melt pattern provides no feedback on the inner cavity after this first snap, where as the change is approximately 4\% in the 2012 case. This is attributed to the presence of the ridge: with a low pycnocline, the shelf front position in 2012 is still sufficient to provide a strong barrier to CDW intrusion into the inner cavity, whereas this appears to not be the case for the high pycnocline conditions in 2009. \blue{This can be seen in cross sections? Also motivates further study of how close to the ridge the ice shelf front has to be before you get intrusions}. \red{Can see that the thermocline inside cavity is raised with each snap (see depth $\approx$ 500 -- 700m), until scenario 5 when it drops, but this is in the centre and large melt anomaly persists in the northern shear margin to balance this out -- for 2009 conditions, strong enough to still give an increase in $f$, but for 2012, not strong enough, and $f$ stagnates. This also raises the important point that the largest anomalies are focussed in the shear margins, which are vitally important for stability, but perhaps that belongs in the discussion.}
-
-The second difference is that $f$ is almost for scenario 4 and 5 in the 2012 case (scenario 5 marginally smaller), whereas the latter is larger for the 2009 boundary conditions. This appears to be because the cold anomaly is now able to get over the ridge (can see this in the transects, thermocline on the inner cavity drops after this snap).
-
-%but because of these anomalies of both signs (plot the distribution of melt anomalies, showing large variance?), looking at the mean melt rate anomaly is not necessarily the best measure of size of effect. Also doesn't know anything about \emph{where} the melt is applied. So we come up with this other method...
-
-
-\section{Discussion and Conclusions}
-\begin{itemize}
-    \item What do these numbers mean: stress that this is not a prediction for the response to PIG upon calving, which requires a coupled ice ocean model to resolve changes in buttressing etc (this is probably discussion). But this gives us an idea of the magnitude of the changes: difference between melt pattern and no melt pattern increases with snapping and equivalent to (but will not necessarily result in) up to 20\% increase in ice velocity. 
-    \item Suggests that melt pattern changes enhance/promote the possibility of a runaway collapse of the shelf.
-    \item Some discussion of the location of anomalies: seem to be focused on the shear margins, which is also bad.
-    \item What does this mean for melt rate parametrizations?
-\end{itemize}
-
-\begin{figure}
-    \centering
-    \includegraphics[width = \textwidth]{figs/melt_anomalies_cumulative_2012.eps}
-    \caption{Cumulative melt anomalies 2012 }
-    \label{fig:melt_anomalies_2012_cumulative}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width = \textwidth]{figs/BSF_2009_extended_domain.eps}
-    \caption{Barotropic streamfunction extended domain }
-    \label{fig:barotropic_streamfunction_extended_domain}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width = \textwidth]{figs/BSF_2009_regular_domain.eps}
-    \caption{Barotropic streamfunction regular domain }
-    \label{fig:barotropic_streamfunction_regular_domain}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width = \textwidth]{figs/bottom_current_and_temp_2009_cumulative.eps}
-    \caption{Bottom temperature and current cumulative with 2009 boundary conditions }
-    \label{fig:bottom_temp_anomalies_2009_cumulative}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width = \textwidth]{figs/bottom_current_and_temp_2012_cumulative.eps}
-    \caption{Bottom temperature and current cumulative with 2012 boundary conditions}
-    \label{fig:bottom_temp_anomalies_2012_cumulative}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width = \textwidth]{figs/melt_anomalies_non_cumulative_2009.eps}
-    \caption{Melt anomalies 2009 non-cumulative}
-    \label{fig:melt_anomalies_2009_noncumulative}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width = \textwidth]{figs/top_current_and_temp_2009_noncumulative.eps}
-    \caption{Temperature anomalies 2009 non-cumulative}
-    \label{fig:top_temp_anomalies_2009_noncumulative}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width = 0.66\textwidth]{figs/mean_temperature_anomaly.eps}
-    \caption{Mean top boundary layer temperature anomaly for 2009  (blue) and 2012 (red) boundary conditions. Solid lines correspond to the inner cavity area, which dashed lines correspond to the whole southern ice shelf. }
-    \label{fig:mean_temperature_anomaly}
-\end{figure}
 
 %%% Suggested section heads:
 % \section{Introduction}

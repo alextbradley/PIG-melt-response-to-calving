@@ -3,7 +3,7 @@
 
 %close all
 %add interp tools dir
-addpath('/data/hpcdata/users/aleey/mitgcm/matlab/aleey/interp_tools');
+addpath('interp_tools');
 
 % Flags
 RBCSvelFlag = 0;
@@ -29,7 +29,7 @@ numplot = 1;
 %%
 nx=120; % number of grid cells along longitudinal direction
 ny=320; % number of grid cells along latitudinal direction
-nz=220; % number of vertical grid cells
+nz=110; % number of vertical grid cells
 
 dlon = 400; dx=dlon; % horizontal grid resolution (meters)
 dlat = 400; dy=dlat;

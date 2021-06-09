@@ -33,6 +33,13 @@ pos = [0.1, 0.12, 0.5, 0.82];
 p0 = subplot('Position', pos); box on; hold on
 for i = 1:3
 if i == 1
+%add inner cavity definition
+X = 98:128;
+fillX = [X, flip(X)];
+fillY = [-1100*ones(size(X)), -400*ones(size(X))];
+fill(fillX, fillY, [167, 0, 47]/255, 'linestyle', 'none', 'FaceAlpha', 0.3)
+
+%add shaded region of ice
 fillX = [yyf(1:idx), flip(yyf(1:idx))]/1e3;
 fillY = [h_profiles(i,1:idx), zeros(1,idx)];
 fill(fillX, fillY, [173, 216, 230]/255, 'linewidth', 1.5)
@@ -61,8 +68,8 @@ fill(fillX, fillY, [203, 150, 80]/255, 'Linewidth', 1.5)
 %plot(yyf/1e3, bump, 'k', 'linewidth', 1.5)	
 
 
-xlabel('Y (km)')
-ylabel('depth(m)')
+xlabel('Y (km)','FontSize',label_size )
+ylabel('depth(m)', 'FontSize', label_size)
 xlim([min(yy), max(yy)]/1e3)
 ylim([-1100, 0])
 p0.YTick = [-1100,-1000:200:0];
@@ -91,7 +98,7 @@ p2 = subplot('Position',pos_s); box on; hold on; grid on
 depth = 0:10:1110;
 
 P = [600, 700. 800];
-linestyles = ["-", "--", "--"];
+linestyles = ["-", "--", "-."];
 
 %2009 and 2012 profiles in background
 load('./data/TS_2009.mat', "Z", "T2009","S2009");
@@ -133,6 +140,12 @@ p2.YTickLabel = cell(length(p2.YTickLabel),1);
 p2.XLabel.String = 'Salinity (psu)';
 p2.XLabel.FontSize = label_size;
 p2.FontSize = ax_fontsize;
+
+%figure labels 
+text(p0, -20, -40, "(a)", 'FontSize', 12)
+text(p1,  0.93, -40, "(b)", 'FontSize', 12)
+text(p2, 34.653, -40, "(c)", 'FontSize', 12)
+
 
 %
 % save

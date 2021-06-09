@@ -11,7 +11,7 @@
 % Flags
 %
 gendata = 1; %specify whether to pass through the generate data loop
-save_flag = 1;
+save_flag = 0;
 
 %
 % Preliminaries
@@ -22,7 +22,7 @@ label_size = 11;
 ax_fontsize = 10;
 figure(1); clf;
 fig = gcf; fig.Position(3:4) = [1085, 540];
-merid_idx = floor(nx/2);
+merid_idx = 60;
 zonal_idx = 50;
 
 %

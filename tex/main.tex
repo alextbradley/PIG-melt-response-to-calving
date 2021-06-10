@@ -276,7 +276,7 @@ The nine experiments can be uniquely identified by a $(H,P)$ pair, where $H$ $\i
 \section{Result for the Baseline Experiments}\label{S:Baseline}
 In this section, we describe the results for the baseline experiment with $H$ = 100~m and $P$ = 600~m, which correspond to the profiles with solid lines in figures~\ref{fig:Schematic}a--c. We begin by describing the steady state configuration for the uncalved run, and then describe how, and why, calving changes the melt rate.
 
-\subsection{Default Run: $H$=100~m, $P$=600~m}
+\subsection{Default Run: $H$=100~m, $P$=600~m}\label{S:Baseline:Default}
 %describe each of what we see: melt rate, general observations
 Ice-ocean properties that characterise the default simulation are shown in figure~\ref{fig:figure3}. Melt rates (figure~\ref{fig:figure3}a) are mostly below  15\mpryr everywhere, except for a region located within 20~km of the grounding line, where maximum melt rates of reach a maximum of approximately 120\mpryr. The average melt rate over the whole shelf is approximately 20\mpryr; this is lower than the observed value of 33$\pm$2 that has been observed for PIG in 2009 (to which the $P=600$ case corresponds), as is to be expected given that the configuration in this simulation has the tightest topographic control on warm water inflow that is observed for PIG applied everywhere.
 
@@ -305,6 +305,15 @@ In summary, in this uncalved run with a strong topographic barrier, a topographi
 \subsection{Calving Effect}
 While the ice shelf front is located beyond 70~km from the grounding line, removing sections of ice increases the inner cavity melt rate only slightly (figure~\ref{fig:figure4}a). As the ice shelf front approaches the ridge, however, the melt rate increase dramatically, reaching a maximum of 73\mpryr (70\% larger than in the default run) when the ice shelf is located approximately 5~km north of the ridge crest. The following calving event, after which the ice shelf front sits immediately above the ridge, results in a significant decrease in the melt rate of approximately 15\%  (from 73\mpryr to 64\mpryr). The melt rate is then approximately independent of further calving events.
 
+
+%figure 5: (a) plot of mean melt rate as a function of extent and (b) millgate decomposition 
+\begin{figure}
+    \centering
+    \includegraphics[width = \textwidth]{../make_figures/plots/figure4.eps}
+    \caption{(a) Mean inner cavity melt rate as a function of the calved length $l_c$. The black dashed line indicates the position of the ice front when it is located directly above the seabed ridge. (b) Velocity-thermal driving decomposition: plot of the decomposition of changes in inner cavity melt rate relative to the default (uncalved) experiment (equation~\eqref{E:MillgateDecompMelt}) into changes in boundary layer speed $U_\text{effect}$ (green curve, equation~\eqref{E:MillgateDecompU}) and thermal driving $\Delta T_{\text{effect}}$ (red curve, equation~\eqref{E:MillgateDecompD}).}
+    \label{fig:figure4}
+\end{figure}
+
 %explain what the Millgate decomposition.
 The melt rate is approximately proportional to the product of the boundary layer velocity and thermal driving (equation~\eqref{E:MeltRateUdT}). We investigate the relative roles of changes in boundary layer velocity and thermal driving in the changes the mean inner cavity melt rate described above by replacing the boundary layer velocity and thermal driving fields in the calving experiments with the corresponding fields for the default run, and calculating the resulting mean inner cavity melt rate, relative to the actual melt rate from the simulation. In other words, the relative effect of changes in boundary layer velocity and thermal driving on inner cavity melt rate are assessed by computing
  \begin{align}
@@ -316,41 +325,40 @@ U_{\text{effect}}(l_c) &=  \int_{\text{inner cavity}}\frac{u^*(x,y)}{u^*(x,y)_d}
  \end{equation}
 The quantities~\eqref{E:MillgateDecompU}--\eqref{E:MillgateDecompMelt} are plotted in figure~\ref{fig:figure4}b, where changes in inner cavity melt rate that result exclusively from changes in circulation would be indicated by indistinguishable blue and red curves, while changes in the inner cavity melt rate that result exclusively from changes in thermal driving at the ice-ocean interface would be indicated by indistinguishable blue and green curves. We refer to this comparison as a `velocity/thermal driving decomposition' henceforth.
 
-\red{ab readable here}
-
 %what do these plots tell us about what is responsible for the changes?
-The velocity/thermal driving composition for the baseline experiments indicates that changes in melting with calving are the result of changes in relative changes in thermal driving and velocity that are of similar magnitude. As the ice front is retreated whilst located outside north of the ridge, both increases in the boundary layer velocity and thermal driving contribute to the increase in melting. When calving beyond the ridge, the thermal driving effect increases, while the velocity effect decreases sharply, indicating a large drop in circulation in the inner cavity. This large drop outweighs the further modest increase in thermal driving effect, leading to an overall reduction in the melt rate when calving beyond the ridge.
+The velocity/thermal driving decomposition for the baseline experiments indicates that changes in melting with calving are the result of relative changes of equal magnitude in both the thermal driving and boundary layer velocity (figure~\ref{fig:figure4}a). When the ice front is located offshore of the ridge, calving events result in both increases in the boundary layer velocity and thermal driving; these two effects are complimentary in driving the increase in melt rate. When calving beyond the ridge, however, the thermal driving effect continues to increase, but the velocity effect decreases sharply, indicating a large drop in circulation in the inner cavity; the large drop in circulation outweighs the more modest increase in thermal driving, leading to an overall reduction in the melt rate when calving beyond the ridge.
 
-%how can we understand what happens.
-We gain insight into why the velocity and thermal driving effects behave as described by considering the barotropic stream function and cross sections shown in figure~\ref{fig:figure5}. 
-\begin{itemize}
-    \item When the front is located beyond the ridge, further calving events do not change the topographic barrier provided by the ridge and so the inner cavity circulation still dominated by a strongly confined cyclonic circulation (first column)
-    \item However, snapping in this case reduces the area of the plume (second column), as it is constrained to satisfy the geometry. 
-    \item This means that mixing along the boundary wall where warm water enters is reduced, meaning less modified (i.e. warmer) water entering cavity (third column). NB. still little flow over the ridge proper. 
-    \item This means that (a) water is warmer in the inner cavity (i.e. more thermal driving) and (b) stronger stratification (third column) which enhances vigour of circulation (i.e. more velocity effect).
-    \item When we snap to the ridge crest, two things happen  (1) The pv barrier provided by the ridge crest/ice shelf is relaxed and the circulation connect with one another. The circulation is no longer so strongly confined and thus reduces speed (see column 4, reduce velocity effect). (2): In addition to connected domains meaning more heat access, plume no longer blocks ridge crest (it no longer extends that far!); both of these mean that inner cavity flooded with essentially unmodified cdw. This means that there is more heat available for melting (thermal driving effect increases), but also reduced stratification (reduce velocity effect).
-\end{itemize}
-
-
-
-%figure 5: (a) plot of mean melt rate as a function of extent and (b) millgate decomposition 
-\begin{figure}
-    \centering
-    \includegraphics[width = 0.9\textwidth]{../make_figures/plots/figure4.eps}
-    \caption{(a) Mean inner cavity melt rate as a function of the calved length of ice. The black dashed line indicates the position of the ice front when it is located directly above the seabed ridge. (b) Velocity-thermal driving decomposition: plot of the decomposition of changes in meean inner cavity melt rate relative to the default (uncalved) experiment (equation~\eqref{E:MillgateDecompMelt}) into changes in boundary layer speed $U_\text{effect}$ (green curve) and thermal driving $\Delta T_{\text{effect}}$ (red curve, see equation~\eqref{E:MillgateDecomp} and main text surrounding).}
-    \label{fig:figure4}
-\end{figure}
-
-%figure 6: calving with snapping why: (a) row of melt rate (colours) and BSF contours, (b) zonal sections, (c) meridional sections
+%figure 6:  (a) row of melt rate (colours) and BSF contours, (b) zonal sections, (c,d) meridional sections
 \begin{figure}
     \centering
     \includegraphics[width = 0.99\textwidth]{../make_figures/plots/figure5.eps}
-    \caption{columns showing (a) change of melt rate with snap, (b) meridional cross sectio T and S, (c) zonal cross section T and S, (d) zonal velocity zonal cross section. \red{add a,b,c,d labels for columns and arrow along left with `calving'}}
+    \caption{columns showing (a) change of melt rate with snap, (b) meridional cross sectio T and S, (c) zonal cross section T and S, (d) zonal velocity zonal cross section. \red{add a,b,c,d labels for columns and arrow along left with $l_c$}}
     \label{fig:figure5}
 \end{figure}
 
+%how can we understand what happens.
+To understand why the changes in thermal driving and boundary layer velocity behave as they do, it is instructive to consider the barotropic stream function and zonal and meridional cross sections, shown in figure~\ref{fig:figure5} (for the default run, to which the first row corresponds, these are identical to figure~\ref{fig:figure3}b,e, and d, respectively). These plots indicate that while the ice front is still located beyond the ridge, the strong PV barrier provided by the ridge and ice draft remains and a topographically constrained cyclonic circulation is spun up inshore of the ridge (there is zero barotropic flow across the ridge, see figure~\ref{fig:figure5}, first column), with a strong boundary current at the East of the domain which provides hot water access to the inner cavity, as described in section~\ref{S:Baseline:Default} for the default run. In this case, calving events result in a less prominent meltwater plume (figure~\ref{fig:figure5}, second column), which permits greater warm water access to the inner cavity (figure~\ref{fig:figure5}, third column) because (1) meltwater mixing at the Eastern boundary is reduced and (2) (for larger values of the calved length) the hydrographic front on the north of the ridge reaches the ridge crest and warm water is able to spill over the central portion of the ridge. The increased presence of warm water (both in quantity and temperature) results in increased melting because there is a great quantity of heat available for melting and the topographically constrained circulation is more vigorous, as mentioned above.
+
+When the ice front is calved on top of the ridge, however, their are two important changes. Firstly, the strong PV barrier provided by the ridge crest and ice draft is relaxed, and the domains become connected. The flow within the cavity is still cyclonic (figure~\ref{fig:figure5}, first column), but far less constrained and thus the velocity effect is reduced. The second change, which is related to the first, is that vast amounts of warm water are now able to spill over the ridge, and the inner cavity is entirely flooded with warm water; although this means there is far more heat available for melting (thermal driving effect increases when calving on top of the ridge, figure~\ref{fig:figure4}b), this also results in a reduced stratification and thus reduction in the velocity effect. The two mechanisms that reduce circulation -- reductions in stratification and topographic constraint on the circulation -- outweigh the increase in heat available for melting, resulting in a significant reduction in the heat available for melting.
 
 
+%We gain insight into why the velocity and thermal driving effects behave as described by considering the barotropic stream function and cross sections shown in figure~\ref{fig:figure5}. 
+%\begin{itemize}
+%    \item When the front is located beyond the ridge, further calving events do not change the topographic barrier provided by the ridge and so the inner cavity circulation still dominated by a strongly confined cyclonic circulation (first column)
+%    \item However, snapping in this case reduces the area of the plume (second column), as it is constrained to satisfy the geometry. 
+%    \item This means that mixing along the boundary wall where warm water enters is reduced, meaning less modified (i.e. warmer) water entering cavity (third column). NB. still little flow over the ridge proper. 
+%    \item This means that (a) water is warmer in the inner cavity (i.e. more thermal driving) and (b) stronger stratification (third column) which enhances vigour of circulation (i.e. more velocity effect).
+%    \item When we snap to the ridge crest, two things happen  (1) The pv barrier provided by the ridge crest/ice shelf is relaxed and the circulation connect with one another. The circulation is no longer so strongly confined and thus reduces speed (see column 4, reduce velocity effect). (2): In addition to connected domains meaning more heat access, plume no longer blocks ridge crest (it no longer extends that far!); both of these mean that inner cavity flooded with essentially unmodified cdw. This means that there is more heat available for melting (thermal driving effect increases), but also reduced stratification (reduce velocity effect).
+%\end{itemize}
+
+
+
+\section{Effect of Cavity Geometry on Melt Response to Calving}\label{S:Results:H}
+%what are we doing here and why (briefly)
+In the previous section, we analyzed how, and why, the inner cavity melt rate changes with calving in the $H$=100~m case. The strength of the topographic barrier provided by the seabed ridge in combination with the ice draft was identified as a important control on the melt rate response to calving; in this section, we describe how this picture changes for larger values of $H$ ($H$ = 150~m and $H$=200~m), and the strength of the topographic barrier is therefore reduced.
+
+%how do melt rates 
+The inner cavity melt rate as a function of the calved length $l_c$ is plotted in figure~\ref{fig:figure7} for both $H$ = 150~m and $H$ = 200~m.
 \begin{figure}
     \centering
     \includegraphics[width = \textwidth]{../make_figures/plots/figure7.eps}
@@ -358,10 +366,6 @@ We gain insight into why the velocity and thermal driving effects behave as desc
     \label{fig:figure7}
 \end{figure}
 
-
-
-\section{Effect of Cavity Geometry on Melt Response to Calving}\label{S:Results:H}
-Having understood how and why the inner cavity melt rate changes with calving in the narrow gap $H = 100$ case, we now turn our attention to describing how the picture presented in the previous section changes when the width of the gap, and thus the strength of the topographic barrier provided by the ridge and ice shelf, is increased.
 
 \begin{figure}
     \centering

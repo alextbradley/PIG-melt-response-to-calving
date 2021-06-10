@@ -19,7 +19,7 @@ plot_defaults
 label_size = 11;
 ax_fontsize = 10;
 figure(1); clf; 
-fig = gcf; fig.Position(3:4) = [1000, 650];
+%fig = gcf; fig.Position(3:4) = [1000, 650];
 
 %
 % Data locations
@@ -58,12 +58,13 @@ ntout2 = 8; %define time period to average over
 % 
 % Generate data loop
 %
-run_nos = ["102", "102", "103", "104", "105", "106", "107", "108", "109", "110";
-	"125", "126", "127", "128", "129", "130", "131", "132", "133", "134"];
+run_nos =["077", "078", "079", "080", "081", "082", "083", "084", "085", "086"; %H = 100
+	"102", "102", "103", "104", "105", "106", "107", "108", "109", "110"; %H = 150
+	"125", "126", "127", "128", "129", "130", "131", "132", "133", "134"]; %H = 200
 sz = size(run_nos);
 extent = [84,80,75,70,65,60,55,50,45,40];
 H = 400; %ridge height (always 400);
-W = [150, 200]; %ridge gap
+W = [100,150, 200]; %ridge gap
 
 %generate data loop
 if gendata
@@ -162,31 +163,47 @@ end %end generate data loop
 % Plots
 %
 
+positions = [0.1,0.1,0.4,0.85;
+	     0.6, 0.1, 0.38, 0.4;
+	     0.6, 0.55, 0.38, 0.4];
 
 %
-% Plot 1 + 3: Mean inner cavity melt rate with calving
+% Plot 1: Mean inner cavity melt rate with calving
 %
-for i = 1:2
-subplot(2,2,2*i-1); grid on; hold on; ax = gca; box on
+subplot('Position', positions(1,:));
+grid on; hold on; ax = gca; box on
+
+for i = 1:3
 ave_melt = zeros(1,sz(2));
 for j = 1:sz(2)
 melt = cell2mat(melt_scenarios(i,j));
 ave_melt(j) = mean(melt(idx));
 end
-plot([34,34],  [60,70], 'k--', 'linewidth', 1.5); %plot the location of top of ridge
+
+plot([34,34],  [45,75], 'k--', 'linewidth', 1.5, 'HandleVisibility', 'off'); %plot the location of top of ridge
+if i == 1 %H =  100
+plot(84 - extent, ave_melt, 'o-', 'color', 0.8*ones(3,1), 'markerfacecolor', 0.8*ones(3,1));
+elseif i == 2
 plot(84 - extent, ave_melt, 'o-', 'color', plotcolor1, 'markerfacecolor', plotcolor1);
-xlabel('Calved length (km)');
-ylabel('Mean inner cavity melt rate (m/yr)');
-xlim([0, 84 - 40]);
+elseif i == 3
+plot(84 - extent, ave_melt, 'o-', 'color', plotcolor2, 'markerfacecolor', plotcolor2);
+end %end plot style by H value
 end %end loop over i
 
-
+xlabel('$l_c$ (km)', 'Interpreter', 'latex', 'FontSize', 12);
+ylabel('Inner cavity melt rate (m/yr)', 'Interpreter', 'latex', 'FontSize', 12);
+xlim([0, 84 - 40]);
+ylim([45,75])
+legend({"$H$ = 100~m", "$H$ = 150~m", "$H$ = 200~m"}, 'location', 'southeast', 'FontSize', 12, 'Interpreter', 'latex');
+text(-10,75, "(a)", 'Interpreter', 'latex', 'FontSize', 12)
 
 %
-% Plot 2: Decomposition
+% Decompositions for H = 150, 200
 %
-for i = 1:2
-subplot(2,2,2*i); grid on; hold on; ax = gca; box on
+
+for i = 2:3
+subplot('Position', positions(i,:))
+grid on; hold on; ax = gca; box on
 
 %set up storage
 relmelt        = zeros(1,sz(2));
@@ -224,15 +241,22 @@ plot(84 - extent, relmelt, 'o-', 'color', plotcolor1, 'markerfacecolor', plotcol
 plot(84 - extent, relmelt_noTemp, 'o-', 'color', plotcolor2, 'markerfacecolor', plotcolor2);
 plot(84 - extent, relmelt_noVel, 'o-', 'color', plotcolor3, 'markerfacecolor', plotcolor3);
 
-%tidy
+%tidy plots
+xlim([0, 44])
+ylabel('Relative Change', 'Interpreter', 'latex', 'FontSize', 12);
+if i == 3
+ax = gca; ax.XTickLabels = cell(0,1);
+ylim([0.8, 1.2])
+legend({"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', 12)
+text(-10,1.2, "(b)", 'Interpreter', 'latex', 'FontSize', 12)
+
+else
 ylim([0.6, 1.4])
-xlabel('Calved length (km)');
-ylabel('Mean melt relative to default')
-xlim([0, 84 - 40]);
-if i == 1
-legend({"Modelled results", "Constant $(T - T_f)$", "Constant $U^*$"}, 'location', 'southwest','interpreter', 'latex')
+xlabel('$l_c$ (km)', 'Interpreter', 'latex', 'FontSize', 12);
+text(-10,1.4, "(c)", 'Interpreter', 'latex', 'FontSize', 12)
+
 end
-end %end loop over i = 1,2
+end
 
 %
 % Save figure

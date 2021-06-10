@@ -17,7 +17,7 @@ save_flag = 1;
 addpath("plot_tools");
 plot_defaults
 label_size = 11;
-ax_fontsize = 10;
+ax_fontsize = 12;
 figure(1); clf; 
 fig = gcf; fig.Position(3:4) = [1000, 390];
 
@@ -48,8 +48,6 @@ density_ice = 918.0;
 lambda = 7.61*1e-4;%constants in liquidus
 gamma = 5.73*1e-2;
 T0 = 8.32*1e-2;
-
-
 
 %time details
 ntout1 = 6; 
@@ -175,9 +173,12 @@ ave_melt(i) = mean(melt(idx));
 end
 plot([34,34],  [40,80], 'k--', 'linewidth', 1.5); %plot the location of top of ridge
 plot(84 - extent, ave_melt, 'o-', 'color', plotcolor1, 'markerfacecolor', plotcolor1);
-xlabel('Calved length (km)');
-ylabel('Mean inner cavity melt rate (m/yr)');
+xlabel('$l_c$ (km)', 'Interpreter', 'Latex','FontSize', ax_fontsize);
+ylabel('Inner cavity melt rate (m/yr)', 'Interpreter', 'latex','FontSize', ax_fontsize);
 xlim([0, 84 - 40]);
+text(-10, 80, '(a)', 'FontSize', ax_fontsize);
+
+
 
 %
 % Plot 2: Decomposition
@@ -222,11 +223,12 @@ plot(84 - extent, relmelt_noVel, 'o-', 'color', plotcolor3, 'markerfacecolor', p
 
 %tidy
 ylim([0.4, 1.8])
-xlabel('Calved length (km)');
-ylabel('Mean melt relative to default')
+xlabel('$l_c$ (km)', 'Interpreter', 'Latex', 'FontSize', ax_fontsize);
+ylabel('Relative inner cavity melt rate', 'Interpreter', 'latex', 'FontSize', ax_fontsize)
 xlim([0, 84 - 40]);
-legend({"Modelled results", "Constant $(T - T_f)$", "Constant $U^*$"}, 'location', 'southwest','interpreter', 'latex')
+legend({"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', ax_fontsize)
 
+text(-10,1.8, '(b)', 'FontSize', ax_fontsize);
 %
 % Save figure
 %

@@ -8,8 +8,8 @@
 %
 % Flags
 %
-gendata = 1; %specify whether to pass through the generate data loop
-save_flag = 1; 
+gendata = 0; %specify whether to pass through the generate data loop
+save_flag = 0; 
 
 %
 % Preliminaries
@@ -164,8 +164,8 @@ end %end generate data loop
 %
 
 positions = [0.1,0.1,0.4,0.85;
-	     0.6, 0.1, 0.38, 0.4;
-	     0.6, 0.55, 0.38, 0.4];
+	     0.6, 0.55, 0.38, 0.4;
+	     0.6, 0.1, 0.38, 0.4];
 
 %
 % Plot 1: Mean inner cavity melt rate with calving
@@ -192,7 +192,7 @@ end %end loop over i
 
 xlabel('$l_c$ (km)', 'Interpreter', 'latex', 'FontSize', 12);
 ylabel('Inner cavity melt rate (m/yr)', 'Interpreter', 'latex', 'FontSize', 12);
-xlim([0, 84 - 40]);
+xlim([0, 45]);
 ylim([45,75])
 legend({"$H$ = 100~m", "$H$ = 150~m", "$H$ = 200~m"}, 'location', 'southeast', 'FontSize', 12, 'Interpreter', 'latex');
 text(-10,75, "(a)", 'Interpreter', 'latex', 'FontSize', 12)
@@ -242,18 +242,18 @@ plot(84 - extent, relmelt_noTemp, 'o-', 'color', plotcolor2, 'markerfacecolor', 
 plot(84 - extent, relmelt_noVel, 'o-', 'color', plotcolor3, 'markerfacecolor', plotcolor3);
 
 %tidy plots
-xlim([0, 44])
+xlim([0, 45])
 ylabel('Relative Change', 'Interpreter', 'latex', 'FontSize', 12);
 if i == 3
-ax = gca; ax.XTickLabels = cell(0,1);
 ylim([0.8, 1.2])
 legend({"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', 12)
-text(-10,1.2, "(b)", 'Interpreter', 'latex', 'FontSize', 12)
+text(-10,1.2, "(c)", 'Interpreter', 'latex', 'FontSize', 12)
+xlabel('$l_c$ (km)', 'Interpreter', 'latex', 'FontSize', 12);
 
 else
+ax = gca; ax.XTickLabels = cell(0,1);
 ylim([0.6, 1.4])
-xlabel('$l_c$ (km)', 'Interpreter', 'latex', 'FontSize', 12);
-text(-10,1.4, "(c)", 'Interpreter', 'latex', 'FontSize', 12)
+text(-10,1.4, "(b)", 'Interpreter', 'latex', 'FontSize', 12)
 
 end
 end

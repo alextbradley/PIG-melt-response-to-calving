@@ -310,7 +310,7 @@ While the ice shelf front is located beyond 70~km from the grounding line, remov
 \begin{figure}
     \centering
     \includegraphics[width = \textwidth]{../make_figures/plots/figure4.eps}
-    \caption{(a) Mean inner cavity melt rate as a function of the calved length $l_c$. The black dashed line indicates the position of the ice front when it is located directly above the seabed ridge. (b) Velocity-thermal driving decomposition: plot of the decomposition of changes in inner cavity melt rate relative to the default (uncalved) experiment (equation~\eqref{E:MillgateDecompMelt}) into changes in boundary layer speed $U_\text{effect}$ (green curve, equation~\eqref{E:MillgateDecompU}) and thermal driving $\Delta T_{\text{effect}}$ (red curve, equation~\eqref{E:MillgateDecompD}).}
+    \caption{(a) Mean inner cavity melt rate as a function of the calved length $l_c$. The black dashed line indicates the position of the ice front when it is located directly above the seabed ridge. (b) Velocity-thermal driving decomposition: plot of the decomposition of changes in inner cavity melt rate relative to the default (uncalved) experiment (equation~\eqref{E:MillgateDecompMelt}) into changes in boundary layer speed $U_\text{effect}$ (green curve, equation~\eqref{E:MillgateDecompU}) and thermal driving $\Delta T_{\text{effect}}$ (red curve, equation~\eqref{E:MillgateDecompDT}). \red{labels to latex and size 12}}
     \label{fig:figure4}
 \end{figure}
 
@@ -359,6 +359,15 @@ In the previous section, we analyzed how, and why, the inner cavity melt rate ch
 
 %how do melt rates 
 The inner cavity melt rate as a function of the calved length $l_c$ is plotted in figure~\ref{fig:figure7} for both $H$ = 150~m and $H$ = 200~m.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width = \textwidth]{../make_figures/plots/figure6.eps}
+    \caption{(a) Inner cavity melt rate as a function of the calved length $l_c$ for $H$=100~m (light grey, as in figure~\ref{fig:figure4}a), $H$=150~m (blue), and $H$=200~m (green). The black dashed line indicates the position of the ice front when it is located directly above the seabed ridge. (b)-(c) Velocity-thermal driving decomposition for (b) $H$ = 150~m and (c) $H$ = 200~m: plot of the decomposition of changes in inner cavity melt rate relative to the default (uncalved) experiment (equation~\eqref{E:MillgateDecompMelt}) into changes in boundary layer speed $U_\text{effect}$ (green curve, equation~\eqref{E:MillgateDecompU}) and thermal driving $\Delta T_{\text{effect}}$ (red curve, equation~\eqref{E:MillgateDecompDT}). \red{NB: two runs missing for W = 150 -- this figure needs updating when we have these done! As do the time limits in the script (change ntout2 from 8 to 12).}}
+    \label{fig:figure6}
+\end{figure}
+
 \begin{figure}
     \centering
     \includegraphics[width = \textwidth]{../make_figures/plots/figure7.eps}
@@ -366,13 +375,6 @@ The inner cavity melt rate as a function of the calved length $l_c$ is plotted i
     \label{fig:figure7}
 \end{figure}
 
-
-\begin{figure}
-    \centering
-    \includegraphics[width = \textwidth]{../make_figures/plots/figure6.eps}
-    \caption{Mean melt rate and millgate decomposition for W = 150 and W = 200 \red{NB: two runs missing for W = 150 -- this figure needs updating when we have these done! As do the time limits in the script (change ntout2 from 8 to 12). Could change this to have both mean inner cavity plots on the same axis -- save space and show that effect larger for $W = 200$ than $W = 150$? (also add $W = 100$ results in grey) }}
-    \label{fig:figure6}
-\end{figure}
 
 %what do we see
 Mean melt rates as a function of calved length for the two larger gaps we consider here ($W = 150$~m and $W = 200$~m) are plotted in figure~\ref{fig:figure6}. As in the $W = 100$ case, we see that the melt rate reaches a peak while the ice front is located north of the ridge crest, and further calving events beyond this point reduce the melt rate. From the decomposition, we see in both cases that a reduction in the cavity circulation that outweighs an increase in thermal driving is responsible (and both relative changes are a similar order of magnitude) for the reduction in mean inner cavity melt rate beyond this point.  However, there are several important differences: firstly, the inner cavity melt rate is far less sensitive to calving in both the $W = 150$ and $W = 200$m cases (the difference between largest and smallest inner cavity melt rates is approximately 20\% and 10\%, respectively), and follows the upper end of the maximum range seen in the $W = 100$m case; secondly, the inner cavity melt rate does not show any sort of threshold behaviour when the calving front reaches the top of the ridge.

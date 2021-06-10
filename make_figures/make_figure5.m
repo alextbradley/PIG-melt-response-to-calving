@@ -11,8 +11,8 @@
 %
 % Flags
 %
-gendata = 1; %specify whether to pass through the generate data loop
-save_flag = 1;
+gendata = 0; %specify whether to pass through the generate data loop
+save_flag = 0;
 
 %
 % Preliminaries
@@ -198,9 +198,9 @@ end %end gendata loop
 %
 %figure positions
 %
-width = 0.22;
+width = 0.24;
 ncols = 4;
-colgap = 0.02;
+colgap = 0.01;
 startx = (1 -width*ncols - (ncols-1)*colgap)/2;
 starty = 0.01;
 height = 1/(sz+1);
@@ -213,7 +213,7 @@ end
 colmap = lighter_blue_parula(100,0.2);
 colbar_ypos = 0.93;
 colbar_xpos = [startx, startx + colgap + width,startx + 2*colgap + 2*width,startx + 3*colgap + 3*width];
-colbar_width = width; cbar_fontsize = 10;
+colbar_width = width; cbar_fontsize = 12;
 
 %
 % Column 1
@@ -237,7 +237,9 @@ if p == 1
 	a.Position(1)=colbar_xpos(1);
 	a.Position(2)=colbar_ypos;
 	a.Label.String = 'melt rate (m/yr)';
+	a.FontSize = 10;
 	a.Label.FontSize = cbar_fontsize;
+	a.Label.Interpreter = 'latex';
 end
 
 %add bsf
@@ -281,8 +283,10 @@ if p == 1
 	b.Location = 'northoutside';
 	b.Position(1)=colbar_xpos(2);
 	b.Position(2)=colbar_ypos;
-	b.Label.String = '\Theta (\circC)';
+	b.FontSize = 10;
+	b.Label.String = '$\Theta$ (${}^\circ$C)';
 	b.Label.FontSize = cbar_fontsize;
+	b.Label.Interpreter = 'latex';
 end
 %add salinity contours
 axnew = axes;
@@ -323,8 +327,10 @@ if p == 1
 	c.Location = 'northoutside';
 	c.Position(1)=colbar_xpos(3);
 	c.Position(2)=colbar_ypos;
-	c.Label.String = '\Theta (\circC)';
+	c.FontSize = 10;
+	c.Label.String = '$\Theta$ (${}^\circ$C)';
 	c.Label.FontSize = cbar_fontsize;
+	c.Label.Interpreter = 'latex';
 end
 %add salinity contours
 axnew = axes;
@@ -358,8 +364,10 @@ if p == 1
 	d.Location = 'northoutside';
 	d.Position(1)=colbar_xpos(4);
 	d.Position(2)=colbar_ypos;
+	d.FontSize = 10;
 	d.Label.String = 'zonal velocity (m/s)';
 	d.Label.FontSize = cbar_fontsize;
+	d.Label.Interpreter = 'latex';
 end
 end %end loop over runs
 

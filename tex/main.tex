@@ -310,7 +310,7 @@ While the ice shelf front is located beyond 70~km from the grounding line, remov
 \begin{figure}
     \centering
     \includegraphics[width = \textwidth]{../make_figures/plots/figure4.eps}
-    \caption{(a) Mean inner cavity melt rate as a function of the calved length $l_c$. The black dashed line indicates the position of the ice front when it is located directly above the seabed ridge. (b) Velocity-thermal driving decomposition: plot of the decomposition of changes in inner cavity melt rate relative to the default (uncalved) experiment (equation~\eqref{E:MillgateDecompMelt}) into changes in boundary layer speed $U_\text{effect}$ (green curve, equation~\eqref{E:MillgateDecompU}) and thermal driving $\Delta T_{\text{effect}}$ (red curve, equation~\eqref{E:MillgateDecompDT}). \red{labels to latex and size 12}}
+    \caption{(a) Mean inner cavity melt rate as a function of the calved length $l_c$. The black dashed line indicates the position of the ice front when it is located directly above the seabed ridge. (b) Velocity-thermal driving decomposition: plot of the decomposition of changes in inner cavity melt rate relative to the default (uncalved) experiment (equation~\eqref{E:MillgateDecompMelt}) into changes in boundary layer speed $U_\text{effect}$ (green curve, equation~\eqref{E:MillgateDecompU}) and thermal driving $\Delta T_{\text{effect}}$ (red curve, equation~\eqref{E:MillgateDecompDT}).}
     \label{fig:figure4}
 \end{figure}
 
@@ -319,7 +319,7 @@ The melt rate is approximately proportional to the product of the boundary layer
  \begin{align}
 U_{\text{effect}}(l_c) &=  \int_{\text{inner cavity}}\frac{u^*(x,y)}{u^*(x,y)_d}, \label{E:MillgateDecompU}\\ \Delta T_{\text{effect}}(l_c) &= \int_{\text{inner cavity}}\frac{T(x,y) - T_f(x,y)}{T_d(x,y) - T_{f,d}(x,y)},\label{E:MillgateDecompDT}
  \end{align}
-  respectively, where subscript d indicates result for the default (uncalved) simulation with $l_c = 0$. The quantities in~\eqref{E:MillgateDecomp} are compared, for a given calved length $l_c$, to the relative change in melting over the default
+  respectively, where subscript d indicates result for the default (uncalved) simulation with $l_c = 0$. The quantities in~\eqref{E:MillgateDecompU}--\eqref{E:MillgateDecompDT} are compared, for a given calved length $l_c$, to the relative change in melting over the default
  \begin{equation}\label{E:MillgateDecompMelt}
    \mathcal{M}(l_c) =  \int_{\text{inner cavity}}\frac{\dot{m}(x,y)}{\dot{m}(x,y)_d}.
  \end{equation}

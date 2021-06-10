@@ -10,7 +10,7 @@
 %
 % Flags
 %
-gendata = 1; %specify whether to pass through the generate data loop
+gendata = 0; %specify whether to pass through the generate data loop
 save_flag = 0;
 
 %
@@ -197,13 +197,15 @@ quiver(XX(idxY, idxX),YY(idxY, idxX),velscale *Ubl(idxX, idxY)', velscale*Vbl(id
 A = colorbar;
 A.Location = 'northoutside';
 A.Label.String = 'melt rate (m/yr)';
+A.Label.Interpreter = 'latex';
 A.Position(end) = 0.02;%A.Position(end) - 0.02;
 A.Position(2) = 0.89;
-A.FontSize = 10;
+A.Label.FontSize = 12;
 plot([20, 30], [120,120], 'k', 'linewidth', 1);
 text(31, 120, '0.6 m/s')
-xlabel('x (km)');
-ylabel('y (km)')
+xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
+ylabel('$y$~(km)', 'Interpreter', 'latex', 'FontSize' ,12)
+text(-10,143, '(a)', 'Interpreter', 'latex', 'FontSize',  12)
 
 
 %
@@ -219,10 +221,12 @@ a = colorbar;
 a.Location = 'northoutside';
 a.Position(end) = 0.02;%a.Position(end) - 0.02;
 a.Position(2) = 0.89;%a.Position(2) + 0.03;
-a.Label.String = '1/h (10^{-3} m^{-1})';
-a.FontSize = 10;
+a.Label.String = '$1/h~(10^{-3}~\mathrm{m}^{-1})$';
+a.Label.FontSize = 12;
+a.Label.Interpreter = 'latex';
 yticks([])
-xlabel('x (km)');
+xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
+text(-7,143, '(b)', 'Interpreter', 'latex', 'FontSize',  12)
 
 %add bsf
 streamsm = smooth2a(stream, 2,2);
@@ -254,12 +258,14 @@ b = colorbar;
 b.Location = 'northoutside';
 b.Position(end) = 0.02; %b.Position(end) - 0.02;
 b.Position(2) = 0.89;%b.Position(2) + 0.03;
-b.Label.String = 'Bottom temp(\circC)';
-b.FontSize = 10;
+b.Label.String = 'Bottom temp~(${}^\circ$C)';
+b.Label.Interpreter = 'latex';
+b.Label.FontSize = 12;
 yticks([])
 quiver(XX(idxY, idxX),YY(idxY, idxX),velscale *Ubot(idxX, idxY)', velscale*Vbot(idxX, idxY)', 'autoscale', 'off', 'color', 'k')
-xlabel('x (km)')
+xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
 
+text(-7,143, '(c)', 'Interpreter', 'latex', 'FontSize',  12)
 %
 % Plot 4: meridional cross section
 %
@@ -288,16 +294,17 @@ plot(max(Y)/1e3 - Y/1e3, topo(merid_idx, :), 'k', 'linewidth', 1)
 plot(max(Y)/1e3 - Y/1e3, bathy(merid_idx, :), 'k', 'linewidth', 1)
 xlim([4*1e4, Y(end)]/1e3)
 ylim([-1100,-300])
-ylabel('depth (m)');
-xlabel('Y (km)');
+ylabel('depth (m)', 'Interpreter', 'latex', 'FontSize', 12);
+xlabel('$y$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
 c = colorbar;
 c.Location = 'north';
 c.Position(1) = positions(4,1) + 0.02;
 c.Position(3) = widthsect - 0.04;
 c.Position(4) = 0.02;
 c.Position(2) = 0.4;
-c.Label.String = '\Theta (\circ C)';
-c.Label.FontSize = 10;
+c.Label.String = '$\Theta$~(${}^\circ$C)';
+c.Label.Interpreter = 'latex';
+c.Label.FontSize = 12;
 plot((max(Y)/1e3 - 20)*[1,1], [bathy(3,zonal_idx),topo(3,zonal_idx)], 'm--', 'linewidth', 1.5)
 
 
@@ -315,6 +322,7 @@ ylim([-1100,-300])
 ax(4).XTick = max(Y)/1e3 - (80:-20:0);
 ax(4).XTickLabels = {"80", "60","40", "20", "0"};
 
+text(18,-300, '(e)', 'Interpreter', 'latex', 'FontSize',  12)
 
 %
 % Plot 5
@@ -339,14 +347,15 @@ TZS  = saturate(TZS, max(max(TMS)), min(min(TMS)));
 contourf(X/1e3,-Z, TZS',30, 'linestyle', 'none');
 colormap(ax(5), cmap);
 hold on
-ylabel('depth (m)');
-xlabel('X (km)');
+ylabel('depth (m)', 'Interpreter', 'latex', 'FontSize', 12);
+xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
 d = colorbar;
 d.Location = 'northoutside';
 d.Position(1) = positions(4,1) + 0.02;
 d.Position(2) = 0.89;
-d.Label.String = '\Theta (\circ C)';
-d.Label.FontSize = 10;
+d.Label.String = '$\Theta$~(${}^\circ$C)';
+d.Label.Interpreter = 'latex';
+d.Label.FontSize = 12;
 d.Position(3) = widthsect - 0.04;
 d.Position(4) = 0.02;
 ylim([bathy(3,zonal_idx),topo(3,zonal_idx)])
@@ -359,6 +368,8 @@ xticks([]);
 yticks([]);
 set(axnew, 'color', 'none')
 ylim([bathy(3,zonal_idx),topo(3,zonal_idx)])
+
+text(-12,-675, '(d)', 'Interpreter', 'latex', 'FontSize',  12)
 
 %
 % Save

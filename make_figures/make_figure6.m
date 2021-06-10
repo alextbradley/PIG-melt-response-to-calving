@@ -8,8 +8,8 @@
 %
 % Flags
 %
-gendata = 0; %specify whether to pass through the generate data loop
-save_flag = 0; 
+gendata = 1; %specify whether to pass through the generate data loop
+save_flag = 1; 
 
 %
 % Preliminaries

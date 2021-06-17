@@ -1,4 +1,4 @@
-%Make figure 10 of the IG calving manuscript: realistic domain melt rate (2009 geometry) and non-cumulative melt rate anomalies
+%Make figure 11 of the PIG calving manuscript: realistic domain melt rate (2009 geometry) and non-cumulative melt rate anomalies
 
 % NB: Many of the data files referred to in this script are too large to be hosted online. These files are hosted internally as BAS.
 % Please email Alex Bradley (aleey@bas.ac.uk) to obtain a copy.
@@ -17,7 +17,7 @@ addpath("plot_tools");
 plot_defaults
 label_size = 11;
 ax_fontsize = 11;
-figure(1); clf;
+figure(2); clf;
 fig = gcf; fig.Position(3:4) = [1085, 540];
 %plot colours
 background_color = 0.8*[1,1,1]; %ice color
@@ -72,6 +72,7 @@ ntout2 = 12; %define time period to average over
 %
 % Generate data loop
 %
+if gendata
 run_nos = ["078", "082", "083", "084", "085", "086"];
 sz = length(run_nos);
 
@@ -103,7 +104,7 @@ melt = -melt * secs_per_year / density_ice;
 melt_scenarios{i} = melt;
 
 end
-
+end
 
 %
 % Make the plot
@@ -200,8 +201,7 @@ axs(q).XTickLabel = cell(length(axs(q).XTick),1);
 end
 
 %add the definitions of the two cavity regions
-a1 =  [3.7144, 3.2482, 5.5487, 5.7]*1e4; b1 = [ 1.6625, 1.6361, 1.6307, 1.6625]*1e6; %north half in stereographic
-a2 = [3.2482, 2.6036, 5.2548, 5.5487]*1e4; b2 = [1.6361, 1.6231, 1.6177, 1.6307]*1e6; %south half in stereographic
+realistic_inner_cavity_definition; %bring inner cavity definition into scope (a1,b1,a2,b2)
 [XXns,YYns] = meshgrid(X,Y);
 
 in1 = inpolygon(XXns',YYns', a1,b1);
@@ -228,5 +228,5 @@ fig = gcf; fig.Position(3:4) = [1280, 687.333];
 % Save
 %
 if save_flag
-saveas(gcf, "plots/figure11.epsc", "epsc")
+saveas(gcf, "plots/figure11.eps", "epsc")
 end

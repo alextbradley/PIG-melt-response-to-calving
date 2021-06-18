@@ -1,4 +1,4 @@
-%Make figure 4 in the idealized PIG calving manuscript: plots of (a) mean melt rate with calving and (b) decomposition of changes in melting
+%Make figure 6 in the PIG calving manuscript: plots of (a) mean melt rate with calving and (b) decomposition of changes in melting for W = 100, 150, 200
 %
 % NB: Many of the data files referred to in this script are too large to be hosted online. These files are hosted internally as BAS.
 % Please email Alex Bradley (aleey@bas.ac.uk) to obtain a copy. 

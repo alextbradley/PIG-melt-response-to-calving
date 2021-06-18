@@ -5,10 +5,12 @@
 %
 % Plot info
 %
+saveflag = 1;
 addpath('plot_tools');
+plot_defaults
 positions = [0.1,0.1,0.4,0.85;
-             0.6, 0.27, 0.38, 0.24;
-             0.6, 0.54, 0.38, 0.24];
+             0.58, 0.31, 0.38, 0.25;
+             0.58, 0.59, 0.38, 0.25];
 
 close all
 
@@ -27,6 +29,8 @@ y = dy:dy:ny*dy;
 %
 % get grid in image space
 %
+load('image_to_model_points.mat', 'ximage', 'yimage', 'xmod', 'ymod');
+[model2image, image2model] = genmaps_image2model(ximage, yimage, xmod, ymod); %maps from model to image and vice 
 yi = zeros(size(yy));
 xi = zeros(size(xx));
 for i = 1:320
@@ -79,7 +83,7 @@ contourf(x,y,bathyng', 20, 'linestyle', 'none')
 %transect
 %
 yidx = 5:140;
-xidx = 245*ones(1,length(yidx));
+xidx = 256*ones(1,length(yidx));
 sline =  sqrt((x(xidx) - x(xidx(1))).^2 + (y(yidx) - y(yidx(1))).^2); %arclength along line
 xline = x(xidx);
 yline = y(yidx);
@@ -110,17 +114,26 @@ topoline = topoline(idx);
 t = Tiff('PIG-S2-NovDec2020.tif', 'r'); %!! not in git repo!!
 imageData = read(t);
 figure(2); 
-subplot('Position',positions(1,:)); imshow(imageData);
+ax(1) = subplot('Position',positions(1,:)); imshow(imageData);
 
 %
 % add bathymetry and fronta
 %
 hold on
-contourf(xi, yi, bathyng', 30, 'linestyle', 'none');
-[cgl,~] = contour(xi,yi,bathy', [0,0], 'k', 'linewidth',2 );
-[c2009,~] = contour(xi,yi,topo2009', [0,0], 'linecolor', plotcolor3, 'linewidth', 2);
-[c2020,~] = contour(xi,yi,topo2020', [0,0], 'linecolor', plotcolor1, 'linewidth', 2);
+contourf(xi, yi, bathyng', 30, 'linestyle', 'none'); 
+c = colorbar('Location', 'northoutside');
+c.Position(2) = 0.79;
+c.Position(4) = 0.02;
 
+c.Label.String = 'sea bed depth (m)';
+c.Label.VerticalAlignment = 'bottom';
+c.Label.FontSize = 12;
+c.Label.Interpreter = 'latex';
+
+[cgl,~] = contour(xi,yi,bathy', [0,0], 'k', 'linewidth',2 );
+[c2009,h2009] = contour(xi,yi,topo2009', [0,0], 'linecolor', plotcolor3, 'linewidth', 2);
+[c2020,h2020] = contour(xi,yi,topo2020', [0,0], 'linecolor', plotcolor1, 'linewidth', 2);
+95
 
 %
 % add cross section
@@ -128,20 +141,65 @@ contourf(xi, yi, bathyng', 30, 'linestyle', 'none');
 cline = [xline; yline];
 cline_img = model2image(cline);
 plot(cline_img(1,:), cline_img(2,:), 'k--');
+ptA = text(ax(1), 9700,8200, 'A', 'FontSize',12, 'FontWeight', 'bold');
+ptB = text(ax(1), 5300,8900, 'B', 'FontSize',12, 'FontWeight', 'bold');
 
+%
+% Label fronts
+%
+f2009 = text(ax(1), 4500,13500, '2009', 'FontSize',12, 'color', plotcolor3);
+f2020 = text(ax(1), 8700,10200, '2020', 'FontSize',12, 'color', plotcolor1);
+
+%tidy
 ylim([3000, 14847])
 xlim([2000,12000])
+plot(ax(1), [11000,11000], [5000,4000], 'k', 'linewidth', 3)
+scalebar = text(ax(1),10950, 6600, '10 km', 'Interpreter', 'latex', 'FontSize', 12);
+
+
 camroll(-90);
 
-subplot('Position', positions(2,:)); 
+%
+% Plot along the cross section
+%
+ax(2) = subplot('Position', positions(3,:)); grid on 
 plot(sline/1e3, bathyline, 'color', plotcolor1, 'linewidth', 2);
 hold on
 plot(sline/1e3, topoline, 'color', plotcolor3, 'linewidth', 2);
-xlim([0, 46])
+xlim([0, 45])
+ax(2).XTickLabels = cell(length(ax(2).XTick), 1);
 
-subplot('Position', positions(3,:));
+ax(3) = subplot('Position', positions(2,:)); grid on
 plot(sline/1e3,topoline - bathyline, 'color', plotcolor1, 'linewidth', 2);
-ax = gca; ax.XTickLabels = cell(length(ax.XTick), 1);
-xlim([0, 46])
+xlim([0, 45])
+ptAA = text(ax(2), 1,-700, 'A', 'FontSize', 12, 'FontWeight', 'bold');
+ptBB = text(ax(2), max(ax(3).XLim)-3 ,-700, 'B', 'FontSize', 12, 'FontWeight', 'bold');
+
+
+
+%
+% tidy everything
+%
+ax(3).XLabel.String = 'Distance along transect (km)';
+ax(3).XLabel.Interpreter = 'latex';
+ax(3).XLabel.FontSize = 12;
+ax(2).YLabel.String = 'depth (m)';
+ax(2).YLabel.FontSize = 12;
+ax(2).YLabel.Interpreter = 'latex';
+ax(2).YLim = [-850, -200];
+ax(2).YTick = [-800, -600, -400,-200];
+ax(3).YTick = [0,100,200,300, 400];
+ax(3).YLabel.String = 'gap (m)';
+ax(3).YLabel.FontSize = 12;
+ax(3).YLabel.Interpreter = 'latex';
 
 fig = gcf; fig.Position(3:4) = [900, 600];
+grid(ax(3), 'on')
+grid(ax(2), 'on')
+
+%
+% Save?
+%
+if saveflag
+saveas(gcf, 'plots/figure1.eps', 'epsc');
+end

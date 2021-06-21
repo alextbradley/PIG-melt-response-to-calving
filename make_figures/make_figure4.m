@@ -23,10 +23,9 @@ fig = gcf; fig.Position(3:4) = [1000, 390];
 
 %
 % Data locations
-%
-rootdir = '/data/oceans_output/shelf/aleey/mitgcm/APIGi_';
-topodir = '/data/hpcdata/users/aleey/mitgcm/matlab/interp_APIGi/topo_files';
-bathy_path = '/data/hpcdata/users/aleey/mitgcm/matlab/interp_APIGi/bathy_files/bathymetry.shice';
+rootdir = '/data/oceans_output/shelf/aleey/mitgcm/APIGi_'; %not in git repo
+topodir = '../gendata/topo_files/';
+bathy_path = '../gendata/bathy_files/bathymetry_H400.shice';
 
 %grid details
 nx=120; % number of grid cells along longitudinal direction

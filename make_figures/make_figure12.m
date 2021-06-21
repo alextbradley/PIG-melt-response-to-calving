@@ -9,7 +9,7 @@
 % Flags
 %
 gendata = 1; %specify whether to pass through the generate data loop
-save_flag = 0;
+saveflag = 0;
 
 %
 % Preliminaries
@@ -211,3 +211,9 @@ legend({"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','inte
 subplot(2,2,2); ylim([0.95, 1.15]);
 subplot(2,2,4); ylim([0.95, 1.1]);
 
+%
+% Save flag
+%
+if saveflag
+saveas(gcf, 'plots/figure12.eps', 'epsc')
+end

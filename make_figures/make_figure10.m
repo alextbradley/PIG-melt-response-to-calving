@@ -4,7 +4,8 @@
 % Please email Alex Bradley (aleey@bas.ac.uk) to obtain a copy.
 %Alex Bradley (aleey@bas.ac.uk) 27/05/2021. MIT license.
 saveflag = 0; %save toggle
-
+addpath("plot_tools")
+plot_defaults
 %
 % Data info
 %
@@ -20,6 +21,23 @@ Y = ncread(strcat(rootdir, "078", '/run/state2D.nc'), 'LATITUDE'); %stereographi
 [XX,YY] = meshgrid(X,Y);
 x = dx:dx:nx*dx;
 y = dy:dy:ny*dy; %stereographic co-ords with zero origin
+[xx,yy] = meshgrid(x,y);
+
+%
+% get grid in image space
+%
+load('image_to_model_points.mat', 'ximage', 'yimage', 'xmod', 'ymod');
+[model2image, image2model] = genmaps_image2model(ximage, yimage, xmod, ymod); %maps from model to image and vice
+yi = zeros(size(yy));
+xi = zeros(size(xx));
+for i = 1:320
+cc = [xx(i,:); yy(i,:)];
+ci = model2image(cc);
+yi(i,:) = ci(2,:);
+xi(i,:) = ci(1,:);
+end
+
+
 
 %load bathy
 bathyfid = fopen(bathypath);
@@ -98,6 +116,13 @@ ysnap(i) = yline(min_idx);
 end
 snap_distance = snap_distance - snap_distance(1); %take relative to 2012 topo
 
+%cross section
+ycrossidx = 5:140;
+xcrossidx = 256*ones(1,length(ycrossidx));
+xcross = x(xcrossidx);
+ycross = y(ycrossidx);
+
+
 %get inner cavity contours
 realistic_inner_cavity_definition; %bring inner cavity definition into scope (a1,b1,a2,b2)
 in1 = inpolygon(XX',YY', a1,b1);
@@ -127,6 +152,7 @@ load('image_to_model_points.mat', 'ximage', 'yimage', 'xmod', 'ymod');
 [model2image, image2model] = genmaps_image2model(ximage, yimage, xmod, ymod); %maps from model to image and vice versa
 c_image_GL = model2image(cgl); %put gl model gl position onto image
 scatter(ax, c_image_GL(1,:), c_image_GL(2,:), 4,'k', 'filled')
+%contour(xi, yi, bathy', [0,0], 'k', 'linewidth', 2)
 
 %add the fronts
 colmap = parula(7);
@@ -147,6 +173,9 @@ csnap_image = model2image(csnap);
 plot(csnap_image(1,:), csnap_image(2,:), 'ko', 'markerfacecolor', 'k');
 
 %add the ridge cross section
+cx = [xcross; ycross];
+cx_image = model2image(cx);
+plot(cx_image(1,:), cx_image(2,:), 'm--')
 
 %add the inner cavity definition
 cin1_img = model2image(cin1); 
@@ -161,6 +190,40 @@ xlim([2000,12000])
 
 %rotate
 camroll(-90);
+
+%add the gap width as inset axes
+topo = cell2mat(topo_scenarios(1));
+bathyline = nan(1,length(ycrossidx));
+topoline  = nan(1,length(ycrossidx));
+sline =  sqrt((x(xcrossidx) - x(xcrossidx(1))).^2 + (y(ycrossidx) - y(ycrossidx(1))).^2); %arclength along line
+
+for i = 1:length(bathyline)
+if bathy(xcrossidx(i), ycrossidx(i)) ~=0
+bathyline(i) = bathy(xcrossidx(i), ycrossidx(i));
+end
+if topo(xcrossidx(i), ycrossidx(i)) ~=0
+topoline(i)  = topo(xcrossidx(i), ycrossidx(i));
+end
+end
+idx = ~isnan(bathyline);
+sline = sline(idx);
+sline = sline - sline(1);
+bathyline = bathyline(idx);
+topoline = topoline(idx);
+ax2 = axes; hold on; box on
+ax2.Position = [0.65, 0.1, 0.3, 0.2];
+fill(ax2,[0, 22, 22, 0], [0, 0, 400, 400], plotcolor3,'linestyle', 'none', 'FaceAlpha', 0.3);
+fill(ax2,[22, 45, 45, 22], [0, 0, 400, 400], plotcolor2,'linestyle', 'none', 'FaceAlpha', 0.3);
+plot(ax2,sline/1e3,topoline - bathyline, 'color', plotcolor1, 'linewidth', 2);
+
+ax2.XLabel.String = 'distance (km)';
+ax2.YLabel.String = 'gap width (m)';
+ax2.XLabel.Interpreter = 'latex';
+ax2.XLabel.FontSize = 12;
+ax2.YLabel.Interpreter = 'latex';
+ax2.YLabel.FontSize = 12;
+
+
 
 %
 % save flag

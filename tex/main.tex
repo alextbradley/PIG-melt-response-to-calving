@@ -210,6 +210,9 @@
 %\end{figure}
 
 \section{Experiment Details}
+\red{I think it would be good to have a table with all of the experiments in!}
+
+
 %broad overview of the experiemnts
 We perform a total of nine experiments, each corresponding to a unique pair of parameters that characterize the hydrographic forcing, the strength of the barrier provided by the shelf, which are known to be variable in practice (section 1). Within each experiment, we perform ten simulations in which the ocean circulation is resolved explicitly using the MIT general circulation model (MITgcm): the first `default' (or `uncalved') simulation  corresponds to a configuration that captures the essential features of the Pine Island Cavity in 2009, while in the nine further `calving' simulations, sections of the ice shelf in the default run are removed subsequently, thus simulating the effect of calving (we use the word calving henceforth as a proxy for this description). Other than removing sections within each experiment, the ice shelf geometry does not change within each experiment (but may change between experiments, see section \ref{S:Experiment:Geometry}). Ice shelves therefore enter passively, via the exchange of heat and salt at the ice-ocean interface alone; a passive description of ice shelves (i.e. not including any ice sheet or ice shelf dynamics) is sufficient for this study since we are primarily interested in response of melt rates to ice shelf calving, which occur on timescales much shorter than on which the ice responds dynamically to perturbations in melting. In the following sections we provide further details of the ocean model and experimental setup, including the motivation for various parameter choices.
 \begin{figure}
@@ -393,19 +396,30 @@ To understand the reasons it is useful to compare the cross sections in figure~\
 
 
 \section{Effect of Hydrographic Conditions on Melt Response to Calving}\label{S:Results:P}
-\red{not sure whether to include this, now that we are definitely going to include the realistic runs here. Leaving figure numbers as if there are two figures in this section.}
-\begin{figure}
-    \centering
-    \includegraphics{}
-    \caption{figure 8: mean melt rate and decomposition for P700, P800 cases. }
-    \label{fig:my_label}
-\end{figure}
+Before moving on to assess how melt rates change with calving in realistic simulations of Pine Island, we briefly consider how the picture presented in the previous two sections depends on the choice of hydrographic conditions to which the ocean state is restored far from the ice shelf.
+
+% Introduce simulations with reminder of what they correspond to 
+In figure~\ref{fig:figure8}, we present the inner cavity melt rate and velocity-thermal driving decomposition for experiments 4--9 (table \red{tabref}), which cover the three geometric values ($W$ = 100~m, $W$ = 150~m, and $W$ = 200~m) for $P$=700 (dashed profile in figure~\ref{fig:figure2}, experiments 4--6) and $P$=800 (dot-dashed profile in figure~\ref{fig:figure2}, experiments 7--9). Recall that the $P$=800 cases approximately corresponds to observations in Pine Island Bay in 2012, when the thermocline was at one of the lowest values on record. As mentioned, we consider a constant ridge height and thus variability in the difference between the lower layer depth and height of the ridge -- which is thought to be the key driver of the amount of CDW able to spill over the ridge -- is entirely captured by the variability in the value of $P$.
 
 \begin{figure}
     \centering
-    \includegraphics{}
-    \caption{figure 9: contour plots showing why the difference for P800 case. }
-    \label{fig:my_label}
+    \includegraphics[width = \textwidth]{../make_figures/plots/figure8.eps}
+    \caption{figure 8: mean melt rate for P = 700 and P = 800. Decomposition for P = 800 runs }
+    \label{fig:figure8}
+\end{figure}
+
+% Brief results for P = 700 (very similar to the P = 800 case)
+The results for $P$=700~m are very similar to those for $P$=800~m, albeit with slightly lower melt rates. The result can be summarized as for the $P$=800~m case: for the narrowest gap ($W$=100~m), the inner cavity melt rate is very sensitive to the front position; it increases rapidly with calving as the calving front approaches the ridge, before dropping off sharply when the ice front reaches the top of the ridge and stabilizing for further calving events. For the wider gaps ($W$=150~m, $W$=200~m), the melt rates are far less sensitive to changes in ice front position, reaching a peak when the ice front is some way upstream of the ridge (figure~\ref{fig:figure8}) and decrease steadily with further calving events. The velocity-thermal driving decompositions for the experiments with $P$=700~m (not shown) reveal that, as in the $P$=800~m case, these observations can be explained by the competition between velocity changes owing to stratification and communication between the inner and outer cavities, and the increased heat available for melting in the inner cavity. As mentioned, the relationship between the CDW layer depth and the height of the ridge is expected to be the important control; when framed in this way, the similarity between the $P$=800~m and $P$=700~m cases is unsurprisng: in both of these, the CDW layer extends all the way to the top of the ridge (figure~\ref{fig:figure2}).
+
+%results are different for P = 800 -- how?
+In the $P$=800~m case, however, the CDW layer does not extend all the way to the top of the ridge (figure~\ref{fig:figure2}). In this case, the melt rate increases with calving at while the ice front is located downstream of the ridge, as in the $P$=700~m cases and the melt rate drops off when the ice front reaches the top of the ridge that is associated with a reduction in boundary layer velocity (figure~\ref{fig:figure8}) -- the inner and outer cavities are able to talk to one another. However, unlike the $P$=700~m cases, subsequent calving events result in an increase in inner cavity melt rate that is associated with an increase in boundary layer velocity. The crucial difference here is that once the calving front has reached the top of the ridge, the fact that the CDW layer is below the top of the ridge means that a strong topographic barrier still exists and, unlike in the other two cases, the inner cavity is not entirely flushed with CDW. Further calving events thus increase the stratification further (rather than reducing it, as is the case for an entirely flushed cavity), leading to a strengthening of the circulation. 
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.4\textwidth]{../make_figures/plots/figure9.eps}
+    \caption{figure 9: meridional ridge cross sections for the $P$=800~m case (will be to the ridge c.f. figure 7 in JDR 2014 paper) }
+    \label{fig:figure9}
 \end{figure}
 
 

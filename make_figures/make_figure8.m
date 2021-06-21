@@ -162,7 +162,7 @@ positions = [0.06, 0.55, 0.4, 0.43;
 	     0.56, 0.55, 0.4, 0.43;
 	     0.06, 0.1, 0.27, 0.33;
 	     0.38, 0.1, 0.27, 0.33;
-	     0.69, 0.1, 0.27, 0.33];
+	     0.70, 0.1, 0.27, 0.33];
 plotcols = [plotcolor3; plotcolor1; plotcolor2]; %permute for consitency with fig 6
 plotcols = parula(4);
 %
@@ -187,7 +187,7 @@ plot(84 - extent, ave_melt(i,:), 'o-', 'color', plotcols(i,:), 'markerfacecolor'
 end
 xlim([0, 45]);
 ylim([40, 65]);
-legend({"$H$ = 200~m", "$H$ = 150~m", "$H$ = 100~m"}, 'location', 'southeast', 'FontSize', 12, 'Interpreter', 'latex');
+legend({"$W$ = 200~m", "$W$ = 150~m", "$W$ = 100~m"}, 'location', 'southeast', 'FontSize', 12, 'Interpreter', 'latex');
 grid on
 ax(1).XTick = [0:10:40];
 P700txt = text(ax(1), 0.3, 41.2, '$P$ = 700m', 'interpreter', 'latex', 'FontSize', 14);
@@ -198,7 +198,7 @@ P700txt = text(ax(1), 0.3, 41.2, '$P$ = 700m', 'interpreter', 'latex', 'FontSize
 
 ax(2) = subplot('Position', positions(2,:));hold on
 ylabel('Melt rate (m/yr)', 'FontSize', 12, 'Interpreter', 'latex');
-xlabel('Calved length (km)', 'FontSize', 12, 'Interpreter', 'latex');
+xlabel('$l_c$ (km)', 'FontSize', 12, 'Interpreter', 'latex');
 
 ave_melt = zeros(3,sz(2));
 for i = 1:3
@@ -223,15 +223,15 @@ P800txt = text(ax(2), 0.3, 26.15, '$P$ = 800m', 'interpreter', 'latex', 'FontSiz
 % decompositions
 %
 ax(3) = subplot('Position', positions(5,:));
-xlabel('Calved length (km)', 'FontSize', 12, 'Interpreter', 'latex');
+xlabel('$l_c$ (km)', 'FontSize', 12, 'Interpreter', 'latex');
 hold on
 box on
 ax(4) = subplot('Position', positions(4,:));
-xlabel('Calved length (km)', 'FontSize', 12, 'Interpreter', 'latex');
+xlabel('$l_c$ (km)', 'FontSize', 12, 'Interpreter', 'latex');
 box on
 hold on
 ax(5) = subplot('Position', positions(3,:)); %switch to W = 100 on left
-xlabel('Calved length (km)', 'FontSize', 12, 'Interpreter', 'latex');
+xlabel('$l_c$ (km)', 'FontSize', 12, 'Interpreter', 'latex');
 ylabel('Relative change', 'FontSize', 12, 'Interpreter', 'latex');
 box on
 hold on
@@ -283,9 +283,17 @@ ax(3).YLim = [0.8, 1.2];
 ax(4).YLim = [0.8, 1.2];
 ax(5).YLim = [0.8, 1.6];
 legend(ax(3),{"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', 12)
-H100txt = text(ax(5), 0.5, 1.55, 'H = 100', 'Interpreter', 'latex', 'FontSize', 11.5);
-H150txt = text(ax(4), 0.5, 1.175, 'H = 150', 'Interpreter', 'latex', 'FontSize', 11.5);
-H200txt = text(ax(3), 0.5, 1.175, 'H = 200', 'Interpreter', 'latex', 'FontSize', 11.5);
+W100txt = text(ax(5), 0.5, 1.55, 'W = 100', 'Interpreter', 'latex', 'FontSize', 11.5);
+W150txt = text(ax(4), 0.5, 1.175, 'W = 150', 'Interpreter', 'latex', 'FontSize', 11.5);
+W200txt = text(ax(3), 0.5, 1.175, 'W = 200', 'Interpreter', 'latex', 'FontSize', 11.5);
+
+%plot labels
+ta = text(ax(1), -6.5, 65, '(a)','Interpreter', 'latex', 'FontSize', 12);
+tb = text(ax(2), -6.5, 50, '(b)','Interpreter', 'latex', 'FontSize', 12);
+tc = text(ax(5), -10, 1.69, '(c)', 'Interpreter', 'latex', 'FontSize', 12);
+td = text(ax(4), -8, 1.24, '(d)', 'Interpreter', 'latex', 'FontSize', 12);
+te = text(ax(3), -8, 1.24, '(e)', 'Interpreter', 'latex', 'FontSize', 12);
+
 
 %
 % save?

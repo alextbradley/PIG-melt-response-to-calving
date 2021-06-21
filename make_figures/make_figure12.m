@@ -150,13 +150,33 @@ melt = cell2mat(melt_scenarios(i));
 ave_melt1(i) = mean(melt(idx1));
 ave_melt2(i) = mean(melt(idx2));
 end
-subplot(2,2,1); hold on; box on; grid on
-plot(snap_distance(4)*ones(1,2)/1e3, [40, 50], 'k--', 'HandleVisibility', 'off')
-plot(snap_distance/1e3, ave_melt1, 'o-', 'color', plotcolor1, 'markerfacecolor', plotcolor1);
+ax(1) = subplot(2,2,1); hold on; box on; grid on
+plot(snap_distance(4)*ones(1,2)/1e3, [0, 100], 'k--', 'HandleVisibility', 'off')
+plot(snap_distance/1e3, ave_melt1, 'o-', 'color', plotcolor2, 'markerfacecolor', plotcolor2);
 
-subplot(2,2,3); hold on; box on; grid on
-plot(snap_distance(4)*ones(1,2)/1e3, [70, 80], 'k--', 'HandleVisibility', 'off')
-plot(snap_distance/1e3, ave_melt2, 'o-', 'color', plotcolor1, 'markerfacecolor', plotcolor1);
+ax(3) = subplot(2,2,3); hold on; box on; grid on
+plot(snap_distance(4)*ones(1,2)/1e3, [0, 100], 'k--', 'HandleVisibility', 'off')
+plot(snap_distance/1e3, ave_melt2, 'o-', 'color', plotcolor3, 'markerfacecolor', plotcolor3);
+
+%tidy these
+ax(1).YLim = [38, 46];
+ax(3).YLim = [72, 78];
+ax(3).YTick = [72:2:78];
+ax(1).XLabel.String = '$l_c$ (km)';
+ax(3).XLabel.String = '$l_c$ (km)';
+ax(1).YLabel.Interpreter = 'latex';
+ax(1).XLabel.Interpreter = 'latex';
+ax(3).YLabel.Interpreter = 'latex';
+ax(3).XLabel.Interpreter = 'latex';
+ax(1).YLabel.String = 'inner cavity melt rate (m/yr)';
+ax(3).YLabel.String = 'inner cavity melt rate (m/yr)';
+ax(1).XLabel.FontSize = 12;
+ax(1).YLabel.FontSize = 12;
+ax(3).XLabel.FontSize = 12;
+ax(3).YLabel.FontSize = 12;
+tN = text(ax(1), 1, 45.2, "North box", "Interpreter", "latex", "FontSize", 14, "Color", plotcolor2);
+tS = text(ax(3), 1, 77.3, "South box", "Interpreter", "latex", "FontSize", 14, "Color", plotcolor3);
+
 
 %
 % decompositions
@@ -200,16 +220,39 @@ relmelt_noVel(2,j) = nanmean(UdT_noVel(idx2)) / nanmean(UdT_baseline(idx2));
 end
 
 for p = 1:2
-subplot(2,2,2*p); hold on;ax = gca; box on; grid on;
+ax(2*p) = subplot(2,2,2*p); hold on;box on; grid on;
 plot(snap_distance(4)*ones(1,2)/1e3, [0.95, 1.15], 'k--', 'HandleVisibility', 'off')
 plot(snap_distance/1e3, relmelt(p,:), 'o-', 'color', plotcolor1, 'markerfacecolor', plotcolor1);
 plot(snap_distance/1e3, relmelt_noTemp(p,:), 'o-', 'color', plotcolor2, 'markerfacecolor', plotcolor2);
 plot(snap_distance/1e3, relmelt_noVel(p,:), 'o-', 'color', plotcolor3, 'markerfacecolor', plotcolor3);
 end
-legend({"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', 12)
+l = legend(ax(2), {"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'northwest','interpreter', 'latex', 'FontSize', 12);
 
-subplot(2,2,2); ylim([0.95, 1.15]);
-subplot(2,2,4); ylim([0.95, 1.1]);
+ax(2).YLim = [0.98, 1.15];
+ax(4).YLim = [0.98, 1.08];
+ax(2).XLabel.String = '$l_c$ (km)';
+ax(4).XLabel.String = '$l_c$ (km)';
+ax(2).YLabel.Interpreter = 'latex';
+ax(2).XLabel.Interpreter = 'latex';
+ax(4).YLabel.Interpreter = 'latex';
+ax(4).XLabel.Interpreter = 'latex';
+ax(2).YLabel.String = 'relative effect';
+ax(4).YLabel.String = 'relative effect';
+ax(2).XLabel.FontSize = 12;
+ax(2).YLabel.FontSize = 12;
+ax(4).XLabel.FontSize = 12;
+ax(4).YLabel.FontSize = 12;
+
+
+%plot labels
+ta = text(ax(1), -10, 46.8, '(a)', 'Interpreter', 'latex', 'FontSize', 12);
+tb = text(ax(2), -10, 1.166, '(b)', 'Interpreter', 'latex', 'FontSize', 12);
+tc = text(ax(3), -10, 78.8, '(c)', 'Interpreter', 'latex', 'FontSize', 12);
+td = text(ax(4), -10, 1.092, '(d)', 'Interpreter', 'latex', 'FontSize', 12);
+
+
+
+
 
 %
 % Save flag

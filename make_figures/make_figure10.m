@@ -175,7 +175,7 @@ plot(csnap_image(1,:), csnap_image(2,:), 'ko', 'markerfacecolor', 'k');
 %add the ridge cross section
 cx = [xcross; ycross];
 cx_image = model2image(cx);
-plot(cx_image(1,:), cx_image(2,:), 'm--')
+plot(cx_image(1,:), cx_image(2,:), 'k--', 'color', plotcolor1)
 
 %add the inner cavity definition
 cin1_img = model2image(cin1); 
@@ -222,8 +222,6 @@ ax2.XLabel.Interpreter = 'latex';
 ax2.XLabel.FontSize = 12;
 ax2.YLabel.Interpreter = 'latex';
 ax2.YLabel.FontSize = 12;
-
-
 
 %
 % save flag

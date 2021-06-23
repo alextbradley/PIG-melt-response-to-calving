@@ -52,6 +52,7 @@ figure(1); clf; hold on
 [c750,~] = contour(x,y, bathy',[-750,-750], 'linestyle', 'none');
 
 A = lines(6);
+topo_scenarios = cell(6,1);
 for i = 1:6
     topo_fname=  ['shelfice_topo_scn', num2str(i), '.shice'];
     topo_fid = fopen(strcat(topodir, '/',topo_fname));

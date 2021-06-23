@@ -1,4 +1,4 @@
-%Make figure 11 of the PIG calving manuscript: realistic domain melt rate (2009 geometry) and non-cumulative melt rate anomalies
+%Make figure 11 of the PIG calving manuscript: realistic domain melt rate (2009 geometry) and non-cumulative melt rate anomalies. NB: make_figure10 must be ran first to get the definition of the inner cavity.
 
 % NB: Many of the data files referred to in this script are too large to be hosted online. These files are hosted internally as BAS.
 % Please email Alex Bradley (aleey@bas.ac.uk) to obtain a copy.
@@ -109,14 +109,15 @@ end
 %
 % Make the plot
 %
-width = 0.25;
-height = 0.4;
+width = 0.30;
+height = 0.44;
 gapx = 0.02;
 gapy = 0.02;
 ncols = 3;
 nrows = 2;
 startx = (1 -width*ncols - (ncols-1)*gapx)/2;
 starty = 1-(1 -height*nrows - (nrows -1)*gapy)/2;
+starty = 0.97;
 positions = zeros(4, nrows* ncols);
 for i = 1:nrows*ncols
 q = 1 + mod(i-1,ncols); %index in x direction

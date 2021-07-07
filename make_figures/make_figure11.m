@@ -66,7 +66,7 @@ density_ice = 918.0;
 
 %time details
 ntout1 = 6;
-ntout2 = 12; %define time period to average over
+ntout2 = 7; %define time period to average over
 
 
 %
@@ -74,6 +74,7 @@ ntout2 = 12; %define time period to average over
 %
 if gendata
 run_nos = ["078", "082", "083", "084", "085", "086"];
+run_nos = ["141", "142", "143", "144", "145", "146"];
 sz = length(run_nos);
 
 %setup storage

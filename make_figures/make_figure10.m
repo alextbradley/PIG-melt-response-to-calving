@@ -1,4 +1,4 @@
-%Make figure 11 of the PIG calving manuscript: description of calving experiments
+%Make figure 10 of the PIG calving manuscript: description of calving experiments
 
 % NB: Many of the data files referred to in this script are too large to be hosted online. These files are hosted internally as BAS.
 % Please email Alex Bradley (aleey@bas.ac.uk) to obtain a copy.

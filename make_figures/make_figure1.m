@@ -5,7 +5,7 @@
 %
 % Plot info
 %
-saveflag = 1;
+saveflag = 0;
 addpath('plot_tools');
 plot_defaults
 positions = [0.1,0.1,0.4,0.85;
@@ -159,6 +159,9 @@ scalebar = text(ax(1),10950, 6600, '10 km', 'Interpreter', 'latex', 'FontSize', 
 
 camroll(-90);
 
+txa = text(ax(1), 250, 16000, '(a)', 'FontSize', 12, 'interpreter', 'latex')
+
+
 %
 % Plot along the cross section
 %
@@ -192,6 +195,9 @@ ax(3).YTick = [0,100,200,300, 400];
 ax(3).YLabel.String = 'gap (m)';
 ax(3).YLabel.FontSize = 12;
 ax(3).YLabel.Interpreter = 'latex';
+
+txb = text(ax(2), -8, 80, '(b)', 'FontSize', 12, 'interpreter', 'latex')
+txc = text(ax(3), -8, 420, '(c)', 'FontSize', 12, 'interpreter', 'latex')
 
 fig = gcf; fig.Position(3:4) = [900, 600];
 grid(ax(3), 'on')

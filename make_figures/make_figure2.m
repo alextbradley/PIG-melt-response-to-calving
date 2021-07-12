@@ -4,7 +4,7 @@
 %
 % Flags
 % 
-save_flag = 1; 
+save_flag = 0; 
 
 %
 % Preliminaries
@@ -84,9 +84,9 @@ south = text(123,-210, "South", 'FontSize', 16);
 set(south, 'Rotation', 90)
 
 %add the H values
-text(25,-480, "H = 200", 'FontSize', 11)
-text(25,-580, "H = 100", 'FontSize', 11)
-text(25,-530, "H = 150", 'FontSize', 11)
+text(25,-480, "W = 200", 'FontSize', 11)
+text(25,-580, "W = 100", 'FontSize', 11)
+text(25,-530, "W = 150", 'FontSize', 11)
 
 %
 % salinity and temperature profiles

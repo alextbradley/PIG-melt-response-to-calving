@@ -11,7 +11,7 @@
 %
 % Flags
 %
-gendata = 0; %specify whether to pass through the generate data loop
+gendata = 1; %specify whether to pass through the generate data loop
 save_flag = 0;
 
 %
@@ -192,28 +192,8 @@ merid_vvel_scenarios{i} = VMS;
 end %end loop over runs
 end %end gendata loop
 
-%%%%%%%%%%%%%%%%% Plots %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%figure positions
-%
-width = 0.24;
-ncols = 4;
-colgap = 0.01;
-startx = (1 -width*ncols - (ncols-1)*colgap)/2;
-starty = 0.01;
-height = 1/(sz+1);
-positions = zeros(4, ncols, sz);
-for p = 1:sz
-for q = 1:ncols
-positions(:,q,p) = [startx + (q-1)*colgap + (q-1)*width, starty + (p-1)*height, width, height];
-end
-end
-colmap = lighter_blue_parula(100,0.2);
-colbar_ypos = 0.93;
-colbar_xpos = [startx, startx + colgap + width,startx + 2*colgap + 2*width,startx + 3*colgap + 3*width];
-colbar_width = width; cbar_fontsize = 12;
 
-%
+
 % Column 1
 %
 for p = 1:sz
@@ -222,10 +202,10 @@ melt = cell2mat(melt_scenarios(p));
 melt = saturate(melt, 120, 0);
 topo = squeeze(cell2mat(topo_scenarios(p)));
 melt(topo == 0) = nan;
-contourf(Y/1e3,X/1e3,melt, 50, 'linestyle', 'none');
+contourf(-Y/1e3,X/1e3,melt, 50, 'linestyle', 'none');
 box on
 hold on
-plot([50, 50], [0, max(X/1e3)],'--', 'color', [0.5, 0.5, 0.5])
+plot(-[50, 50], [0, max(X/1e3)],'--', 'color', [0.5, 0.5, 0.5])
 colormap(ax(1,p), colmap)
 xticks([]);
 yticks([]);
@@ -245,11 +225,11 @@ stream = cell2mat(bsf_scenarios(p));
 streamsm = smooth2a(stream, 2,2);
 axnew = axes;
 axnew.Position = ax(1,p).Position;
-[C,h] =contour(Y/1e3,X/1e3, streamsm, [-0.7, -0.5, -0.3, -0.1], 'k');
+[C,h] =contour(-Y/1e3,X/1e3, streamsm, [-0.7, -0.5, -0.3, -0.1], 'k');
 %clabel(C,h);
 hold on
 streamsm(1:4,:) = nan; streamsm(end-3:end,:) = nan; streamsm(:,1:60) = nan; streamsm(:,end-4:end) = nan; %remove borders and near Gl where stream is messy
-[C,h] =contour(Y/1e3,X/1e3, streamsm, [0,0], 'r');
+[C,h] =contour(-Y/1e3,X/1e3, streamsm, [0,0], 'r');
 xticks([]);
 yticks([]);
 set(axnew, 'color', 'none')

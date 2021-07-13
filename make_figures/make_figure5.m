@@ -193,6 +193,26 @@ end %end loop over runs
 end %end gendata loop
 
 
+%%%%%%%%%%%%%%%%% Plots %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%figure positions
+%
+width = 0.24;
+ncols = 4;
+colgap = 0.01;
+startx = (1 -width*ncols - (ncols-1)*colgap)/2;
+starty = 0.01;
+height = 1/(sz+1);
+positions = zeros(4, ncols, sz);
+for p = 1:sz
+for q = 1:ncols
+positions(:,q,p) = [startx + (q-1)*colgap + (q-1)*width, starty + (p-1)*height, width, height];
+end
+end
+colmap = lighter_blue_parula(100,0.2);
+colbar_ypos = 0.93;
+colbar_xpos = [startx, startx + colgap + width,startx + 2*colgap + 2*width,startx + 3*colgap + 3*width];
+colbar_width = width; cbar_fontsize = 12;
 
 % Column 1
 %

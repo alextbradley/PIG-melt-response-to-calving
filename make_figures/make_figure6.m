@@ -9,7 +9,7 @@
 % Flags
 %
 gendata = 1; %specify whether to pass through the generate data loop
-save_flag = 1; 
+save_flag = 0; 
 
 %
 % Preliminaries
@@ -193,7 +193,7 @@ xlabel('$l_c$ (km)', 'Interpreter', 'latex', 'FontSize', 12);
 ylabel('Inner cavity melt rate (m/yr)', 'Interpreter', 'latex', 'FontSize', 12);
 xlim([0, 45]);
 ylim([45,75])
-legend({"$H$ = 100~m", "$H$ = 150~m", "$H$ = 200~m"}, 'location', 'southeast', 'FontSize', 12, 'Interpreter', 'latex');
+legend({"$W$ = 100~m", "$W$ = 150~m", "$W$ = 200~m"}, 'location', 'southeast', 'FontSize', 12, 'Interpreter', 'latex');
 text(-10,75, "(a)", 'Interpreter', 'latex', 'FontSize', 12)
 
 %

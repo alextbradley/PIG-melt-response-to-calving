@@ -6,6 +6,8 @@
 saveflag = 0; %save toggle
 addpath("plot_tools")
 plot_defaults
+plotcolor2 = [0,1,1]; %overwrite defaults 
+plotcolor3 = [1,0,1];
 %
 % Data info
 %
@@ -138,7 +140,11 @@ A(idx2) = 1;
 A(~idx2) = 0;
 [cin2,~] = contour(x,y, A',[1,1], 'linestyle', 'none');
 cin2 = cin2(:, (cin2(1,:)~=1)); %remove levels
-%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% make the plot %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %open the image
 t = Tiff('PIG-S2-NovDec2020.tif', 'r'); %!! not in git repo!!
@@ -166,7 +172,7 @@ end
 %add the calving front measurement line
 cl = [xline; yline];
 cl_image = model2image(cl);
-plot(cl_image(1,:), cl_image(2,:), 'k--');
+plot(cl_image(1,:), cl_image(2,:), 'b--');
 
 %add the calving front measurement positions
 csnap = [xsnap; ysnap];
@@ -176,7 +182,7 @@ plot(csnap_image(1,:), csnap_image(2,:), 'ko', 'markerfacecolor', 'k');
 %add the ridge cross section
 cx = [xcross; ycross];
 cx_image = model2image(cx);
-plot(cx_image(1,:), cx_image(2,:), 'k--', 'color', plotcolor1)
+plot(cx_image(1,:), cx_image(2,:), 'k--')
 
 %add the inner cavity definition
 cin1_img = model2image(cin1); 
@@ -191,6 +197,17 @@ xlim([2000,12000])
 
 %rotate
 camroll(-90);
+
+%add the A,B pts
+ax1 = gca;
+ptAA = text(ax1,9800,8000, 'A', 'FontSize', 12, 'FontWeight', 'bold');
+ptBB = text(ax1, 4300,8800, 'B', 'FontSize', 12, 'FontWeight', 'bold');
+txtN = text(ax1, 5200, 6400, 'North', 'FontSize', 12, 'Interpreter', 'latex');
+txtS = text(ax1, 8700, 6000, 'South', 'FontSize', 12, 'Interpreter', 'latex');
+
+
+
+
 
 %add the gap width as inset axes
 topo = cell2mat(topo_scenarios(1));
@@ -213,16 +230,19 @@ bathyline = bathyline(idx);
 topoline = topoline(idx);
 ax2 = axes; hold on; box on
 ax2.Position = [0.65, 0.1, 0.3, 0.2];
-fill(ax2,[0, 22, 22, 0], [0, 0, 400, 400], plotcolor3,'linestyle', 'none', 'FaceAlpha', 0.3);
-fill(ax2,[22, 45, 45, 22], [0, 0, 400, 400], plotcolor2,'linestyle', 'none', 'FaceAlpha', 0.3);
-plot(ax2,sline/1e3,topoline - bathyline, 'color', plotcolor1, 'linewidth', 2);
+fill(ax2,[0, 22, 22, 0], [0, 0, 400, 400], 'm','linestyle', 'none', 'FaceAlpha', 0.3);
+fill(ax2,[22, 45, 45, 22], [0, 0, 400, 400], 'c','linestyle', 'none', 'FaceAlpha', 0.3);
+plot(ax2,sline/1e3,topoline - bathyline, 'color', 'k', 'linewidth', 2);
 
 ax2.XLabel.String = 'distance (km)';
-ax2.YLabel.String = 'gap width (m)';
+ax2.YLabel.String = 'gap (m)';
 ax2.XLabel.Interpreter = 'latex';
 ax2.XLabel.FontSize = 12;
 ax2.YLabel.Interpreter = 'latex';
 ax2.YLabel.FontSize = 12;
+ptA2 = text(ax2, 0.5,30, 'A', 'FontSize', 10, 'FontWeight', 'bold');
+ptB2 = text(ax2, 42.2,30, 'B', 'FontSize', 10, 'FontWeight', 'bold');
+
 
 %
 % save flag

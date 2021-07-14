@@ -363,6 +363,7 @@ When the ice front is calved on top of the ridge ($l_c$ = 34~km), however, this 
 
 
 \section{Effect of Cavity Geometry on Melt Response to Calving}\label{S:Results:H}
+\red{Section needs second pass}
 %what are we doing here and why (briefly)
 In the previous section, we analyzed how, and why, the inner cavity melt rate changes with calving in the $W$=100~m case. The strength of the topographic barrier provided by the seabed ridge in combination with the ice draft was identified as a important control on the melt rate response to calving; in this section, we describe how this picture changes for larger values of $W$ ($W$ = 150~m and $W$=200~m), for which the strength of the topographic barrier is lower in the uncalved simulation.
 
@@ -379,8 +380,8 @@ In the previous section, we analyzed how, and why, the inner cavity melt rate ch
 
 \begin{figure}
     \centering
-    \includegraphics[width = \textwidth]{../make_figures/plots/figure7.eps}
-    \caption{Ocean charactertistics in the idealized simulation with $P$ = 600~m and $W$ = 200~m. This plot is as in figure~\ref{fig:figure5} for the simulation with $W$=200~m. \red{needs a,b,c,d labels}}
+    \includegraphics[width = \textwidth]{../make_figures/plots/figure7_axislabel.pdf}
+    \caption{Ocean charactertistics in the idealized simulation with $P$ = 600~m and $W$ = 200~m. This plot is as in figure~\ref{fig:figure5} for the simulation with $W$=200~m. \red{needs a,b,c,d labels? Also meridional velocity I think?}}
     \label{fig:figure7}
 \end{figure}
 
@@ -389,9 +390,9 @@ In the previous section, we analyzed how, and why, the inner cavity melt rate ch
 Mean melt rates as a function of calved length for the two larger values of $W$ ($W = 150$~m and $W = 200$~m) are plotted in figure~\ref{fig:figure6}. As in the $W = 100$ case, the inner cavity melt rate reaches a peak while the ice front is located offshore of the ridge crest. In addition, the velocity-thermal driving decomposition demonstrates that for both $W$=150~m and $W$=200~m, the reduction in inner cavity melt rates for larger $l_c$ is associated with a reduction in the inner cavity circulation that outweighs an increase in thermal driving. However, there are several important differences to the $W$=100~m case: firstly, the inner cavity melt rate is far less sensitive to calving in both the $W = 150$ and $W = 200$m cases (the difference between largest and smallest inner cavity melt rates is approximately 20\% and 10\%, respectively, compared to 60\% for $W$=100~m). Secondly, the inner cavity melt rate does not demonstrate the threshold behaviour when the calving front reaches the top of the ridge as it does in the $W$ = 100~m case.
 
 %why do we see it
-To understand these observations, it is useful to compare the cross sections in figure~\ref{fig:figure4} for $W$=100~m to those in figure~\ref{fig:figure7} for $W = 200$ case (a comparison between the $W = 100$m and $W = 150$m case is qualitatively similar to that discussed below for $W = 100$, but the differences are clearer for $W = 200$m.)
+To understand these observations, it is useful to compare the cross sections in figure~\ref{fig:figure4} for $W$=100~m to those in figure~\ref{fig:figure7} for $W = 200$ case (a comparison between the $W = 100$m and $W = 150$m case is qualitatively similar to that discussed below for $W = 100$, but the differences are clearer for $W = 200$m.) In the $W$=100~m case, the two important changes were (1) relaxation of the connectivity between the inner and outer cavities and (2) greater access to the inner cavity for warm water. In the $W$=200¬m case, the inner and outer cavities are connected, even for the uncalved ($l_c$=0) simulation; there is significant transport of warm water across the ridge (figure~\ref{fig:figure7}a, c, d), not just along the and the inner cavity is almost entirely flushed with modified CDW (figure~\ref{fig:figure7}b). In other words, the inner cavity is \textit{always} saturated with warm water and their is always a strong connection between inner and outer cavities; calving does not change this, and melt rates are approximately independent of the ice front position.
 
-\red{Need to write this section FFS}
+
 %\begin{itemize}
 %    \item Domains are connected even in the default run, and the inner cavity is entirely flushed with warm water. This is different to the `fully' calved $W = 100$m case because the ridge still provides a strong pv barrier constraining the flow to the inner cavity and strongly bounding it, permitting high velocities necessary to allow high mean melt rates.
 %
@@ -418,21 +419,19 @@ In the $P = 800$ case, the melt rate increases with calving at while the ice fro
 
 \begin{figure}
     \centering
-    \includegraphics[width = 0.35\textwidth]{../make_figures/plots/figure9.eps}
+    \includegraphics[width = 0.35\textwidth]{../make_figures/plots/figure9_axislabel.pdf}
     \caption{Meridional cross sections for simulations with $P$=800~m, $W$ = 100~m. This plot is as in figure~\ref{fig:figure5}b for the simulation with $P$=800~m, $W$ = 100~m.  \red{This figure will be text wrapped.} }
     \label{fig:figure9}
 \end{figure}
 
-\red{first draft pass here}
-
 \section{Pine Island Simulations}
 % intro to the section
-The idealized modelling reveals how melt rates near the grounding line are expected to respond to calving events in a cavity with a seabed ridge that is uniform in the zonal direction. We now turn to results for the realistic Pine Island Cavity, and use these idealized results to guide our understanding of the results in this case. 
+The idealized modelling reveals how melt rates near the grounding line are expected to respond to calving events in a cavity with a seabed ridge that is uniform in the zonal direction. These idealized simulations inform our understanding of a similar experiment in a realistic Pine Island domain. In this section, we describe this experiments, and present and analyze the results.
 
 \begin{figure}
     \centering
     \includegraphics[width = 0.75\textwidth]{../make_figures/plots/figure10.eps}
-    \caption{Ice front positions in realistic Pine Island simulations. Purple to yellow colormap curves indicate the six ice front positions used in realistic Pine Island experiments, with dark purple corresponding to the 2009 front and blue corresponding to the 2020 front position (see main text). The solid black line indicates the 2009 grounding line position from~\cite{Joughin2010GRL}. The black dashed line roughly indicates the centreline of the cavity, along which the calved length is measured, while the blue dashed line approximately indicates  the peak of the sea bed ridge (corresponding to the black dashed line in figure~\ref{fig:figure1}. The cyan (North) and magenta (South) boxes indicate the inner cavity regions considered in the experiments. Inset: plot of the vertical gap between the ridge crest and the ice draft, measured northwards along the blue dashed line in the main figure. Red and green shaded sections roughly correspond to locations immediately upstream of the red and blue boxes in the main figure, respectively. The background image is a Sentinel 2 mosaic from November 2020. \red{add lat/lon lines as grid? Add A, B labels as in figure 1. Add Northern box/Southern box labels}}
+    \caption{Ice front positions in a simulations of cavity circulation under Pine Island. Each simulation corresponds to a different ice front position, indicated by the curves in the purple to yellow colormap curves; dark purple and blue ice fronts correspond to the 2009 and 2020 front positions, respectively. The solid black line indicates the 2009 grounding line position from~\cite{Joughin2010GRL}. The blue dashed line roughly indicates the centreline of the cavity, along which the calved length is measured, and the black dashed line approximately indicates the peak of the sea bed ridge, as in figure~\ref{fig:figure1}. The cyan (North) and magenta (South) boxes indicate the inner cavity regions considered in the experiments. Inset: plot of the vertical gap between the ridge crest and the ice draft, measured along the black dashed line in the main figure. cyan and magenta shaded sections roughly correspond to locations immediately upstream of the correspondingly coloured boxes in the main figure. The background image is a Sentinel 2 mosaic from November 2020. \red{add lat/lon lines as grid? Add Northern box/Southern box labels + change colours.}}
     \label{fig:figure10}
 \end{figure}
 

@@ -16,6 +16,8 @@ saveflag = 0;
 %
 addpath("plot_tools");
 plot_defaults
+plotcolor2 = [0,1,1]; %overwrite defaults
+plotcolor3 = [1,0,1];
 label_size = 11;
 ax_fontsize = 11;
 figure(3); clf;
@@ -176,8 +178,13 @@ ax(1).XLabel.FontSize = 12;
 ax(1).YLabel.FontSize = 12;
 ax(3).XLabel.FontSize = 12;
 ax(3).YLabel.FontSize = 12;
-tN = text(ax(1), 1, 37.6, "North box", "Interpreter", "latex", "FontSize", 14, "Color", plotcolor2);
-tS = text(ax(3), 1, 68.6, "South box", "Interpreter", "latex", "FontSize", 14, "Color", plotcolor3);
+tN = text(ax(1), 1, 37.6, "North box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
+tS = text(ax(3), 1, 68.6, "South box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
+txt2009 = text(ax(1), 1.5, 34.2, '2009', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
+txt2020 = text(ax(1), 18, 34.5, '2020', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
+
+txt2009a = text(ax(3), 1.5, 65.5, '2009', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
+txt2020a = text(ax(3), 18, 67, '2020', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
 
 
 %
@@ -221,6 +228,7 @@ relmelt_noVel(2,j) = nanmean(UdT_noVel(idx2)) / nanmean(UdT_baseline(idx2));
 
 end
 
+plot_defaults %rerun to return to default colours
 for p = 1:2
 ax(2*p) = subplot(2,2,2*p); hold on;box on; grid on;
 plot(snap_distance(4)*ones(1,2)/1e3, [0.95, 1.15], 'k--', 'HandleVisibility', 'off')
@@ -251,8 +259,6 @@ ta = text(ax(1), -10, 38.4, '(a)', 'Interpreter', 'latex', 'FontSize', 12);
 tb = text(ax(2), -10, 1.166, '(b)', 'Interpreter', 'latex', 'FontSize', 12);
 tc = text(ax(3), -10, 69.6, '(c)', 'Interpreter', 'latex', 'FontSize', 12);
 td = text(ax(4), -10, 1.072, '(d)', 'Interpreter', 'latex', 'FontSize', 12);
-
-
 
 
 

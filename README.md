@@ -1,2 +1,2 @@
-# IdealizedPIGSnapping
-Code and tex for the Idealized PIG Snapping paper
+# Pine Island Melt Response to Calving
+Code and tex for the paper

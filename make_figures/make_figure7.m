@@ -2,7 +2,7 @@
 %Column 1: Melt rate and BSF contours 
 %Column 2: Zonal Sections velocity
 %Column 3: Zonal Sections temperature
-%Column 4: Meridional Sections
+%Column 4: Zonal Section of meridional velocity
 %
 % NB: Many of the data files referred to in this script are too large to be hosted online. These files are hosted internally as BAS.
 % Please email Alex Bradley (aleey@bas.ac.uk) to obtain a copy.
@@ -12,7 +12,7 @@
 % Flags
 %
 gendata = 1; %specify whether to pass through the generate data loop
-save_flag = 1;
+save_flag = 0;
 
 %
 % Preliminaries
@@ -51,7 +51,7 @@ gamma = 5.73*1e-2;
 T0 = 8.32*1e-2;
 
 %time details
-ntout1 = 6;
+ntout1 = 11;
 ntout2 = 12; %define time period to average over
 
 %cross section info
@@ -222,7 +222,7 @@ melt = cell2mat(melt_scenarios(p));
 melt = saturate(melt, 120, 0);
 topo = squeeze(cell2mat(topo_scenarios(p)));
 melt(topo == 0) = nan;
-contourf(Y/1e3,X/1e3,melt, 50, 'linestyle', 'none');
+contourf((max(Y) -Y)/1e3,X/1e3,melt, 50, 'linestyle', 'none');
 box on
 hold on
 plot([50, 50], [0, max(X/1e3)],'--', 'color', [0.5, 0.5, 0.5])
@@ -235,7 +235,9 @@ if p == 1
 	a.Position(1)=colbar_xpos(1);
 	a.Position(2)=colbar_ypos;
 	a.Label.String = 'melt rate (m/yr)';
-	a.Label.FontSize = cbar_fontsize;
+	%a.Label.FontSize = cbar_fontsize;
+        a.FontSize = 10;
+        a.Label.Interpreter = 'latex';
 end
 
 %add bsf
@@ -243,11 +245,11 @@ stream = cell2mat(bsf_scenarios(p));
 streamsm = smooth2a(stream, 2,2);
 axnew = axes;
 axnew.Position = ax(1,p).Position;
-[C,h] =contour(Y/1e3,X/1e3, streamsm, [-0.7, -0.5, -0.3, -0.1], 'k');
+[C,h] =contour((max(Y) - Y)/1e3,X/1e3, streamsm, [-0.7, -0.5, -0.3, -0.1], 'k');
 %clabel(C,h);
 hold on
 streamsm(1:4,:) = nan; streamsm(end-3:end,:) = nan; streamsm(:,1:60) = nan; streamsm(:,end-4:end) = nan; %remove borders and near Gl where stream is messy
-[C,h] =contour(Y/1e3,X/1e3, streamsm, [0,0], 'r');
+[C,h] =contour((max(Y) - Y)/1e3,X/1e3, streamsm, [0,0], 'r');
 xticks([]);
 yticks([]);
 set(axnew, 'color', 'none')
@@ -279,8 +281,10 @@ if p == 1
 	b.Location = 'northoutside';
 	b.Position(1)=colbar_xpos(2);
 	b.Position(2)=colbar_ypos;
-	b.Label.String = '\Theta (\circC)';
-	b.Label.FontSize = cbar_fontsize;
+	b.Label.String = '$\Theta$ (${}^\circ$C)';
+	%b.Label.FontSize = cbar_fontsize;
+        b.FontSize = 10;
+        b.Label.Interpreter = 'latex';
 end
 %add salinity contours
 axnew = axes;
@@ -304,7 +308,7 @@ end %end loop over runs
 for p = 1:sz
 ax(3,p) = subplot('Position', squeeze(positions(:,3,sz+1-p)));
 TZS = cell2mat(zonal_theta_scenarios(p));
-TZS = saturate(TZS, 1.3, 0.5);
+TZS = saturate(TZS, 1.3, -0.5);
 contourf(X,-Z, TZS',30, 'linestyle', 'none');
 hold on
 topo = cell2mat(topo_scenarios(p));
@@ -321,8 +325,10 @@ if p == 1
 	c.Location = 'northoutside';
 	c.Position(1)=colbar_xpos(3);
 	c.Position(2)=colbar_ypos;
-	c.Label.String = '\Theta (\circC)';
+        c.FontSize = 10;
+	c.Label.String = '$\Theta$ (${}^\circ$C)';
 	c.Label.FontSize = cbar_fontsize;
+        c.Label.Interpreter = 'latex';
 end
 %add salinity contours
 axnew = axes;
@@ -342,9 +348,9 @@ end %end loop over runs
 
 for p = 1:sz
 ax(4,p) = subplot('Position', squeeze(positions(:,4,sz+1-p)));
-VZS = cell2mat(zonal_uvel_scenarios(p));
-VZS = saturate(VZS, 0, -0.15);
-contourf(X,-Z, VZS',30, 'linestyle', 'none');
+UZS = cell2mat(zonal_uvel_scenarios(p));
+%VZS = saturate(VZS, 0, -0.2);
+contourf(X,-Z, UZS',30, 'linestyle', 'none');
 hold on
 topo = cell2mat(topo_scenarios(p));
 ylim([bathy(3,zonal_idx),topo(3,zonal_idx)])
@@ -356,9 +362,11 @@ if p == 1
 	d.Location = 'northoutside';
 	d.Position(1)=colbar_xpos(4);
 	d.Position(2)=colbar_ypos;
+        d.FontSize = 10;
 	d.Label.String = 'zonal velocity (m/s)';
 	d.Label.FontSize = cbar_fontsize;
-	d.Ticks = -0.15:0.05:0;
+        d.Label.Interpreter = 'latex';
+%	d.Ticks = -0.15:0.05:0;
 end
 end %end loop over runs
 

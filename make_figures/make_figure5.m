@@ -51,7 +51,7 @@ gamma = 5.73*1e-2;
 T0 = 8.32*1e-2;
 
 %time details
-ntout1 = 6;
+ntout1 = 11;
 ntout2 = 12; %define time period to average over
 
 %cross section info
@@ -147,13 +147,13 @@ for q = 1:nz
         if bathy(p,zonal_idx) > -Z(q)
         TZS(p,q) = nan;
         SZS(p,q) = nan;
-        VZS(p,q) = nan;
+      %  VZS(p,q) = nan;
         UZS(p,q) = nan;
         end
         if topo(p, zonal_idx)< -Z(q)
         TZS(p,q) = nan;
         SZS(p,q) = nan;
-        VZS(p,q) = nan;
+      %  VZS(p,q) = nan;
         UZS(p,q) = nan;
         end
 end
@@ -245,6 +245,7 @@ stream = cell2mat(bsf_scenarios(p));
 streamsm = smooth2a(stream, 2,2);
 axnew = axes;
 axnew.Position = ax(1,p).Position;
+min(min(streamsm(idx)))
 [C,h] =contour(-Y/1e3,X/1e3, streamsm, [-0.7, -0.5, -0.3, -0.1], 'k');
 %clabel(C,h);
 hold on
@@ -285,7 +286,11 @@ if p == 1
 	b.Label.String = '$\Theta$ (${}^\circ$C)';
 	b.Label.FontSize = cbar_fontsize;
 	b.Label.Interpreter = 'latex';
+
 end
+%add vertical line showing hwere sections in (c), (d) taken
+plot((max(Y) - Y(zonal_idx))*[1,1],[bathy(3,zonal_idx),topo(3,zonal_idx)], 'm--', 'linewidth', 2)
+
 %add salinity contours
 axnew = axes;
 axnew.Position = ax(2,p).Position;
@@ -349,11 +354,12 @@ end %end loop over runs
 for p = 1:sz
 ax(4,p) = subplot('Position', squeeze(positions(:,4,sz+1-p)));
 VZS = cell2mat(zonal_uvel_scenarios(p));
-VZS = saturate(VZS, 0, -0.3);
+%VZS = saturate(VZS, 0, -0.3);
 contourf(X,-Z, VZS',30, 'linestyle', 'none');
 hold on
 topo = cell2mat(topo_scenarios(p));
 ylim([bathy(3,zonal_idx),topo(3,zonal_idx)])
+%ylim([-700, -600])
 colormap(ax(4,p), colmap)
 xticks([]);
 yticks([]);

@@ -13,8 +13,8 @@ addpath("plot_tools");
 plot_defaults
 fig = figure(1); clf; 
 fig.Position(3:4) = [900, 420];
-label_size = 11;
-ax_fontsize = 10;
+label_size = 12;
+ax_fontsize = 12;
 %
 % schematic of ice shelf geometry
 %
@@ -68,8 +68,8 @@ fill(fillX, fillY, [203, 150, 80]/255, 'Linewidth', 1.5)
 %plot(yyf/1e3, bump, 'k', 'linewidth', 1.5)	
 
 
-xlabel('Y (km)','FontSize',label_size )
-ylabel('depth(m)', 'FontSize', label_size)
+xlabel('Y (km)','FontSize',label_size, 'Interpreter', 'latex' )
+ylabel('depth(m)', 'FontSize', label_size, 'Interpreter', 'latex')
 xlim([min(yy), max(yy)]/1e3)
 ylim([-1100, 0])
 p0.YTick = [-1100,-1000:200:0];
@@ -77,16 +77,16 @@ p0.YLabel.String = 'depth (m)';
 grid on
 
 %add north south text
-north = text(6,-210, "North", 'FontSize', 16);
+north = text(6,-210, "North", 'FontSize', 16,  'Interpreter', 'latex');
 set(north, 'Rotation', 90)
 
-south = text(123,-210, "South", 'FontSize', 16);
+south = text(123,-210, "South", 'FontSize', 16, 'Interpreter', 'latex');
 set(south, 'Rotation', 90)
 
 %add the H values
-text(25,-480, "W = 200", 'FontSize', 11)
-text(25,-580, "W = 100", 'FontSize', 11)
-text(25,-530, "W = 150", 'FontSize', 11)
+text(25,-480, "W = 200", 'FontSize', 11, 'Interpreter' , 'latex')
+text(25,-580, "W = 100", 'FontSize', 11, 'Interpreter', 'latex')
+text(25,-530, "W = 150", 'FontSize', 11, 'Interpreter', 'latex')
 
 %
 % salinity and temperature profiles
@@ -113,10 +113,10 @@ for i = 1:3
 [t_prof, s_prof] = TS_profile(depth,-1100,P(i) - 600, P(i)-600); %send and third arguments are offset from 600
 
 plot(p1, t_prof,-depth(1:end-1), 'r', 'linestyle', linestyles(i), 'linewidth', 1.5);
-axes(p1); txt =  text(0, -P(i) + 190, strcat("P = " ,num2str(P(i))), 'Color', 'r', 'Rotation', -45);
+axes(p1); txt =  text(0, -P(i) + 190, strcat("P = " ,num2str(P(i))), 'Color', 'r', 'Rotation', -45, 'Interpreter', 'latex');
 
 plot(p2,s_prof, -depth(1:end-1), 'b', 'linestyle', linestyles(i), 'linewidth', 1.5);
-axes(p2); txt =  text(34.3, -P(i) + 200, strcat("P = " ,num2str(P(i))), 'Color', 'b', 'Rotation', -45);
+axes(p2); txt =  text(34.3, -P(i) + 200, strcat("P = " ,num2str(P(i))), 'Color', 'b', 'Rotation', -45, 'interpreter', 'latex');
 end
 
 
@@ -126,11 +126,13 @@ end
 p1.XLim = [-1.2, 1.4]; 
 p1.YLim = [-1100,0];
 p1.YLabel.FontSize = label_size;
-p1.XLabel.String = 'Pot. temp. (\circC)';
+p1.XLabel.String = 'Pot. temp. (${}^\circ$C)';
+p1.XLabel.Interpreter = 'latex';
 p1.XLabel.FontSize = label_size;
 p1.YTick = [-1100,-1000:200:0];
-p1.FontSize = ax_fontsize;
+p1.FontSize = 10;
 p1.YTickLabel = cell(length(p2.YTickLabel),1);
+p1.YLabel.Interpreter = 'latex';
 
 p2.YTick = p1.YTick;
 p2.YLim = [-1100,0];
@@ -139,12 +141,14 @@ p2.XTick = [34, 34.3, 34.6];
 p2.YTickLabel = cell(length(p2.YTickLabel),1);
 p2.XLabel.String = 'Salinity (psu)';
 p2.XLabel.FontSize = label_size;
-p2.FontSize = ax_fontsize;
+p2.FontSize = 10;
+p2.XLabel.Interpreter = 'latex';
+p2.YLabel.Interpreter = 'latex';
 
 %figure labels 
-text(p0, -20, -40, "(a)", 'FontSize', 12)
-text(p1,  0.93, -40, "(b)", 'FontSize', 12)
-text(p2, 34.653, -40, "(c)", 'FontSize', 12)
+text(p0, -20, -40, "(a)", 'FontSize', 12, 'Interpreter', 'latex')
+text(p1,  0.93, -40, "(b)", 'FontSize', 12, 'Interpreter', 'latex')
+text(p2, 34.653, -40, "(c)", 'FontSize', 12, 'Interpreter', 'latex')
 
 
 %

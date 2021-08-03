@@ -10,7 +10,7 @@
 %
 % Flags
 %
-gendata = 0; %specify whether to pass through the generate data loop
+gendata = 1; %specify whether to pass through the generate data loop
 save_flag = 0;
 
 %
@@ -199,8 +199,8 @@ A.Label.Interpreter = 'latex';
 A.Position(end) = 0.02;%A.Position(end) - 0.02;
 A.Position(2) = 0.89;
 A.Label.FontSize = 12;
-plot([20, 30], [120,120], 'k', 'linewidth', 1);
-text(31, 120, '0.6 m/s')
+%plot([20, 30], [120,120], 'k', 'linewidth', 1);
+%text(31, 120, '0.6 m/s')
 xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
 ylabel('$y$~(km)', 'Interpreter', 'latex', 'FontSize' ,12)
 text(-10,143, '(a)', 'Interpreter', 'latex', 'FontSize',  12)

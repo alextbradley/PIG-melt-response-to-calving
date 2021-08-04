@@ -39,8 +39,6 @@ yi(i,:) = ci(2,:);
 xi(i,:) = ci(1,:);
 end
 
-
-
 %load bathy
 bathyfid = fopen(bathypath);
 bathy = fread(bathyfid, 'real*8', 'b');
@@ -149,7 +147,7 @@ cin2 = cin2(:, (cin2(1,:)~=1)); %remove levels
 %open the image
 t = Tiff('PIG-S2-NovDec2020.tif', 'r'); %!! not in git repo!!
 imageData = read(t);
-figure(1); clf; hold on
+fig1 = figure(1); clf; hold on
 imshow(imageData);
 ax = gca;
 %add the reference points
@@ -162,7 +160,7 @@ scatter(ax, c_image_GL(1,:), c_image_GL(2,:), 4,'k', 'filled')
 %contour(xi, yi, bathy', [0,0], 'k', 'linewidth', 2)
 
 %add the fronts
-colmap = parula(7);
+colmap = viridis(7);
 for i = 1:6
     cfront = cell2mat(topo_front_data(i));
     c_image_front = model2image(cfront);
@@ -206,9 +204,6 @@ txtN = text(ax1, 5200, 6400, 'North', 'FontSize', 12, 'Interpreter', 'latex');
 txtS = text(ax1, 8700, 6000, 'South', 'FontSize', 12, 'Interpreter', 'latex');
 
 
-
-
-
 %add the gap width as inset axes
 topo = cell2mat(topo_scenarios(1));
 bathyline = nan(1,length(ycrossidx));
@@ -229,7 +224,7 @@ sline = sline - sline(1);
 bathyline = bathyline(idx);
 topoline = topoline(idx);
 ax2 = axes; hold on; box on
-ax2.Position = [0.65, 0.1, 0.3, 0.2];
+ax2.Position = [0.55, 0.07, 0.3, 0.2];
 fill(ax2,[0, 22, 22, 0], [0, 0, 400, 400], 'm','linestyle', 'none', 'FaceAlpha', 0.3);
 fill(ax2,[22, 45, 45, 22], [0, 0, 400, 400], 'c','linestyle', 'none', 'FaceAlpha', 0.3);
 plot(ax2,sline/1e3,topoline - bathyline, 'color', 'k', 'linewidth', 2);
@@ -243,10 +238,64 @@ ax2.YLabel.FontSize = 12;
 ptA2 = text(ax2, 0.5,30, 'A', 'FontSize', 10, 'FontWeight', 'bold');
 ptB2 = text(ax2, 42.2,30, 'B', 'FontSize', 10, 'FontWeight', 'bold');
 
+%
+% Make a second figure with the 1/h contours
+%
+fig2 = figure(2);clf; hold on;  fig2.Position = fig1.Position;
+imshow(imageData);
+
+%add the inverse water column thickness
+fid = fopen("../gendata_realistic/bathy_files/bathymetry.shice");
+bathy = fread(fid, 'real*8', 'b');
+bathy = reshape(bathy, [nx,ny]);
+bathyng = bathy; bathyng(bathy ==0) = nan;
+
+fid = fopen("../gendata_realistic/topo_files/shelfice_topo_scn1.shice");
+topo2009 = fread(fid, 'real*8', 'b');
+topo2009 = reshape(topo2009, [nx,ny]);
+gap = topo2009 - bathy;
+gap(bathy == 0) = nan;
+invgap = (1./gap);
+invgap = saturate(invgap, 0.01,0);
+hold on
+contourf(xi, yi, invgap', 30, 'linestyle', 'none');
+d = colorbar;
+d.Label.String = '$1/h$ (m\textsuperscript{-1})';
+d.Label.Interpreter = 'latex';
+d.Label.FontSize = 12;
+d.Position = [0.85, 0.28, 0.03, 0.5];
+
+
+ax = gca;
+%colormap(ax, viridis);
+scatter(ax, c_image_GL(1,:), c_image_GL(2,:), 4,'k', 'filled')
+%contour(xi, yi, bathy', [0,0], 'k', 'linewidth', 2)
+
+%add the fronts
+for i = 1:6
+    cfront = cell2mat(topo_front_data(i));
+    c_image_front = model2image(cfront);
+    scatter(c_image_front(1,:), c_image_front(2,:), 5, colmap(i,:), 'filled');
+end
+%add the inner cavity definition
+cin1_img = model2image(cin1); 
+cin2_img = model2image(cin2);
+plot(ax,cin1_img(1,:), cin1_img(2,:), '--','color', plotcolor2);
+plot(ax,cin2_img(1,:), cin2_img(2,:), '--', 'color',plotcolor3);
+
+
+%tidy plot
+ylim([2194, 14847])
+xlim([2000,12000])
+
+%rotate
+camroll(-90);
+
 
 %
 % save flag
 %
 if saveflag
-saveas(gcf, "plots/figure10.eps", "epsc");
+saveas(fig1, "plots/figure10a.eps", "epsc");
+saveas(fig2, "plots/figure10b.eps", "epsc");
 end

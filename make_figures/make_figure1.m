@@ -149,7 +149,7 @@ contourf(xi, yi, bathyng', 30, 'linestyle', 'none');
 c = colorbar('Location', 'northoutside');
 c.Position(2) = 0.91;
 c.Position(4) = 0.02;
-c.Label.String = 'sea bed depth (m)';
+c.Label.String = 'seabed depth (m)';
 c.Label.VerticalAlignment = 'bottom';
 c.Label.FontSize = 12;
 c.Label.Interpreter = 'latex';
@@ -196,6 +196,9 @@ d.Label.Interpreter = 'latex';
 [cgl,~] = contour(xi,yi,bathy', [0,0], 'k', 'linewidth',2 );
 [c2009,h2009] = contour(xi,yi,topo2009', [0,0], 'linecolor', plotcolor3, 'linewidth', 2);
 [c2020,h2020] = contour(xi,yi,topo2020', [0,0], 'linecolor', plotcolor1, 'linewidth', 2);
+
+
+contour(xi, yi, gap', [125,125], 'm'); 
 
 % add cross section
 cline = [xline; yline];

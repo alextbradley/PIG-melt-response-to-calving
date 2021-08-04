@@ -8,10 +8,10 @@
 saveflag = 0;
 addpath('plot_tools');
 plot_defaults
-positions = [0.06,0.37,0.42,0.53; %bathymetry depth
-	     0.56,0.37,0.42,0.53; %ridge-draft gap	
-             0.06, 0.1, 0.42, 0.25;
-             0.56, 0.1, 0.42, 0.25];
+positions = [0.08,0.37,0.40,0.53; %bathymetry depth
+	     0.58,0.37,0.40,0.53; %ridge-draft gap	
+             0.08, 0.1, 0.40, 0.25;
+             0.58, 0.1, 0.40, 0.25];
 
 close all
 

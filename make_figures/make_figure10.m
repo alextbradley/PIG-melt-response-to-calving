@@ -71,12 +71,16 @@ topo_scenarios{i} = topo;
 end
 
 %line cross section definition
-xidx = [102,334];
-yidx = [160,41];
-xline_idx = min(xidx):max(xidx); %x indices of points on the line
-yline_idx = round(diff(yidx)/diff(xidx) * (xline_idx - xidx(end)) + yidx(end));%corresponding y indices
-xline_idx = xline_idx(50:200);
-yline_idx = yline_idx(50:200); %remove some entries
+%xidx = [102,334];
+%yidx = [160,41];
+%xline_idx = min(xidx):max(xidx); %x indices of points on the line
+%yline_idx = round(diff(yidx)/diff(xidx) * (xline_idx - xidx(end)) + yidx(end));%corresponding y indices
+%xline_idx = xline_idx(50:200);
+%yline_idx = yline_idx(50:200); %remove some entries
+
+xline_idx = round(linspace(102,334,np));
+yline_idx = round(linspace(160,51, np));
+
 sline =  sqrt((x(xline_idx) - x(xline_idx(1))).^2 + (y(yline_idx) - y(yline_idx(1))).^2); %arclength along line
 hold on
 xline = x(xline_idx);
@@ -139,6 +143,18 @@ A(~idx2) = 0;
 [cin2,~] = contour(x,y, A',[1,1], 'linestyle', 'none');
 cin2 = cin2(:, (cin2(1,:)~=1)); %remove levels
 
+%north and south transect lines
+xlineidxN = round(linspace(102,334,np)); %north line x indices
+ylineidxN = round(linspace(170,81, np)); %north line y indices
+xlineidxS = round(linspace(102,334,np)); % etc
+ylineidxS = round(linspace(140,31, np)); % etc
+xlineN = x(xlineidxN); 		 	 % north line x co-ordinates
+ylineN = y(ylineidxN);		  	 % north line y co-ordinates
+xlineS = x(xlineidxS); 		 	 % south line x co-ordinates
+ylineS = y(ylineidxS);		  	 % south line y co-ordinates
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% make the plot %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -172,6 +188,14 @@ cl = [xline; yline];
 cl_image = model2image(cl);
 plot(cl_image(1,:), cl_image(2,:), 'b--');
 
+%add the north south cross section lines
+clN = [xlineN; ylineN];
+cl_imageN = model2image(clN);
+plot(cl_imageN(1,:), cl_imageN(2,:), '--', 'color', 0.6*[1,1,1]);
+clS = [xlineS; ylineS];
+cl_imageS = model2image(clS);
+plot(cl_imageS(1,:), cl_imageS(2,:), '--','color', 0.6*[1,1,1]);
+
 %add the calving front measurement positions
 csnap = [xsnap; ysnap];
 csnap_image = model2image(csnap);
@@ -196,12 +220,15 @@ xlim([2000,12000])
 %rotate
 camroll(-90);
 
-%add the A,B pts
+%add the A,B pts and 2009, 2020 front labels
 ax1 = gca;
 ptAA = text(ax1,9800,8000, 'A', 'FontSize', 12, 'FontWeight', 'bold');
 ptBB = text(ax1, 4300,8800, 'B', 'FontSize', 12, 'FontWeight', 'bold');
 txtN = text(ax1, 5200, 6400, 'North', 'FontSize', 12, 'Interpreter', 'latex');
 txtS = text(ax1, 8700, 6000, 'South', 'FontSize', 12, 'Interpreter', 'latex');
+f2009 = text(ax1, 4000,13200, '2009', 'FontSize',12, 'color', colmap(1,:));
+f2020 = text(ax1, 7500,11700, '2020', 'FontSize',12, 'color', colmap(2,:));
+
 
 
 %add the gap width as inset axes

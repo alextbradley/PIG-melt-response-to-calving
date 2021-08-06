@@ -234,7 +234,9 @@ axnew.Position = ax(2).Position;
 clabel(C,h);
 hold on
 streamsm(1:4,:) = nan; streamsm(end-3:end,:) = nan; streamsm(:,1:20) = nan; streamsm(:,end-4:end) = nan; %remove borders and near Gl where stream is messy
-[C,h] =contour(X/1e3,Y/1e3, streamsm', [0,0], 'k');
+[C,h] =contour(X/1e3,Y/1e3, streamsm', [0,0], 'r');
+clabel(C,h);
+[C,h] =contour(X/1e3,Y/1e3, streamsm', [0.05,0.05], 'g');
 clabel(C,h);
 
 xticks([]);

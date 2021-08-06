@@ -214,11 +214,11 @@ if ((q == 1) || (q == 6))
 bsf_copy = bsf;
 bsf_copy(idx1) = 0.01;
 bsf_copy(~idx1) =0;
-contour(lambda,phi,bsf_copy',[.01,.01], '--', 'linewidth', 1.75, 'linecolor', 'k')
+contour(lambda,phi,bsf_copy',[.01,.01], '--', 'linewidth', 1.5, 'linecolor', 'c')
 bsf_copy = bsf_sat;
 bsf_copy(idx2) = 0.01;
 bsf_copy(~idx2) =0;
-contour(lambda,phi,bsf_copy',[.01,.01], '--', 'linewidth', 1.75, 'linecolor', 'k')
+contour(lambda,phi,bsf_copy',[.01,.01], '--', 'linewidth', 1.5, 'linecolor', 'm')
 end
 end %end loop over runs
 

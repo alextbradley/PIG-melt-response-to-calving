@@ -1,4 +1,4 @@
-%Make figure 11 of the PIG calving manuscript: realistic domain melt rate (2009 geometry) and non-cumulative melt rate anomalies. NB: make_figure10 must be ran first to get the definition of the inner cavity.
+%Make figure 13 of the PIG calving manuscript: plots of barotropic stream function (contours) and water column thickness (colours) for each of the scenarios.
 
 % NB: Many of the data files referred to in this script are too large to be hosted online. These files are hosted internally as BAS.
 % Please email Alex Bradley (aleey@bas.ac.uk) to obtain a copy.
@@ -7,7 +7,7 @@
 %
 % Flags
 %
-gendata = 1; %specify whether to pass through the generate data loop
+gendata = 0; %specify whether to pass through the generate data loop
 save_flag = 0;
 
 %
@@ -120,7 +120,7 @@ end
 end
 
 %
-% Make the plot
+% Plot preliminaries
 %
 width = 0.30;
 height = 0.44;
@@ -139,58 +139,65 @@ positions(:,i) = [startx + (q-1)*gapx + (q-1)*width, starty - p*height - (p-1)*g
 end
 cmap = lighter_blue_parula(100,0.1);
 
-
+%
+% Make plots sequentially
+%
 for q = 1:sz
+%get data
 icetopo = cell2mat(topo_scenarios(q));
 bsf = cell2mat(bsf_scenarios(q));
 topo = cell2mat(topo_scenarios(q));
+h = topo - bathy;
+h(bathy == 0) = nan;
+invh = 1./h;
+invh = saturate(invh, 0.01, 0);
 bsf(bathy == 0) = nan;
-
 bsf_sat = saturate(bsf, 0.45, -0.4);
-%make plot
+
+%bottom layer: inverse water column thickness
 axs(q) = subplot('Position',positions(:,q));
-contourf(lambda,phi,bsf_sat', 50, 'linestyle', 'none')
-hold on
-contour(lambda,phi,bathy', [0,0], 'k', 'linewidth', 1.5)
-contour(lambda,phi,icetopo', [0,0], 'k', 'linewidth', 1.5)
-colormap(axs(q),redblue);
+contourf(lambda,phi,invh', 15, 'linestyle', 'none')
+colormap(axs(q),cmap);
 if q == 1
 c = colorbar;
 c.Location = 'west';
-c.Position(1) = positions(1,q) + 0.005; %relatvie horiztonal pos
-c.Position(2) = 0.78;
+%c.Position(1) = positions(1,q) + 0.005;  %left of plot
+c.Position(1) = 0.3;
+c.Position(2) = 0.8;
+c.Position(3) = 0.012; %make it thin
 c.Position(end) = 0.145;
 c.Color = 0*[1,1,1]; %set color to white/blck
-c.Label.String = 'BSF (Sv)';
+c.Label.String = '$1/h$ (m\textsuperscript{-1})';
 c.Label.FontSize = 10;
-end
-xlim([-102.6, -99])
-ylim([-75.45,-74.75])
-set(axs(q),'Color',background_color)
-        
-%add the open ocean
-bathynoice = bathy;
-bathynoice(icetopo < 0) = 0; %remove cavity
-bathynoice(bathy == 0) = 0; %remove grounded ice
-bathynoice(bathynoice ~= 0) = .01; %make constant
-%cf = contourf(lambda, phi, bathynoice',[.01,.01]);
-%idx = find((cf(1,:) == 1));
-%c1 = cf(1,2:idx(2)-1);
-%c2 = cf(2,2:idx(2)-1);
-%fill(c1,c2,ocean_color, 'linewidth', 1.5, 'edgecolor', 'k');
-        
-%add 750m bathymetric contour
-%contour(lambda, phi, -1e-2*bathy', -1e-2*[-750, -750], 'color',bathycontourcolor, 'linewidth' ,1, 'linestyle', '--'); %he weird "* -1e-2" is to get bring -750 into range of colourar, avoid skewing it
-grid on
-axs(q).YTick = -75.4:0.1:-74.8;
-if mod(q,3) == 1
-axs(q).YTickLabel = {"24'", "18'",  "12'", "6'",  "75S", "54'", "48'"};
-else
-axs(q).YTickLabel = cell(length(axs(q).YTick),1);
+c.Label.Interpreter = 'latex';
 end
 
+
+%top layer: contours of bsf, GL and ice front
+axnew(q) = axes; hold on %new axes for contours
+axnew(q).Position = axs(q).Position;
+[C,h] =contour(lambda, phi, bsf', -0.5:0.1:0.5, 'k', 'linewidth', 1);
+clabel(C,h)
+contour(lambda,phi,bathy', [0,0], 'k', 'linewidth', 1.5) %grounding line
+contour(lambda,phi,icetopo', [0,0], 'k', 'linewidth', 1.5) %ice front
+
+        
+%tidy plot
+grid(axs(q), 'on');
+axs(q).XLim= [-102.6, -98.8];
+axs(q).YLim =[-75.45,-74.75];
+axnew(q).XLim = axs(q).XLim;
+axnew(q).YLim = axs(q).YLim;
+axnew(q).Visible = 'off'; %make top layer invisible - see colours on bottom layer
+set(axs(q),'Color',background_color)
+axs(q).YTick = -75.4:0.1:-74.8;
+if mod(q,3) == 1 %label x axis on bottom row
+axs(q).YTickLabel = {"24'", "18'",  "12'", "6'",  "75S", "54'", "48'"};
+else %top row no labels
+axs(q).YTickLabel = cell(length(axs(q).YTick),1);
+end
 axs(q).XTick = [-102.5:0.5:-99];
-if floor((q-1)/3) == 1
+if floor((q-1)/3) == 1 %label y axis on left-most column only
 axs(q).XTickLabel = {"30'", "102W",  "30'", "101W", "30'", "100W", "30'", "99W"};
 else
 axs(q).XTickLabel = cell(length(axs(q).XTick),1);
@@ -199,7 +206,6 @@ end
 %add the definitions of the two cavity regions
 realistic_inner_cavity_definition; %bring inner cavity definition into scope (a1,b1,a2,b2)
 [XXns,YYns] = meshgrid(X,Y);
-
 in1 = inpolygon(XXns',YYns', a1,b1);
 in2 = inpolygon(XXns',YYns', a2,b2);
 idx1 = (icetopo < 0) & in1;
@@ -213,11 +219,12 @@ bsf_copy = bsf_sat;
 bsf_copy(idx2) = 0.01;
 bsf_copy(~idx2) =0;
 contour(lambda,phi,bsf_copy',[.01,.01], '--', 'linewidth', 1.75, 'linecolor', 'k')
-
 end
-
-
 end %end loop over runs
+
+%
+% macro tidy
+%
 fig = gcf; fig.Position(3:4) = [1280, 687.333];
 
 %

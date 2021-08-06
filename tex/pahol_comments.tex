@@ -26,3 +26,34 @@ I have rewritten this paragraph to reflect this comment, with Paul's interpretat
 - P17: "The DEM gives the ice freeboard, which is adjusted to ice thickness using assumed ice and seawater densities.  This gives the ice draft, which is compared to Autosub." 
 --> Feel like my description captures this, but perhaps this description is ambiguous?
 
+- P20 "which is wind-driven?" 
+--> Not quite sure how to parse this comment
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Paul H Meeting 06-08-2021 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Realistic plots:
+    - We don't need the sections, they're confusing and do not add a lot of info. All we might use them for is to say that on average, the inner cavity temperature is changing (in the north case) or staying the same (in the south cavity); this info can be distilled from the Millgate decompositions.
+    - We want plots of streamfunction contours with f/h (colours): show that the spatial pattern of streamfunction is explained by the f/h. SF closely linked to melt.
+        --> This could be an important implication of work: showing that PIG circulation is basically explained by $f/h$ contours. 
+    - There is a PV barrier between the two regions of inner cavity that you have highlighted. This is why you get the double inner gyre. Make sure this is made explicit. 
+    - For your own interest, you should plot the isopycnals through the centre of the gyre seen in scenario 4: how are melting and restoring reconciled before and after snapping beyond the ridge? This balance is different when we have removed a section of $f/h$ space.
+    
+Idealized plots:
+    - Add the 0.1 contour to the outer cavity, showing that there is a circulation there (it is a region of closed f/h). (Regions of closed f/h promote circulation)
+
+Physics: three regions of closed f/h
+    - Domain is really three regions of closed f/h contours: inner cavity, outer cavity, and the open ocean. Expect circulation in each, the direction of which depends on the forcing (we see a difference between idealized runs, where cyclonic in open ocean vs anticyclonic in the realistic simulations; suspect that f/h can explain circulation patterns in both cases, so that this difference can be ascribed to complex geometry).
+    - Crucially, in both idealized and realistic simulations, we see a qualitative change in the behaviour in the inner cavity when the outer cavity is removed and the domain is reduced to two regions of closed f/h. 
+    - In the idealized case, not a lot happens in the outer cavity. "Changing the f/h contours induces a fundamental change in the circulation".
+    - A strong hint that f/h dynamics the most important comes from intrusion of anti-cyclonic gyre outside cavity in scenario 4 under southern shear margin. At intrusion, discontinuity in f/h small, so geostrophic flow can penetrate.
+    
+Why is barotropic the thing to look at in the idealized experiments?
+    - Approach 1: let's do a thought experiment: assume that flow is purely barotropic and see how far this gets us in explaining the behaviour (a long way!). Flow is indeed largely barotropic, with some leakage across the ridge caused by overturning circulation.
+    - Approach 2: when we snap, we change two things: the buoyancy flux, and the water column thickness. The latter can only change the flow through barotropic dynamics, so we should consider the barotropic sf in the baseline, because that is what will change when we calve. 
+    - [Our approach is really just considering Navier-Stokes, but we're using a depth averaged form because we're changing the water column thickness, and considering the curl because we're interested in rotation.]
+
+    

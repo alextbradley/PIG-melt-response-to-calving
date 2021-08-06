@@ -77,7 +77,7 @@ end
 %yline_idx = round(diff(yidx)/diff(xidx) * (xline_idx - xidx(end)) + yidx(end));%corresponding y indices
 %xline_idx = xline_idx(50:200);
 %yline_idx = yline_idx(50:200); %remove some entries
-
+np = 50;
 xline_idx = round(linspace(102,334,np));
 yline_idx = round(linspace(160,51, np));
 
@@ -189,12 +189,12 @@ cl_image = model2image(cl);
 plot(cl_image(1,:), cl_image(2,:), 'b--');
 
 %add the north south cross section lines
-clN = [xlineN; ylineN];
-cl_imageN = model2image(clN);
-plot(cl_imageN(1,:), cl_imageN(2,:), '--', 'color', 0.6*[1,1,1]);
-clS = [xlineS; ylineS];
-cl_imageS = model2image(clS);
-plot(cl_imageS(1,:), cl_imageS(2,:), '--','color', 0.6*[1,1,1]);
+%clN = [xlineN; ylineN];
+%cl_imageN = model2image(clN);
+%plot(cl_imageN(1,:), cl_imageN(2,:), '--', 'color', 0.6*[1,1,1]);
+%clS = [xlineS; ylineS];
+%cl_imageS = model2image(clS);
+%plot(cl_imageS(1,:), cl_imageS(2,:), '--','color', 0.6*[1,1,1]);
 
 %add the calving front measurement positions
 csnap = [xsnap; ysnap];

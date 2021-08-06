@@ -251,6 +251,9 @@ min(min(streamsm(idx)))
 hold on
 streamsm(1:4,:) = nan; streamsm(end-3:end,:) = nan; streamsm(:,1:60) = nan; streamsm(:,end-4:end) = nan; %remove borders and near Gl where stream is messy
 [C,h] =contour(-Y/1e3,X/1e3, streamsm, [0,0], 'r');
+[C,h] =contour(-Y/1e3,X/1e3, streamsm, [0.05,0.05], 'g');
+
+
 xticks([]);
 yticks([]);
 set(axnew, 'color', 'none')

@@ -16,7 +16,7 @@
 %
 % Flags
 %
-gendata = 0; %specify whether to pass through the generate data loop
+gendata = 1; %specify whether to pass through the generate data loop
 saveflag = 0;
 
 %
@@ -187,10 +187,10 @@ plot(84 - extent, ave_melt(i,:), 'o-', 'color', plotcols(i,:), 'markerfacecolor'
 end
 xlim([0, 45]);
 ylim([40, 65]);
-legend({"$W$ = 200~m", "$W$ = 150~m", "$W$ = 100~m"}, 'location', 'southeast', 'FontSize', 12, 'Interpreter', 'latex');
+legend({"$W$=200~m", "$W$=150~m", "$W$=100~m"}, 'location', 'southeast', 'FontSize', 12, 'Interpreter', 'latex');
 grid on
 ax(1).XTick = [0:10:40];
-P700txt = text(ax(1), 0.3, 41.2, '$P$ = 700m', 'interpreter', 'latex', 'FontSize', 14);
+P700txt = text(ax(1), 0.3, 41.2, '$P$=700~m', 'interpreter', 'latex', 'FontSize', 14);
 
 %
 % (b)
@@ -217,7 +217,7 @@ ylim([25, 50]);
 grid on
 ax(2).XTick = [0:10:40];
 box on
-P800txt = text(ax(2), 0.3, 26.15, '$P$ = 800m', 'interpreter', 'latex', 'FontSize', 14);
+P800txt = text(ax(2), 0.3, 26.15, '$P$=800~m', 'interpreter', 'latex', 'FontSize', 14);
 
 %
 % decompositions
@@ -283,9 +283,9 @@ ax(3).YLim = [0.8, 1.2];
 ax(4).YLim = [0.8, 1.2];
 ax(5).YLim = [0.8, 1.6];
 legend(ax(3),{"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', 12)
-W100txt = text(ax(5), 0.5, 1.55, 'W = 100', 'Interpreter', 'latex', 'FontSize', 11.5);
-W150txt = text(ax(4), 0.5, 1.175, 'W = 150', 'Interpreter', 'latex', 'FontSize', 11.5);
-W200txt = text(ax(3), 0.5, 1.175, 'W = 200', 'Interpreter', 'latex', 'FontSize', 11.5);
+W100txt = text(ax(5), 0.5, 1.55, '$W$=100~m', 'Interpreter', 'latex', 'FontSize', 11.5);
+W150txt = text(ax(4), 0.5, 1.175, '$W$=150~m', 'Interpreter', 'latex', 'FontSize', 11.5);
+W200txt = text(ax(3), 0.5, 1.175, 'W=200~m', 'Interpreter', 'latex', 'FontSize', 11.5);
 
 %plot labels
 ta = text(ax(1), -6.5, 65, '(a)','Interpreter', 'latex', 'FontSize', 12);
@@ -298,6 +298,8 @@ te = text(ax(3), -8, 1.24, '(e)', 'Interpreter', 'latex', 'FontSize', 12);
 %
 % save?
 %
+set(gcf, 'color', 'w')
 if saveflag
-saveas(gcf, 'plots/figure8.eps', 'epsc');
+%saveas(gcf, 'plots/figure8.eps', 'epsc');
+saveas(gcf, "plots/figure8.png");
 end

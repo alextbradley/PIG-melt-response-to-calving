@@ -245,7 +245,9 @@ stream = cell2mat(bsf_scenarios(p));
 streamsm = smooth2a(stream, 2,2);
 axnew = axes;
 axnew.Position = ax(1,p).Position;
-[C,h] =contour((max(Y) - Y)/1e3,X/1e3, streamsm, [-0.7, -0.5, -0.3, -0.1], 'k');
+[C,h] =contour((max(Y) - Y)/1e3,X/1e3, streamsm, [-0.7, -0.5, -0.3, -0.1], 'k');hold on
+%[C,h] =contour((max(Y) - Y)/1e3,X/1e3, streamsm, [0,0], 'r');
+%[C,h] =contour((max(Y) - Y)/1e3,X/1e3, streamsm, [0.1,0.1], 'g');
 %clabel(C,h);
 hold on
 streamsm(1:4,:) = nan; streamsm(end-3:end,:) = nan; streamsm(:,1:60) = nan; streamsm(:,end-4:end) = nan; %remove borders and near Gl where stream is messy
@@ -373,7 +375,9 @@ end %end loop over runs
 %
 % Save flag
 %
+set(gcf, 'color', 'w')
 if save_flag
-saveas(gcf, "plots/figure7", 'epsc')
+%saveas(gcf, "plots/figure7", 'epsc')
+saveas(gcf, "plots/figure7.png")
 end
 

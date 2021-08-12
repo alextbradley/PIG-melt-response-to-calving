@@ -382,6 +382,7 @@ end %end loop over runs
 % Save flag
 %
 if save_flag
-saveas(gcf, "plots/figure5", 'epsc')
+%saveas(gcf, "plots/figure5", 'epsc')
+saveas(gcf, "plots/figure5.png")
 end
 

@@ -234,6 +234,8 @@ fig = gcf; fig.Position(3:4) = [1280, 687.333];
 %
 % Save
 %
+ set(gcf, 'color', 'w')
 if save_flag
-saveas(gcf, "plots/figure13.eps", "epsc")
+%saveas(gcf, "plots/figure11.eps", "epsc")
+saveas(gcf, "plots/figure11.png")
 end

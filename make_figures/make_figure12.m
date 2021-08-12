@@ -156,7 +156,7 @@ if q == 1 || q==2
 c = colorbar;
 c.Location = 'west';
 c.Position(1) = positions(1,q) + 0.005; %relatvie horiztonal pos
-c.Position(2) = 0.77;
+c.Position(2) = 0.80;
 c.Position(end) = 0.145;
 c.Color = 0*[1,1,1]; %set color to white/blck
 if q == 1
@@ -164,7 +164,8 @@ if q == 1
 else
     c.Label.String = 'anomaly (m/yr)';
 end
-c.Label.FontSize = 10;
+c.Label.FontSize = 12;
+c.Label.Interpreter = 'latex';
 end
 xlim([-102.6, -99])
 ylim([-75.45,-74.75])
@@ -210,11 +211,11 @@ if ((q == 1) || (q == 6))
 melt_copy = melt_diff_sat;
 melt_copy(idx1) = 1;
 melt_copy(~idx1) =0;
-contour(lambda,phi,melt_copy',[1,1], '--', 'linewidth', 1.75, 'linecolor', 'k')
+contour(lambda,phi,melt_copy',[1,1], '--', 'linewidth', 1.75, 'linecolor', 'm')
 melt_copy = melt_diff_sat;
 melt_copy(idx2) = 1;
 melt_copy(~idx2) =0;
-contour(lambda,phi,melt_copy',[1,1], '--', 'linewidth', 1.75, 'linecolor', 'k')
+contour(lambda,phi,melt_copy',[1,1], '--', 'linewidth', 1.75, 'linecolor', 'c')
 
 end
 
@@ -225,6 +226,8 @@ fig = gcf; fig.Position(3:4) = [1280, 687.333];
 %
 % Save
 %
+set(gcf, 'color', 'w');
 if save_flag
-saveas(gcf, "plots/figure11.eps", "epsc")
+%saveas(gcf, "plots/figure12.eps", "epsc")
+saveas(gcf, "plots/figure12.png")
 end

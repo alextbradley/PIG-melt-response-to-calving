@@ -265,6 +265,8 @@ td = text(ax(4), -10, 1.072, '(d)', 'Interpreter', 'latex', 'FontSize', 12);
 %
 % Save flag
 %
+set(gcf, 'color', 'w')
 if saveflag
-saveas(gcf, 'plots/figure12.eps', 'epsc')
+%saveas(gcf, 'plots/figure13.eps', 'epsc')
+saveas(gcf, 'plots/figure13.png')
 end

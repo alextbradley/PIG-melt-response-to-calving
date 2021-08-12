@@ -189,12 +189,12 @@ cl_image = model2image(cl);
 plot(cl_image(1,:), cl_image(2,:), 'b--');
 
 %add the north south cross section lines
-%clN = [xlineN; ylineN];
-%cl_imageN = model2image(clN);
-%plot(cl_imageN(1,:), cl_imageN(2,:), '--', 'color', 0.6*[1,1,1]);
-%clS = [xlineS; ylineS];
-%cl_imageS = model2image(clS);
-%plot(cl_imageS(1,:), cl_imageS(2,:), '--','color', 0.6*[1,1,1]);
+clN = [xlineN; ylineN];
+cl_imageN = model2image(clN);
+plot(cl_imageN(1,:), cl_imageN(2,:), '--', 'color', 0.6*[1,1,1]);
+clS = [xlineS; ylineS];
+cl_imageS = model2image(clS);
+plot(cl_imageS(1,:), cl_imageS(2,:), '--','color', 0.6*[1,1,1]);
 
 %add the calving front measurement positions
 csnap = [xsnap; ysnap];
@@ -322,7 +322,11 @@ camroll(-90);
 %
 % save flag
 %
+set(fig1, 'color', 'w')
+set(fig2, 'color', 'w')
 if saveflag
-saveas(fig1, "plots/figure10a.eps", "epsc");
-saveas(fig2, "plots/figure10b.eps", "epsc");
+%saveas(fig1, "plots/figure10a.eps", "epsc");
+%saveas(fig2, "plots/figure10b.eps", "epsc");
+saveas(fig1, "plots/figure10a.png");
+saveas(fig2, "plots/figure10b.png");
 end

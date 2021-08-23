@@ -68,7 +68,7 @@ fill(fillX, fillY, [203, 150, 80]/255, 'Linewidth', 1.5)
 %plot(yyf/1e3, bump, 'k', 'linewidth', 1.5)	
 
 
-xlabel('Y (km)','FontSize',label_size, 'Interpreter', 'latex' )
+xlabel('y (km)','FontSize',label_size, 'Interpreter', 'latex' )
 ylabel('depth(m)', 'FontSize', label_size, 'Interpreter', 'latex')
 xlim([min(yy), max(yy)]/1e3)
 ylim([-1100, 0])

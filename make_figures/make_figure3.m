@@ -375,7 +375,8 @@ text(-12,-675, '(d)', 'Interpreter', 'latex', 'FontSize',  12)
 % Save
 %
 if save_flag
-saveas(gcf, "plots/figure3", 'epsc')
+%saveas(gcf, "plots/figure3", 'epsc')
+saveas(gcf, "plots/figure3.png")
 end
 
 

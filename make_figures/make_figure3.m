@@ -22,8 +22,8 @@ label_size = 11;
 ax_fontsize = 10;
 figure(1); clf;
 fig = gcf; fig.Position(3:4) = [1085, 540];
-merid_idx = 60;
-zonal_idx = 50;
+NS_idx = 60; %index of line running North south
+EW_idx = 50; %index of line running east west
 
 % Data locations
 rootdir = '/data/oceans_output/shelf/aleey/mitgcm/APIGi_'; %not in git repo
@@ -186,10 +186,10 @@ idxY = 1:8:320;
 [XX,YY] = meshgrid(X,Y);
 XX = XX/1e3; YY = YY/1e3;
 velscale =15;
-plot(X/1e3, 50*ones(length(X), 1), 'w--', 'linewidth', 1.5)
-plot(X/1e3, Y(zonal_idx)*ones(length(X))/1e3, 'm--', 'linewidth', 1.5)
-plot(24*ones(1,230), Y(1:230)/1e3, 'm--', 'linewidth', 1.5);
 quiver(XX(idxY, idxX),YY(idxY, idxX),velscale *Ubl(idxX, idxY)', velscale*Vbl(idxX, idxY)', 'autoscale', 'off', 'color', 'k')
+plot(X/1e3, 50*ones(length(X), 1), 'w--', 'linewidth', 1.5)
+plot(X/1e3, Y(EW_idx)*ones(length(X))/1e3, 'c--', 'linewidth', 1.5)
+plot(X(NS_idx)*ones(1,230)/1e3, Y(1:230)/1e3, 'm--', 'linewidth', 1.5);
 
 %colorbar and arrow
 A = colorbar;
@@ -271,15 +271,15 @@ text(-7,143, '(c)', 'Interpreter', 'latex', 'FontSize',  12)
 %
 ax(4) = subplot('Position', positions(4,:)); hold on; box on;
 ax(4).FontSize = 10;
-SMS = squeeze(Salt(merid_idx, :,:));
-TMS = squeeze(Theta(merid_idx, :, :));
+SMS = squeeze(Salt(EW_idx, :,:));
+TMS = squeeze(Theta(EW_idx, :, :));
 for p = 1:ny
 for q = 1:nz
-        if bathy(merid_idx,p) > -Z(q)
+        if bathy(EW_idx,p) > -Z(q)
         TMS(p,q) = nan;
         SMS(p,q) = nan;
         end
-        if topo(merid_idx,p)< -Z(q)
+        if topo(EW_idx,p)< -Z(q)
         TMS(p,q) = nan;
         SMS(p,q) = nan;
         UMS(p,q) = nan;
@@ -290,8 +290,8 @@ end
 contourf(max(Y)/1e3 - Y/1e3,-Z, TMS',30, 'linestyle', 'none');
 colormap(ax(4), cmap);
 hold on
-plot(max(Y)/1e3 - Y/1e3, topo(merid_idx, :), 'k', 'linewidth', 1)
-plot(max(Y)/1e3 - Y/1e3, bathy(merid_idx, :), 'k', 'linewidth', 1)
+plot(max(Y)/1e3 - Y/1e3, topo(EW_idx, :), 'k', 'linewidth', 1)
+plot(max(Y)/1e3 - Y/1e3, bathy(EW_idx, :), 'k', 'linewidth', 1)
 xlim([4*1e4, Y(end)]/1e3)
 ylim([-1100,-300])
 ylabel('depth (m)', 'Interpreter', 'latex', 'FontSize', 12);
@@ -305,7 +305,7 @@ c.Position(2) = 0.4;
 c.Label.String = '$\Theta$~(${}^\circ$C)';
 c.Label.Interpreter = 'latex';
 c.Label.FontSize = 12;
-plot((max(Y)/1e3 - 20)*[1,1], [bathy(3,zonal_idx),topo(3,zonal_idx)], 'm--', 'linewidth', 1.5)
+%plot((max(Y)/1e3 - 20)*[1,1], [bathy(3,NS_idx),topo(3,NS_idx_idx)], 'm--', 'linewidth', 1.5)
 
 
 axnew = axes;
@@ -329,15 +329,15 @@ text(18,-300, '(e)', 'Interpreter', 'latex', 'FontSize',  12)
 % 
 ax(5) = subplot('Position', positions(5,:)); hold on; box on;
 ax(5).FontSize = 10;
-SZS = squeeze(Salt(:, zonal_idx,:));
-TZS = squeeze(Theta(:, zonal_idx, :));
+SZS = squeeze(Salt(:, NS_idx,:));
+TZS = squeeze(Theta(:, NS_idx, :));
 for p = 1:nx
 for q = 1:nz
-        if bathy(p,zonal_idx) > -Z(q)
+        if bathy(p,NS_idx) > -Z(q)
         TZS(p,q) = nan;
         SZS(p,q) = nan;
         end
-        if topo(p,zonal_idx)< -Z(q)
+        if topo(p,NS_idx)< -Z(q)
         TZS(p,q) = nan;
         SZS(p,q) = nan;
         end
@@ -358,7 +358,7 @@ d.Label.Interpreter = 'latex';
 d.Label.FontSize = 12;
 d.Position(3) = widthsect - 0.04;
 d.Position(4) = 0.02;
-ylim([bathy(3,zonal_idx),topo(3,zonal_idx)])
+ylim([bathy(3,NS_idx),topo(3,NS_idx)])
 axnew = axes;
 axnew.Position = ax(5).Position;
 [C,h] =contour(X/1e3,-Z , SZS', 34.2:0.2:34.6, 'k');
@@ -367,7 +367,7 @@ clabel(C,h);
 xticks([]);
 yticks([]);
 set(axnew, 'color', 'none')
-ylim([bathy(3,zonal_idx),topo(3,zonal_idx)])
+ylim([bathy(3,NS_idx),topo(3,NS_idx)])
 
 text(-12,-675, '(d)', 'Interpreter', 'latex', 'FontSize',  12)
 

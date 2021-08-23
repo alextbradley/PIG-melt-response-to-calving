@@ -83,10 +83,15 @@ set(north, 'Rotation', 90)
 south = text(123,-210, "South", 'FontSize', 16, 'Interpreter', 'latex');
 set(south, 'Rotation', 90)
 
-%add the H values
+%add the W values
 text(25,-480, "W = 200", 'FontSize', 11, 'Interpreter' , 'latex')
 text(25,-580, "W = 100", 'FontSize', 11, 'Interpreter', 'latex')
 text(25,-530, "W = 150", 'FontSize', 11, 'Interpreter', 'latex')
+
+%sort out the ticks, which are the wrong way round
+p0.XTick = flip(128 - (20:20:120));
+p0.XTickLabel = {'120', '100', '80', '60', '40', '20'};
+
 
 %
 % salinity and temperature profiles
@@ -155,5 +160,6 @@ text(p2, 34.653, -40, "(c)", 'FontSize', 12, 'Interpreter', 'latex')
 % save
 %
 if save_flag 
-saveas(gcf, "plots/figure2", 'epsc')
+%saveas(gcf, "plots/figure2", 'epsc')
+saveas(gcf, "plots/figure2.png")
 end

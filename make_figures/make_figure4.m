@@ -19,7 +19,7 @@ plot_defaults
 label_size = 12;
 ax_fontsize = 12;
 figure(1); clf; 
-fig = gcf; fig.Position(3:4) = [1000, 390];
+fig = gcf; fig.Position(3:4) = [920, 390];
 
 %
 % Data locations
@@ -164,8 +164,8 @@ end %end generate data loop
 %
 % Plot 1: Mean inner cavity melt rate with calving
 %
-Positions = [0.1, 0.12, 0.37, 0.77;
-	    0.57, 0.12, 0.37, 0.77];
+Positions = [0.07, 0.12, 0.41, 0.76;
+	    0.57, 0.12, 0.41, 0.76];
 
 axa= subplot('Position',Positions(1,:)); grid on; hold on; ax = gca; box on
 ave_melt = zeros(1,sz);
@@ -178,9 +178,10 @@ plot(84 - extent, ave_melt, 'o-', 'color', plotcolor1, 'markerfacecolor', plotco
 xlabel('$l_c$ (km)', 'Interpreter', 'Latex','FontSize', ax_fontsize);
 ylabel('Inner cavity melt rate (m/yr)', 'Interpreter', 'latex','FontSize', ax_fontsize);
 xlim([0, 84 - 40]);
-txa = text(-10, 84, '(a)', 'FontSize', ax_fontsize, 'Interpreter', 'latex');
+txa = text(-7, 84, '(a)', 'FontSize', ax_fontsize, 'Interpreter', 'latex');
 
 %add axis with yf on
+axa.XTick = [0,10,20,30,40];
 axa2 = axes; axa2.Position = axa.Position; axa2.Color = 'none'; axa2.XAxisLocation = 'top';
 axa2.XTick = [0,10,20,30,40]/44;
 axa2.YTick = [];

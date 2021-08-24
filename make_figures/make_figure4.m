@@ -16,8 +16,8 @@ save_flag = 0;
 %
 addpath("plot_tools");
 plot_defaults
-label_size = 12;
-ax_fontsize = 12;
+label_size = 13;
+ax_fontsize = 13;
 figure(1); clf; 
 fig = gcf; fig.Position(3:4) = [920, 390];
 
@@ -238,7 +238,7 @@ ylabel('Relative change', 'Interpreter', 'latex', 'FontSize', ax_fontsize)
 xlim([0, 84 - 40]);
 legend({"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', ax_fontsize)
 
-txb = text(-10,1.95, '(b)', 'FontSize', ax_fontsize, 'Interpreter', 'latex');
+txb = text(-7,1.95, '(b)', 'FontSize', ax_fontsize, 'Interpreter', 'latex');
 
 %add second axis with yf on
 axb2 = axes; 

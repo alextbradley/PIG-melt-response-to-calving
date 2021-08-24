@@ -8,7 +8,7 @@
 %
 % Flags
 %
-gendata = 1; %specify whether to pass through the generate data loop
+gendata = 0; %specify whether to pass through the generate data loop
 save_flag = 0; 
 
 %
@@ -164,7 +164,10 @@ end %end generate data loop
 %
 % Plot 1: Mean inner cavity melt rate with calving
 %
-subplot(1,2,1); grid on; hold on; ax = gca; box on
+Positions = [0.1, 0.12, 0.37, 0.77;
+	    0.57, 0.12, 0.37, 0.77];
+
+axa= subplot('Position',Positions(1,:)); grid on; hold on; ax = gca; box on
 ave_melt = zeros(1,sz);
 for i = 1:sz
 melt = cell2mat(melt_scenarios(i));
@@ -175,14 +178,21 @@ plot(84 - extent, ave_melt, 'o-', 'color', plotcolor1, 'markerfacecolor', plotco
 xlabel('$l_c$ (km)', 'Interpreter', 'Latex','FontSize', ax_fontsize);
 ylabel('Inner cavity melt rate (m/yr)', 'Interpreter', 'latex','FontSize', ax_fontsize);
 xlim([0, 84 - 40]);
-text(-10, 80, '(a)', 'FontSize', ax_fontsize, 'Interpreter', 'latex');
+txa = text(-10, 84, '(a)', 'FontSize', ax_fontsize, 'Interpreter', 'latex');
 
-
+%add axis with yf on
+axa2 = axes; axa2.Position = axa.Position; axa2.Color = 'none'; axa2.XAxisLocation = 'top';
+axa2.XTick = [0,10,20,30,40]/44;
+axa2.YTick = [];
+axa2.XTickLabel = {"84", "74", "64", "54", "44"};
+axa2.XLabel.String = '$y_f$ (km)';
+axa2.XLabel.Interpreter= 'latex';
+axa2.XLabel.FontSize = ax_fontsize;
 
 %
 % Plot 2: Decomposition
 %
-subplot(1,2,2); grid on; hold on; ax = gca; box on
+axb = subplot('Position', Positions(2,:)); grid on; hold on; ax = gca; box on
 
 %set up storage
 relmelt        = zeros(1,sz);
@@ -223,15 +233,28 @@ plot(84 - extent, relmelt_noVel, 'o-', 'color', plotcolor3, 'markerfacecolor', p
 %tidy
 ylim([0.4, 1.8])
 xlabel('$l_c$ (km)', 'Interpreter', 'Latex', 'FontSize', ax_fontsize);
-ylabel('Relative inner cavity melt rate', 'Interpreter', 'latex', 'FontSize', ax_fontsize)
+ylabel('Relative change', 'Interpreter', 'latex', 'FontSize', ax_fontsize)
 xlim([0, 84 - 40]);
 legend({"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', ax_fontsize)
 
-text(-10,1.8, '(b)', 'FontSize', ax_fontsize, 'Interpreter', 'latex');
+txb = text(-10,1.95, '(b)', 'FontSize', ax_fontsize, 'Interpreter', 'latex');
+
+%add second axis with yf on
+axb2 = axes; 
+axb2.Position = axb.Position; 
+axb2.Color = 'none'; 
+axb2.XAxisLocation = 'top';
+axb2.XTick = [0,10,20,30,40]/44;
+axb2.YTick = [];
+axb2.XTickLabel = {"84", "74", "64", "54", "44"};
+axb2.XLabel.String = '$y_f$ (km)';
+axb2.XLabel.Interpreter= 'latex';
+axb2.XLabel.FontSize = ax_fontsize;
 %
 % Save figure
 %
 if save_flag
-saveas(gcf, "plots/figure4", 'epsc')
+%saveas(gcf, "plots/figure4", 'epsc')
+saveas(gcf, "plots/figure4.png")
 end
 

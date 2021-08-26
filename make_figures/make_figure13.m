@@ -53,8 +53,8 @@ gamma = 5.73*1e-2;
 T0 = 8.32*1e-2;
 
 %time details
-ntout1 = 6;
-ntout2 = 7; %define time period to average over
+ntout1 = 9;
+ntout2 = 12; %define time period to average over
 
 
 
@@ -63,7 +63,8 @@ ntout2 = 7; %define time period to average over
 %
 if gendata
 run_nos = ["078", "082", "083", "084", "085", "086"];
-run_nos = ["141", "142", "143", "144", "145", "146"];
+%run_nos = ["079", "088", "089", "090", "091", "092"]; %2012 boundary conditions (use this to compute sensitivity to P in realistic runs)
+%run_nos = ["141", "142", "143", "144", "145", "146"];
 sz = length(run_nos);
 
 %setup storage
@@ -162,10 +163,10 @@ plot(snap_distance(4)*ones(1,2)/1e3, [0, 100], 'k--', 'HandleVisibility', 'off')
 plot(snap_distance/1e3, ave_melt2, 'o-', 'color', plotcolor3, 'markerfacecolor', plotcolor3);
 
 %tidy these
-ax(1).YLim = [34, 38];
-ax(1).YTick = 34:38;
-ax(3).YLim = [65, 69];
-ax(3).YTick = 65:69;
+ax(1).YLim = [39, 44];
+ax(1).YTick = 39:44;
+ax(3).YLim = [72, 77];
+ax(3).YTick = 72:77;
 ax(1).XLabel.String = '$l_c$ (km)';
 ax(3).XLabel.String = '$l_c$ (km)';
 ax(1).YLabel.Interpreter = 'latex';
@@ -180,11 +181,11 @@ ax(3).XLabel.FontSize = 12;
 ax(3).YLabel.FontSize = 12;
 tN = text(ax(1), 1, 37.6, "North box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
 tS = text(ax(3), 1, 68.6, "South box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
-txt2009 = text(ax(1), 1.5, 34.2, '2009', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
-txt2020 = text(ax(1), 18, 34.5, '2020', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
+txt2009 = text(ax(1), 1.5,39.3, '2009', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
+txt2020 = text(ax(1), 18, 39.7, '2020', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
 
-txt2009a = text(ax(3), 1.5, 65.5, '2009', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
-txt2020a = text(ax(3), 18, 67, '2020', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
+txt2009a = text(ax(3), 1.5, 72.6, '2009', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
+txt2020a = text(ax(3), 18, 74.4, '2020', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
 
 
 %

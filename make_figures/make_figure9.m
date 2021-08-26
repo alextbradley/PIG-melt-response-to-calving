@@ -170,5 +170,6 @@ end %end loop over runs
 % save
 %
 if saveflag
-saveas(gcf, 'plots/figure9.eps', 'epsc');
+%saveas(gcf, 'plots/figure9.eps', 'epsc');
+saveas(gcf, 'plots/figure9.png');
 end

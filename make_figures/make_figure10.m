@@ -177,7 +177,7 @@ scatter(ax, c_image_GL(1,:), c_image_GL(2,:), 4,'k', 'filled')
 
 %add the fronts
 colmap = viridis(7);
-for i = 1:6
+for i = 6:-1:1 %reverse order so 2009 on top
     cfront = cell2mat(topo_front_data(i));
     c_image_front = model2image(cfront);
     scatter(c_image_front(1,:), c_image_front(2,:), 5, colmap(i,:), 'filled');

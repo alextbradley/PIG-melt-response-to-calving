@@ -242,7 +242,7 @@ plot(84 - extent, relmelt_noVel, 'o-', 'color', plotcolor3, 'markerfacecolor', p
 
 %tidy plots
 xlim([0, 45])
-ylabel('Relative Change', 'Interpreter', 'latex', 'FontSize', 12);
+ylabel('Relative change', 'Interpreter', 'latex', 'FontSize', 12);
 if i == 3
 ylim([0.8, 1.2])
 legend({"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', 12)
@@ -261,6 +261,7 @@ end
 % Save figure
 %
 if save_flag
-saveas(gcf, "plots/figure6", 'epsc')
+%saveas(gcf, "plots/figure6", 'epsc')
+saveas(gcf, "plots/figure6.png")
 end
 

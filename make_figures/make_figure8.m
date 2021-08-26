@@ -16,7 +16,7 @@
 %
 % Flags
 %
-gendata = 1; %specify whether to pass through the generate data loop
+gendata = 0; %specify whether to pass through the generate data loop
 saveflag = 0;
 
 %
@@ -180,17 +180,27 @@ melt = cell2mat(melt_scenarios(i,j));
 ave_melt(i,j) = mean(melt(idx));
 end %end loop over front positions
 end %end loop over i = 1:3
+m100_700 = ave_melt(3,:);
 
 plot([34,34],  [0,100], 'k--', 'linewidth', 1.5, 'HandleVisibility', 'off'); %plot the location of top of ridge
 for i = 1:3
 plot(84 - extent, ave_melt(i,:), 'o-', 'color', plotcols(i,:), 'markerfacecolor', plotcols(i,:))
 end
-xlim([0, 45]);
-ylim([40, 65]);
-legend({"$W$=200~m", "$W$=150~m", "$W$=100~m"}, 'location', 'southeast', 'FontSize', 12, 'Interpreter', 'latex');
+ax(1).YLim = [25, 65];
+ax(1).XLim = [0,45];
 grid on
 ax(1).XTick = [0:10:40];
-P700txt = text(ax(1), 0.3, 41.2, '$P$=700~m', 'interpreter', 'latex', 'FontSize', 14);
+ax(1).YTick = 25:10:65;
+P700txt = text(ax(1), 0.3, 27, '$P=700$~m', 'interpreter', 'latex', 'FontSize', 12);
+
+%add sensitivity as an inset
+axin = axes;axin.Position = [0.27, 0.62, 0.17, 0.17];
+plot(axin, 84 - extent, m100_700 ./ m100_800, 'ko-', 'markerfacecolor', 'k')
+axin.XLabel.String = '$l_c$~(km)';
+axin.XLabel.Interpreter = 'latex';
+axin.YLabel.String= 'sensitivity';
+axin.YLabel.Interpreter = 'latex';
+axin.YLabel.FontSize  = 10
 
 %
 % (b)
@@ -207,17 +217,22 @@ melt = cell2mat(melt_scenarios(i+3,j));
 ave_melt(i,j) = mean(melt(idx));
 end %end loop over front positions
 end %end loop over i = 1:3
+m100_800 = ave_melt(3,:);
 
 plot([34,34],  [0,100], 'k--', 'linewidth', 1.5, 'HandleVisibility', 'off'); %plot the location of top of ridge
 for i = 1:3
 plot(84 - extent, ave_melt(i,:), 'o-', 'color', plotcols(i,:), 'markerfacecolor', plotcols(i,:))
 end
-xlim([0, 45]);
-ylim([25, 50]);
+ax(2).YLim = ax(1).YLim;
+ax(2).XLim = ax(1).XLim;
 grid on
 ax(2).XTick = [0:10:40];
+ax(2).YTick = ax(1).YTick;
 box on
-P800txt = text(ax(2), 0.3, 26.15, '$P$=800~m', 'interpreter', 'latex', 'FontSize', 14);
+P800txt = text(ax(2), 0.3, 27, '$P=800$~m', 'interpreter', 'latex', 'FontSize', 12);
+legend({"$W=200$~m", "$W=150$~m", "$W=100$~m"}, 'location', 'northeast', 'FontSize', 12, 'Interpreter', 'latex');
+
+
 
 %
 % decompositions
@@ -283,13 +298,13 @@ ax(3).YLim = [0.8, 1.2];
 ax(4).YLim = [0.8, 1.2];
 ax(5).YLim = [0.8, 1.6];
 legend(ax(3),{"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', 12)
-W100txt = text(ax(5), 0.5, 1.55, '$W$=100~m', 'Interpreter', 'latex', 'FontSize', 11.5);
-W150txt = text(ax(4), 0.5, 1.175, '$W$=150~m', 'Interpreter', 'latex', 'FontSize', 11.5);
-W200txt = text(ax(3), 0.5, 1.175, 'W=200~m', 'Interpreter', 'latex', 'FontSize', 11.5);
+W100txt = text(ax(5), 0.5, 1.55, '$W=100$~m', 'Interpreter', 'latex', 'FontSize', 11.5);
+W150txt = text(ax(4), 0.5, 1.175, '$W=150$~m', 'Interpreter', 'latex', 'FontSize', 11.5);
+W200txt = text(ax(3), 0.5, 1.175, '$W=200$~m', 'Interpreter', 'latex', 'FontSize', 11.5);
 
 %plot labels
 ta = text(ax(1), -6.5, 65, '(a)','Interpreter', 'latex', 'FontSize', 12);
-tb = text(ax(2), -6.5, 50, '(b)','Interpreter', 'latex', 'FontSize', 12);
+tb = text(ax(2), -6.5, 65, '(b)','Interpreter', 'latex', 'FontSize', 12);
 tc = text(ax(5), -10, 1.69, '(c)', 'Interpreter', 'latex', 'FontSize', 12);
 td = text(ax(4), -8, 1.24, '(d)', 'Interpreter', 'latex', 'FontSize', 12);
 te = text(ax(3), -8, 1.24, '(e)', 'Interpreter', 'latex', 'FontSize', 12);

@@ -381,8 +381,10 @@ end %end loop over runs
 %
 % Save flag
 %
+set(gcf, 'color', 'w')
 if save_flag
 %saveas(gcf, "plots/figure5", 'epsc')
+
 saveas(gcf, "plots/figure5.png")
 end
 

@@ -156,6 +156,13 @@ stream = stream/1e6; %convert to sv
 
 end %end gendata loop
 
+% Compute the transport across the ridge
+vvel_ridge = VVEL(:,125,:);  %125 is index of ridge crest
+vvel_ridge_neg = vvel_ridge; vvel_ridge_neg(vvel_ridge_neg > 0) = 0; %set positive entries (out of cavity) to zero
+neg_flux = sum(sum(vvel_ridge_neg))*dx*dy/1e9; %flux into the cavity in Sv
+fprintf("total flux into the cavity is %.3f Sv \n", neg_flux)
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plots %%%%%%%%%%%%%%%%%%%%%%%
 width = 0.16;
 widthsect = 0.28;
@@ -219,9 +226,9 @@ a = colorbar;
 a.Location = 'northoutside';
 a.Position(end) = 0.02;%a.Position(end) - 0.02;
 a.Position(2) = 0.89;%a.Position(2) + 0.03;
+a.Label.Interpreter = 'latex';
 a.Label.String = '$1/h~(10^{-3}~\mathrm{m}^{-1})$';
 a.Label.FontSize = 12;
-a.Label.Interpreter = 'latex';
 yticks([])
 xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
 text(-7,143, '(b)', 'Interpreter', 'latex', 'FontSize',  12)

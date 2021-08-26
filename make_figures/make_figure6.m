@@ -8,7 +8,7 @@
 %
 % Flags
 %
-gendata = 1; %specify whether to pass through the generate data loop
+gendata = 0; %specify whether to pass through the generate data loop
 save_flag = 0; 
 
 %
@@ -181,7 +181,7 @@ end
 
 plot([34,34],  [45,75], 'k--', 'linewidth', 1.5, 'HandleVisibility', 'off'); %plot the location of top of ridge
 if i == 1 %H =  100
-plot(84 - extent, ave_melt, 'o-', 'color', 0.8*ones(3,1), 'markerfacecolor', 0.8*ones(3,1));
+plot(84 - extent, ave_melt, 'o-', 'color', 0.6*ones(3,1), 'markerfacecolor', 0.6*ones(3,1));
 elseif i == 2
 plot(84 - extent, ave_melt, 'o-', 'color', plotcolor1, 'markerfacecolor', plotcolor1);
 elseif i == 3
@@ -244,12 +244,15 @@ plot(84 - extent, relmelt_noVel, 'o-', 'color', plotcolor3, 'markerfacecolor', p
 xlim([0, 45])
 ylabel('Relative change', 'Interpreter', 'latex', 'FontSize', 12);
 if i == 3
+
+txt200= text(0.1, 1.175,"$W = 200$~m", 'interpreter', 'latex', 'FontSize', 12) ;
 ylim([0.8, 1.2])
 legend({"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', 12)
 text(-10,1.2, "(c)", 'Interpreter', 'latex', 'FontSize', 12)
 xlabel('$l_c$ (km)', 'Interpreter', 'latex', 'FontSize', 12);
 
 else
+txt150 = text(0.1, 1.35,"$W = 150$~m", 'interpreter', 'latex', 'FontSize', 12) ;
 ax = gca; ax.XTickLabels = cell(0,1);
 ylim([0.6, 1.4])
 text(-10,1.4, "(b)", 'Interpreter', 'latex', 'FontSize', 12)

@@ -77,6 +77,9 @@ Vbl_scenarios  = cell(1,sz);
 Tbl_scenarios  = cell(1,sz);
 Sbl_scenarios  = cell(1,sz);
 topo_scenarios = cell(1,sz); 
+uvel_baro_scenarios = cell(1,sz);
+vvel_baro_scenarios = cell(1,sz);
+
 
 %loop over runs
 for i = 1:sz
@@ -148,7 +151,20 @@ Tbl_scenarios{i} = Tbl;
 Ubl_scenarios{i} = Ubl;
 Vbl_scenarios{i} = Vbl;
 
+%compute barotropic velocities
+vvel_barotropic = zeros(nx,ny);
+uvel_barotropic = zeros(nx,ny);
+for p = 1:nx
+for q = 1:ny
+vvel = squeeze(VVEL(p,q,:));
+vvel_barotropic(p,q) = mean(vvel(vvel ~= 0));
+uvel = squeeze(UVEL(p,q,:));
+uvel_barotropic(p,q) = mean(uvel(uvel ~= 0));
 
+end
+end
+vvel_baro_scenarios{i} = vvel_barotropic;
+uvel_baro_scenarios{i} = uvel_barotropic;
 end
 
 
@@ -205,8 +221,13 @@ Ubl_baseline = cell2mat(Ubl_scenarios(1));
 Vbl_baseline = cell2mat(Vbl_scenarios(1));
 Tbl_baseline = cell2mat(Tbl_scenarios(1));
 Sbl_baseline = cell2mat(Sbl_scenarios(1));
+Ubaro_baseline = cell2mat(uvel_baro_scenarios(1));
+Vbaro_baseline = cell2mat(vvel_baro_scenarios(1));
+
+
 Tl_baseline  = T0 + lambda*topo - gamma*Sbl_baseline;
 UdT_baseline = sqrt(Ubl_baseline.^2 + Vbl_baseline.^2) .* (Tbl_baseline - Tl_baseline);
+UdT_baro_baseline = sqrt(Ubaro_baseline.^2 + Vbaro_baseline.^2) .* (Tbl_baseline - Tl_baseline);
 for i = 1:sz
 
 %get the current velocity, theta, salt
@@ -215,28 +236,34 @@ Vbl = cell2mat(Vbl_scenarios(i));
 Tbl = cell2mat(Tbl_scenarios(i));
 Sbl = cell2mat(Sbl_scenarios(i));
 Tl  = T0 + lambda*topo - gamma*Sbl; %liquidus temperature in BL
+Ubaro = cell2mat(uvel_baro_scenarios(i));
+Vbaro = cell2mat(vvel_baro_scenarios(i));
+
 
 %compute relative melt contributions
 UdT = sqrt(Ubl.^2 + Vbl.^2) .* (Tbl - Tl);
 UdT_noVel =  sqrt(Ubl_baseline.^2 + Vbl_baseline.^2) .* (Tbl - Tl);
 UdT_noTemp = sqrt(Ubl.^2 + Vbl.^2) .* (Tbl_baseline - Tl_baseline);
+UdT_barotropic = sqrt(Ubaro.^2 + Vbaro.^2) .* (Tbl_baseline - Tl_baseline);
 
 relmelt(i) = nanmean(UdT(idx)) / nanmean(UdT_baseline(idx)); 
 relmelt_noTemp(i) = nanmean(UdT_noTemp(idx)) / nanmean(UdT_baseline(idx));
 relmelt_noVel(i) = nanmean(UdT_noVel(idx)) / nanmean(UdT_baseline(idx));
+relmelt_baro(i)  = nanmean(UdT_barotropic(idx)) / nanmean(UdT_baro_baseline(idx));
 
 end %end loop over runs
 plot([34,34],  [0.4, 1.8], 'k--', 'linewidth', 1.5, 'handlevisibility', 'off'); %plot the location of top of ridge
 plot(84 - extent, relmelt, 'o-', 'color', plotcolor1, 'markerfacecolor', plotcolor1);
 plot(84 - extent, relmelt_noTemp, 'o-', 'color', plotcolor2, 'markerfacecolor', plotcolor2);
+plot(84 - extent, relmelt_baro, 'o--', 'color', plotcolor2, 'markerfacecolor', plotcolor2);
 plot(84 - extent, relmelt_noVel, 'o-', 'color', plotcolor3, 'markerfacecolor', plotcolor3);
 
 %tidy
-ylim([0.4, 1.8])
+ylim([0.3, 1.8])
 xlabel('$l_c$ (km)', 'Interpreter', 'Latex', 'FontSize', ax_fontsize);
 ylabel('Relative change', 'Interpreter', 'latex', 'FontSize', ax_fontsize)
 xlim([0, 84 - 40]);
-legend({"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', ax_fontsize)
+legend({"$\mathcal{M}$", "$U_e$", "$U_{be}$", "$\Delta T_e$"}, 'location', 'southwest','interpreter', 'latex', 'FontSize', ax_fontsize)
 
 txb = text(-7,1.95, '(b)', 'FontSize', ax_fontsize, 'Interpreter', 'latex');
 

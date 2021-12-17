@@ -1,0 +1,9 @@
+*.data
+*.meta
+*.shice
+*.bin
+*.mdjwf
+STDOUT*
+STDERR*
+*.out
+

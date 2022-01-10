@@ -138,12 +138,16 @@ t = Tiff('PIG-S2-NovDec2020.tif', 'r'); %!! not in git repo!!
 imageData = read(t);
 figure(2);
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Make Plots %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %
 % Plot 1: bathymetry
 %
 ax(1) = subplot('Position',positions(1,:)); imshow(imageData);
 
-% add bathymetry and fronta
+% add bathymetry colours and some contours
 hold on
 contourf(xi, yi, bathyng', 30, 'linestyle', 'none'); 
 c = colorbar('Location', 'northoutside');
@@ -153,8 +157,13 @@ c.Label.String = 'seabed depth (m)';
 c.Label.VerticalAlignment = 'bottom';
 c.Label.FontSize = 12;
 c.Label.Interpreter = 'latex';
+contour(xi, yi, bathyng', [-1000,-900, -800,-700, -600, -500], 'linecolor', [211,211,211]/255);
 
+
+%add grounding line
 [cgl,~] = contour(xi,yi,bathy', [0,0], 'k', 'linewidth',2 );
+
+%add ice fronts
 [c2009,h2009] = contour(xi,yi,topo2009', [0,0], 'linecolor', plotcolor3, 'linewidth', 2);
 [c2020,h2020] = contour(xi,yi,topo2020', [0,0], 'linecolor', plotcolor1, 'linewidth', 2);
 
@@ -226,15 +235,23 @@ plot(sline/1e3, bathyline, 'color', plotcolor1, 'linewidth', 2);
 hold on
 plot(sline/1e3, topoline, 'color', plotcolor3, 'linewidth', 2);
 xlim([0, 45])
+ptAA = text(ax(3), 1,-750, 'A', 'FontSize', 12, 'FontWeight', 'bold');
+ptBB = text(ax(3), max(ax(3).XLim)-3 ,-750, 'B', 'FontSize', 12, 'FontWeight', 'bold');
+
 %ax(3).XTickLabels = cell(length(ax(3).XTick), 1);
 
 ax(4) = subplot('Position', positions(4,:)); grid on
 plot(sline/1e3,topoline - bathyline, 'color', plotcolor1, 'linewidth', 2);
 xlim([0, 45])
-ptAA = text(ax(4), 1,-700, 'A', 'FontSize', 12, 'FontWeight', 'bold');
-ptBB = text(ax(4), max(ax(4).XLim)-3 ,-700, 'B', 'FontSize', 12, 'FontWeight', 'bold');
+ptAA = text(ax(4), 1,300, 'A', 'FontSize', 12, 'FontWeight', 'bold');
+ptBB = text(ax(4), max(ax(4).XLim)-3 ,300, 'B', 'FontSize', 12, 'FontWeight', 'bold');
 
 
+%add subplot labels
+laba = text(ax(1), 200, 17000, '(a)', 'FontSize', 12,  'Interpreter', 'latex');
+labb = text(ax(2), 200, 17000, '(b)', 'FontSize', 12,  'Interpreter', 'latex');
+labc = text(ax(3), -8.2, -200, '(c)', 'FontSize', 12, 'Interpreter', 'latex');
+labd = text(ax(4), -9, 400, '(d)', 'FontSize', 12, 'Interpreter', 'latex');
 
 %
 % tidy everything
@@ -251,7 +268,7 @@ ax(3).YLabel.Interpreter = 'latex';
 ax(3).YLim = [-850, -200];
 ax(3).YTick = [-800, -600, -400,-200];
 ax(4).YTick = [0,100,200,300, 400];
-ax(4).YLabel.String = 'gap (m)';
+ax(4).YLabel.String = 'gap thickness (m)';
 ax(4).YLabel.FontSize = 12;
 ax(4).YLabel.Interpreter = 'latex';
 ax(3).YLabel.FontSize = 12;
@@ -267,9 +284,11 @@ grid(ax(4), 'on')
 %
 ax(3).YLabel.FontSize = 12;
 ax(3).YLabel.Interpreter = 'latex';
+
+
+
 % Save?
 %
 if saveflag
-%saveas(gcf, 'plots/figure1.eps', 'epsc');
-saveas(gcf, "plots/figure1_withColumnThickness.eps", "epsc")
+saveas(gcf, 'plots/figure1.png');
 end

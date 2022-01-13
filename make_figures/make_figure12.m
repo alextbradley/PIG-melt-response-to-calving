@@ -122,8 +122,9 @@ p = ceil(i/ncols); %index in y directio
 positions(:,i) = [startx + (q-1)*gapx + (q-1)*width, starty - p*height - (p-1)*gapy, width, height];
 end
 cmap = lighter_blue_parula(100,0.1);
+labels = ["(a)", "(b)", "(c)", "(d)", "(e)", "(f)"];
 
-
+%loop over runs
 for q = 1:sz
 icetopo = cell2mat(topo_scenarios(q));
 melt = cell2mat(melt_scenarios(q));
@@ -207,21 +208,23 @@ in1 = inpolygon(XXns',YYns', a1,b1);
 in2 = inpolygon(XXns',YYns', a2,b2);
 idx1 = (icetopo < 0) & in1;
 idx2 = (icetopo < 0) & in2;
-if ((q == 1) || (q == 6))
+%if ((q == 1) || (q == 6))
 melt_copy = melt_diff_sat;
 melt_copy(idx1) = 1;
 melt_copy(~idx1) =0;
-contour(lambda,phi,melt_copy',[1,1], '--', 'linewidth', 1.75, 'linecolor', 'm')
+contour(lambda,phi,melt_copy',[1,1], '--', 'linewidth', 1.75, 'linecolor', 'c')
 melt_copy = melt_diff_sat;
 melt_copy(idx2) = 1;
 melt_copy(~idx2) =0;
-contour(lambda,phi,melt_copy',[1,1], '--', 'linewidth', 1.75, 'linecolor', 'c')
+contour(lambda,phi,melt_copy',[1,1], '--', 'linewidth', 1.75, 'linecolor', 'm')
+%end
 
-end
-
+% add label
+txt(q) = text(-102.5,-75.38, labels(q), 'FontSize', 14, 'Interpreter', 'latex');
 
 end %end loop over runs
 fig = gcf; fig.Position(3:4) = [1280, 687.333];
+
 
 %
 % Save

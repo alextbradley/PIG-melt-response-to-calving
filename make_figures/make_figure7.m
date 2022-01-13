@@ -225,7 +225,7 @@ melt(topo == 0) = nan;
 contourf((max(Y) -Y)/1e3,X/1e3,melt, 50, 'linestyle', 'none');
 box on
 hold on
-plot([50, 50], [0, max(X/1e3)],'--', 'color', [0.5, 0.5, 0.5])
+plot(128-[50, 50], [0, max(X/1e3)],'--', 'color', [0.5, 0.5, 0.5])
 colormap(ax(1,p), colmap)
 xticks([]);
 yticks([]);
@@ -288,6 +288,10 @@ if p == 1
         b.FontSize = 10;
         b.Label.Interpreter = 'latex';
 end
+
+%add vertical line showing hwere sections in (c), (d) taken
+plot((max(Y) - Y(zonal_idx))*[1,1],[bathy(3,zonal_idx),topo(3,zonal_idx)], 'm--', 'linewidth', 2)
+
 %add salinity contours
 axnew = axes;
 axnew.Position = ax(2,p).Position;

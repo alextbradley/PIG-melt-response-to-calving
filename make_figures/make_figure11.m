@@ -138,6 +138,9 @@ p = ceil(i/ncols); %index in y directio
 positions(:,i) = [startx + (q-1)*gapx + (q-1)*width, starty - p*height - (p-1)*gapy, width, height];
 end
 cmap = lighter_blue_parula(100,0.1);
+labels = ["(a)", "(b)", "(c)", "(d)", "(e)", "(f)"];
+
+
 
 %
 % Make plots sequentially
@@ -164,13 +167,14 @@ cb = colorbar;
 cb.Location = 'west';
 %cb.Position(1) = positions(1,q) + 0.005;  %left of plot
 cb.Position(1) = 0.3;
-cb.Position(2) = 0.81;
+cb.Position(2) = 0.815;
 cb.Position(3) = 0.012; %make it thin
 cb.Position(end) = 0.145;
 cb.Color = 0*[1,1,1]; %set color to white/blck
 cb.Label.String = '$1/h$ (m\textsuperscript{-1})';
 %cb.Label.String = 'BSF (Sv)';
-cb.Label.FontSize = 10;
+cb.Label.FontSize = 12;
+cb.Label.Position(2) = 0.006;
 cb.Label.Interpreter = 'latex';
 end
 
@@ -214,7 +218,7 @@ in1 = inpolygon(XXns',YYns', a1,b1);
 in2 = inpolygon(XXns',YYns', a2,b2);
 idx1 = (icetopo < 0) & in1;
 idx2 = (icetopo < 0) & in2;
-if ((q == 1) || (q == 6))
+%if ((q == 1) || (q == 6))
 bsf_copy = bsf;
 bsf_copy(idx1) = 0.01;
 bsf_copy(~idx1) =0;
@@ -223,7 +227,10 @@ bsf_copy = bsf_sat;
 bsf_copy(idx2) = 0.01;
 bsf_copy(~idx2) =0;
 contour(lambda,phi,bsf_copy',[.01,.01], '--', 'linewidth', 1.5, 'linecolor', 'm')
-end
+%end
+
+txt(q) = text(-102.5,-75.38, labels(q), 'FontSize', 14, 'Interpreter', 'latex');
+
 end %end loop over runs
 
 %

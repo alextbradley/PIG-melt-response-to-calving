@@ -179,8 +179,8 @@ ax(1).XLabel.FontSize = 12;
 ax(1).YLabel.FontSize = 12;
 ax(3).XLabel.FontSize = 12;
 ax(3).YLabel.FontSize = 12;
-tN = text(ax(1), 1, 37.6, "North box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
-tS = text(ax(3), 1, 68.6, "South box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
+tN = text(ax(1), 1, 43.4, "North box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
+tS = text(ax(3), 1, 76.4, "South box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
 txt2009 = text(ax(1), 1.5,39.3, '2009', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
 txt2020 = text(ax(1), 18, 39.7, '2020', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
 
@@ -240,7 +240,7 @@ end
 l = legend(ax(2), {"$\mathcal{M}$", "$U_e$", "$\Delta T_e$"}, 'location', 'northwest','interpreter', 'latex', 'FontSize', 12);
 
 ax(2).YLim = [0.98, 1.15];
-ax(4).YLim = [0.98, 1.06];
+ax(4).YLim = [0.98, 1.08];
 ax(2).XLabel.String = '$l_c$ (km)';
 ax(4).XLabel.String = '$l_c$ (km)';
 ax(2).YLabel.Interpreter = 'latex';
@@ -256,10 +256,10 @@ ax(4).YLabel.FontSize = 12;
 
 
 %plot labels
-ta = text(ax(1), -10, 38.4, '(a)', 'Interpreter', 'latex', 'FontSize', 12);
+ta = text(ax(1), -10, 44.4, '(a)', 'Interpreter', 'latex', 'FontSize', 12);
 tb = text(ax(2), -10, 1.166, '(b)', 'Interpreter', 'latex', 'FontSize', 12);
-tc = text(ax(3), -10, 69.6, '(c)', 'Interpreter', 'latex', 'FontSize', 12);
-td = text(ax(4), -10, 1.072, '(d)', 'Interpreter', 'latex', 'FontSize', 12);
+tc = text(ax(3), -10, 77.4, '(c)', 'Interpreter', 'latex', 'FontSize', 12);
+td = text(ax(4), -10, 1.09, '(d)', 'Interpreter', 'latex', 'FontSize', 12);
 
 
 

@@ -179,8 +179,8 @@ ax(1).XLabel.FontSize = 12;
 ax(1).YLabel.FontSize = 12;
 ax(3).XLabel.FontSize = 12;
 ax(3).YLabel.FontSize = 12;
-tN = text(ax(1), 1, 43.4, "North box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
-tS = text(ax(3), 1, 76.4, "South box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
+tN = text(ax(1), 37.5, 39.4, "north box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
+tS = text(ax(3), 1, 76.4, "south box", "Interpreter", "latex", "FontSize", 14, "Color", 'k');
 txt2009 = text(ax(1), 1.5,39.3, '2009', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
 txt2020 = text(ax(1), 18, 39.7, '2020', 'Interpreter', 'latex', 'FontSize', 10, 'rotation', 90);
 
@@ -260,6 +260,23 @@ ta = text(ax(1), -10, 44.4, '(a)', 'Interpreter', 'latex', 'FontSize', 12);
 tb = text(ax(2), -10, 1.166, '(b)', 'Interpreter', 'latex', 'FontSize', 12);
 tc = text(ax(3), -10, 77.4, '(c)', 'Interpreter', 'latex', 'FontSize', 12);
 td = text(ax(4), -10, 1.09, '(d)', 'Interpreter', 'latex', 'FontSize', 12);
+
+% add the inset with the % change in melt rate
+axnew = axes;
+hold on; box on;
+axnew.Position= [0.17, 0.75, 0.12, 0.15];
+s1 = sum(sum(idx1)); s2 = sum(sum(idx2)); st = s1 + s2;
+pc1 = (ave_melt1 - ave_melt1(1)) / ave_melt1(1) * 100; %percetnage change in box north
+pc2 = (ave_melt2 - ave_melt2(1)) / ave_melt2(1) * 100; %south box
+pct = pc1 * (s1 / (s1 + s2)) + pc2 * (s2 / (s1 + s2)); %weighted percentage change (mean in inner cavity)
+ms = 2;
+plot(snap_distance/1e3, pc1, 'co-', 'MarkerSize', ms, 'MarkerFaceColor', 'c');
+plot(snap_distance/1e3, pc2, 'mo-', 'MarkerSize', ms, 'MarkerFaceColor', 'm');
+plot(snap_distance/1e3, pct, 'ko-', 'MarkerSize', ms, 'MarkerFaceColor', 'k');
+xlim([0, 50])
+xlabel('$\ell_c$ (km)', 'Interpreter', 'latex');
+ylabel('perc. change', 'Interpreter', 'latex');
+
 
 
 

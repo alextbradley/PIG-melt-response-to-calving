@@ -195,11 +195,11 @@ BPV = (f + zeta) ./ H;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plots %%%%%%%%%%%%%%%%%%%%%%%
-width = 0.12;
+width = 0.11;
 widthsect = 0.25;
-gap = 0.03;
+gap = 0.025;
 startx = (1 - 5*width - 4*gap)/2 - 0.05;
-startx = 0.04 ; %
+startx = 0.05 ; %
 starty = 0.085;
 height = 0.8;
 heightsmall = 0.35; 
@@ -227,8 +227,8 @@ XX = XX/1e3; YY = YY/1e3;
 velscale =15;
 quiver(XX(idxY, idxX),YY(idxY, idxX),velscale *Ubl(idxX, idxY)', velscale*Vbl(idxX, idxY)', 'autoscale', 'off', 'color', 'k')
 plot(X/1e3, 50*ones(length(X), 1), 'w--', 'linewidth', 1.5)
-plot(X/1e3, Y(EW_idx)*ones(length(X))/1e3, 'c--', 'linewidth', 1.5)
-plot(X(NS_idx)*ones(1,230)/1e3, Y(1:230)/1e3, 'w', 'linewidth', 1.5);
+plot(X/1e3, Y(EW_idx)*ones(length(X))/1e3, 'w', 'linewidth', 1.5)
+plot(X(NS_idx)*ones(1,230)/1e3, Y(1:230)/1e3, 'm--', 'linewidth', 1.5);
 
 %colorbar and arrow
 A = colorbar;

@@ -240,8 +240,8 @@ A.Position(2) = 0.89;
 A.Label.FontSize = 11;
 %plot([20, 30], [120,120], 'k', 'linewidth', 1);
 %text(31, 120, '0.6 m/s')
-xlabel('$X$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
-ylabel('$Y$~(km)', 'Interpreter', 'latex', 'FontSize' ,12)
+xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
+ylabel('$y$~(km)', 'Interpreter', 'latex', 'FontSize' ,12)
 text(-10,141, '(a)', 'Interpreter', 'latex', 'FontSize',  12)
 
 %
@@ -264,7 +264,7 @@ b.Label.Interpreter = 'latex';
 b.Label.FontSize = 11;
 yticks([])
 quiver(XX(idxY, idxX),YY(idxY, idxX),velscale *Ubot(idxX, idxY)', velscale*Vbot(idxX, idxY)', 'autoscale', 'off', 'color', 'k')
-xlabel('$X$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
+xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
 
 text(-10,141, '(b)', 'Interpreter', 'latex', 'FontSize',  12)
 
@@ -285,7 +285,7 @@ a.Label.Interpreter = 'latex';
 a.Label.String = '$1/h~(10^{-3}~\mathrm{m}^{-1})$';
 a.Label.FontSize = 11;
 yticks([])
-xlabel('$X$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
+xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
 text(-10,141, '(c)', 'Interpreter', 'latex', 'FontSize',  12)
 
 %add bsf
@@ -322,7 +322,7 @@ cc.Label.Interpreter = 'latex';
 cc.Label.FontSize = 11;
 yticks([])
 ax(4).XTick = [0,20,40];
-xlabel('$X$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
+xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
 text(-10,141, '(d)', 'Interpreter', 'latex', 'FontSize',  12)
 
 %add bsf contours
@@ -370,7 +370,7 @@ plot(max(Y)/1e3 - Y/1e3, bathy(EW_idx, :), 'k', 'linewidth', 1)
 xlim([4*1e4, Y(end)]/1e3)
 ylim([-1100,-300])
 ylabel('depth (m)', 'Interpreter', 'latex', 'FontSize', 12);
-xlabel('$Y$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
+xlabel('$y$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
 c = colorbar;
 c.Location = 'north';
 c.Position(1) = positions(5,1) + 0.02;
@@ -423,7 +423,7 @@ contourf(X/1e3,-Z, TZS',30, 'linestyle', 'none');
 colormap(ax(6), cmap);
 hold on
 ylabel('depth (m)', 'Interpreter', 'latex', 'FontSize', 12);
-xlabel('$X$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
+xlabel('$x$~(km)', 'Interpreter', 'latex', 'FontSize' ,12);
 d = colorbar;
 d.Location = 'northoutside';
 d.Position(1) = positions(5,1) + 0.02;

@@ -88,6 +88,17 @@ text(25,-480, "W = 200", 'FontSize', 11, 'Interpreter' , 'latex')
 text(25,-580, "W = 100", 'FontSize', 11, 'Interpreter', 'latex')
 text(25,-530, "W = 150", 'FontSize', 11, 'Interpreter', 'latex')
 
+%add w arrow
+pt1 = [128-50, -650]; pt2 = [128-50, -620];
+dp = pt2 - pt1;
+quiver( pt1(1), pt1(2), dp(1), dp(2), 0, 'k', 'linewidth', 1.5)
+pt1 = [128-50, -650]; pt2 = [128-50, -680];
+dp = pt2 - pt1;
+quiver( pt1(1), pt1(2), dp(1), dp(2), 0, 'k', 'linewidth', 1.5)
+tw = text(128 - 56, -655, "W", 'FontSize', 11, 'Interpreter', 'latex');
+
+
+
 %sort out the ticks, which are the wrong way round
 p0.XTick = flip(128 - (20:20:120));
 p0.XTickLabel = {'120', '100', '80', '60', '40', '20'};

@@ -89,13 +89,13 @@ text(25,-580, "W = 100", 'FontSize', 11, 'Interpreter', 'latex')
 text(25,-530, "W = 150", 'FontSize', 11, 'Interpreter', 'latex')
 
 %add w arrow
-pt1 = [128-50, -650]; pt2 = [128-50, -620];
-dp = pt2 - pt1;
-quiver( pt1(1), pt1(2), dp(1), dp(2), 0, 'k')
-pt1 = [128-50, -650]; pt2 = [128-50, -680];
-dp = pt2 - pt1;
-quiver( pt1(1), pt1(2), dp(1), dp(2), 0, 'k')
-tw = text(128 - 56, -655, "W", 'FontSize', 11, 'Interpreter', 'latex');
+%pt1 = [128-50, -650]; pt2 = [128-50, -620];
+%dp = pt2 - pt1;
+%quiver( pt1(1), pt1(2), dp(1), dp(2), 0, 'k')
+%pt1 = [128-50, -650]; pt2 = [128-50, -680];
+%dp = pt2 - pt1;
+%quiver( pt1(1), pt1(2), dp(1), dp(2), 0, 'k')
+%tw = text(128 - 56, -655, "W", 'FontSize', 11, 'Interpreter', 'latex');
 
 
 
